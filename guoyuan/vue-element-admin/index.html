@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <meta name="renderer" content="webkit">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+  <script type="text/javascript" src="http://api.map.baidu.com/api?v=2.0&ak=dnT9GV3Ryp2xLpkhKrcIFBwScizyZT0k"></script>
+  <!--加载鼠标绘制工具-->
+  <script type="text/javascript" src="http://api.map.baidu.com/library/DrawingManager/1.4/src/DrawingManager_min.js"></script>
+  <script src="static/js/GeoUtils.js"></script>
+  <title>赵县冀康源果品种植专业合作社</title>
+  <style>
+    /*浏览器版本提示*/
+    #tip {
+      display: none;
+    }
+
+    .browserMainBox {
+      position: fixed;
+      background-color: #403833;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index:
+        999999999;
+      /* display: none; */
+    }
+
+    .browserMainBox .textsMainBox {
+      width: 800px;
+      height: 340px;
+      position: absolute;
+      top: 50%;
+      margin-top: -170px;
+      left:
+        50%;
+      margin-left: -400px;
+    }
+
+    .browserMainBox .textsMainBox .textsTitles {
+      font-size: 26px;
+      font-weight: 600;
+      text-align: center;
+      color:
+        #FFFFFF;
+      line-height: 2;
+      margin-bottom: 10px;
+    }
+
+    .browserMainBox .textsMainBox .downloadsMainBox {
+      width: 600px;
+      display: block;
+      margin: 0 auto;
+    }
+
+    .browserMainBox .textsMainBox .downloadsMainBox .downBtnBox {
+      width: 200px;
+      height: 180px;
+      float: left;
+      font-size: 18px;
+      color: #ffffff;
+      font-weight: 600;
+      display: block;
+      text-align: center;
+    }
+
+    .browserMainBox .textsMainBox .downloadsMainBox .downBtnBox img {
+      display: block;
+      margin: 20px auto;
+      width: 100px;
+    }
+
+  </style>
+</head>
+<script src='./static/tinymce4.7.5/tinymce.min.js'> </script>
+<body>
+  <div id="app"></div>
+  <div id='tip'>
+    <!--<<浏览器版本过低-->
+    <div class="browserMainBox">
+      <div class="textsMainBox">
+        <p class="textsTitles">您的浏览器版本过低，存在安全风险，请升级或下载新版本浏览器<br />（若您使用的是双核浏览器，请采用极速模式）</p>
+        <div class="downloadsMainBox">
+          <a class="downBtnBox" target="_blank" href="https://www.google.cn/intl/zh-CN/chrome/">
+            <img src="http://md.bluearp.com/public/uploads/navigation_img/chrome.png"> 立即下载
+          </a>
+          <a class="downBtnBox" target="_blank" href="https://browser.qq.com/">
+            <img src="http://md.bluearp.com/public/uploads/navigation_img/qqBro.png"> 立即下载
+          </a>
+          <a class="downBtnBox" target="_blank" href="http://down.360safe.com/cse/360cse_9.5.0.138.exe">
+            <img src="http://md.bluearp.com/public/uploads/navigation_img/360.png"> 立即下载
+          </a>
+        </div>
+      </div>
+    </div>
+    <!--浏览器版本过低>>-->
+  </div>
+</body>
+
+</html>
+<script>
+  (function (window) {
+    var theUA = window.navigator.userAgent.toLowerCase();
+    if ((theUA.match(/msie\s\d+/) && theUA.match(/msie\s\d+/)[0]) || (theUA.match(/trident\s?\d+/) &&
+        theUA.match(/trident\s?\d+/)[0])) {
+      var ieVersion = theUA.match(/msie\s\d+/)[0].match(/\d+/)[0] || theUA.match(/trident\s?\d+/)[0];
+      if (ieVersion <= 9) {
+        // alert("banbne")
+        // $('.loadsMianBox').hide() $(".longNanContainerBox").hide(); $(".browserMainBox").show(); 
+        document.getElementById('tip').style.display = 'block';
+        document.getElementById('app').style.display = 'none';
+      }
+    }
+  })(window);
+
+</script>

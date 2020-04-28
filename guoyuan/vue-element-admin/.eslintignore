@@ -1,0 +1,5 @@
+# 后期自己生成--应该也是与编辑器之类的有关系
+build/*.js
+config/*.js
+src/assets
+

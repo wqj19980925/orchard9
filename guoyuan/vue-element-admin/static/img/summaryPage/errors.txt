@@ -1,0 +1,1 @@
+[2019-09-24 16:52:42] layer "staff_icon_02.png": Duplicate path: staff_icon_02.png

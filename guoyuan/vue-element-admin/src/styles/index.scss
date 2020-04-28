@@ -1,0 +1,367 @@
+@import './variables.scss';
+@import './mixin.scss';
+@import './transition.scss';
+@import './element-ui.scss';
+@import './sidebar.scss';
+@import './btn.scss';
+@import './common.scss';
+
+// 主内容部分
+// 标题
+.sd-module-box {
+  background-color: #fff;
+  padding: 10px 0 30px;
+  // margin-bottom: 30px;
+
+  .sd-moudle-header {
+    padding-top:5px;
+    height: 45px;
+    border-bottom: 1px solid #ddd;
+    background-color:#fff;
+
+    .sd-module-title {
+      border-left: 2px solid $mainColor;
+      height: 30px;
+      line-height: 30px;
+      font-size: 18px;
+      color: #222;
+      padding-left: 15px;
+      width: 40%;
+      float: left;
+    }
+
+    .sd-module-btn {
+      float: right;
+      padding: 0px 20px;
+      margin: 0;
+
+      .sd-primary-btn {
+        padding: 8px 10px !important;
+      }
+
+      .el-button {
+        border-radius: 4px;
+        cursor: pointer;
+        padding: 8px 6px;
+      }
+
+      .sd-all-btn {
+        width: 80px;
+        padding: 8px 17px 8px 6px !important;
+        border: 1px solid #ddd;
+        position: relative;
+
+        .sd-down-icon {
+          position: absolute;
+          top: 17px;
+          right: 10px;
+        }
+      }
+
+      .sd-mouHead-btn {
+        border: 1px solid #aaa;
+      }
+
+      .sd-add-btn {
+        padding: 8px 20px !important;
+      }
+
+    }
+  }
+
+}
+
+// 顶部状态
+.orderStatus-box {
+  color: #222;
+
+  .order-sta-box {
+    border: 1px solid #fff;
+    height: 109px;
+
+    .orderSta-infor {
+      text-align: center;
+      cursor: pointer;
+
+      .order-sta-num {
+        font-size: 30px;
+        padding-top: 24px;
+      }
+
+      .orderSta-text {
+        font-size: 16px;
+        padding-top: 15px;
+        margin-top: 0;
+      }
+    }
+
+    &.on {
+      // border: 1px solid $mainColor;
+      box-shadow: 0 0 10px rgba(255, 118, 124, 0.8);
+      border: 1px solid #ff767c;
+      height: 109px;
+    }
+  }
+}
+
+// 信息筛选--form输入信息
+.sd-form-box {
+  padding: 15px 0 15px 0px;
+  .sd-col-6 {
+    .sd-form-input {
+      width: 96%;
+    }
+  }
+  .sd-input-hide {
+    height: auto;
+    //  border-bottom:1px dashed #ddd;
+  }
+  .search-btn-box {
+    width: 100%;
+    text-align: center;
+    padding-top: 20px;
+  }
+
+
+}
+.lk-table-box{
+  padding-bottom:20px;
+}
+.lk-page-box{
+  text-align: right;
+  width: 100%;
+  padding-right:20px;
+  
+}
+
+// 订单列表
+.sd-table-box {
+  font-size: 14px;
+  color: #666;
+
+  .sd-table-header {
+    height: 65px;
+    line-height: 65px;
+    background-color: #e6e9f2;
+
+  }
+
+  .sd-table-chose {
+    padding-left: 20px;
+    height: 50px;
+    padding-top: 15px;
+    //  min-width: 1200px;
+
+    .sd-chose-all-box {
+      width: 80px;
+      display: block;
+      float: left;
+      height: 50px;
+      padding-top: 10px;
+
+      .chose-all-text {
+        display: block;
+        // vertical-align: middle;
+        // paddding:0 10px;
+        position: absolute;
+        top: 10px;
+        left: 25px;
+        z-index: 1;
+      }
+    }
+  }
+
+  .sd-table-intro {
+    background-color: #edeef2;
+    height: 50px;
+    line-height: 50px;
+
+
+    td {
+      padding-left: 18px;
+
+      span {
+        // margin-right: 10px;
+        font-size: 12px;
+      }
+
+      .black {
+        font-size: 14px;
+        font-weight: 600;
+      }
+    }
+
+  }
+
+  .sd-table-detail {
+    td {
+      padding: 0 10px 10px 10px;
+      border-bottom: 1px solid #eee;
+
+      &.goodsBox {
+        border-bottom: none;
+      }
+
+      .remarks-box {
+        .red {
+          margin-bottom: 0px;
+        }
+
+        .infor {
+          margin-top: 5px;
+        }
+
+        &:nth-child(2n) {
+          .infor {
+            margin-bottom: 5px;
+          }
+        }
+      }
+
+
+      .light-blue {
+        font-size: 12px;
+        color: $light-blue;
+      }
+
+      .el-button+.el-button {
+        margin-left: 0px;
+      }
+
+      .infor-box {
+        .tit {
+          display: block;
+          width: 70px;
+          float: left;
+
+        }
+
+        .info {
+          display: block;
+          padding-left: 70px;
+          text-align: left;
+        }
+
+        &.goods-tit {
+          .tit {
+            width: 42px;
+          }
+
+          .info {
+            padding-left: 40px;
+          }
+        }
+
+        &.installer {
+          .tit {
+            width: 85px;
+          }
+
+          .info {
+            padding-left: 85px;
+          }
+        }
+      }
+
+    }
+
+    .goodsBox {
+      padding: 0px 0px 0 0px;
+      @include clearfix;
+
+      .img-pic {
+        width: 80px;
+        height: 80px;
+        display: block;
+        float: left;
+        border: 1px solid #eee;
+        margin-top: 10px;
+      }
+
+      .goods-text {
+        padding-left: 100px;
+
+        .name {
+          color: #333;
+        }
+      }
+    }
+
+    .border-left {
+      border-left: 1px solid #edeef2;
+    }
+
+    .opration-btn {
+      padding: 10px;
+      font-size: 12px;
+    }
+
+    // 操作按钮
+    .sd-primary-btn {
+      padding: 0px 0px 10px 0px;
+
+      .el-button {
+        line-height: normal;
+      }
+
+    }
+
+    .sd-per-infor {
+      float: left;
+    }
+
+    .tip-yellow {
+      display: block;
+      float: right;
+      // margin: 8px 0;
+
+      // 提示地址更换
+      .tip-yellow-text {
+        padding: 6px 10px;
+        background-color: #fbe9d3;
+        color: #666;
+        border-radius: 4px;
+
+      }
+
+    }
+
+  }
+}
+
+// 标准式-table
+.sd-stand-table {
+
+  .sd-table-infor {
+
+    .sd-table-infor-tit {
+      display: block;
+      width: 76px;
+      float: left;
+
+      &.w-90 {
+        width: 90px;
+      }
+    }
+
+    .sd-table-infor-cont {
+      display: block;
+      padding-left: 75px;
+      // float: left;
+    }
+  }
+
+  .sd-oprBtn-box {
+    // margin:0 auto;
+    .sd-button {
+      padding: 15px 20px;
+      margin:0 auto;
+    }
+  }
+
+}
+
+.add-bottom-box {
+  width: 100%;
+  height: 80px;
+}
