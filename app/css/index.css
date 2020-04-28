@@ -1,0 +1,150 @@
+blockquote, body, dd, dir, dl, fieldset, figure, form, h1, h2, h3, h4, h5, h6, hr, input, legend, menu, ol, optgroup, p, pre, tbody, td, textarea, tfoot, th, thead, ul{
+    margin: 0;
+    padding: 0;
+}
+html, body, section, .nonedata{
+    width: 100%;
+    height: 100%;
+    /* overflow: hidden; */
+}
+.nonedata{
+    position: relative;
+    /* display: none; */
+}
+.nonedata img{
+    position: absolute;
+    width: 3rem;
+    height: 3rem;
+    left: 50%;
+    top: 50%;
+    margin-left: -1.5rem;
+    margin-top: -1.5rem;
+}
+.information{
+    width: auto;
+    height: 100%;
+    overflow: auto;
+    padding: .3rem .2rem;
+    background: #f5f5f5;
+    padding-top: 0;
+}
+.informat_title{
+    margin-top: .3rem;
+}
+.informaone{
+    display: none;
+}
+.informat_twos {
+    display: none;
+}
+.title_text{
+    font-size: .32rem;
+    font-weight: 600;
+    line-height: .45rem;
+}
+.title_text span{
+    width: 80%;
+    height: .01rem;
+    border-top:.01rem solid #1296db;
+    display: inline-block;
+    float: right;
+    margin-top: .225rem;
+}
+.informat_sect{
+    height: auto;
+    background: #fff;
+    margin-top: .1rem;
+    border-radius: .06rem;
+    padding: .3rem 0;
+}
+.inforlist{
+    font-size: .3rem;
+    line-height: .6rem;
+    overflow: hidden;
+}
+.infor_name{
+    width: 2rem;
+    display: inline-block;
+    text-align: right;
+    float: left;
+}
+.infor_sect{
+    width: 5rem;
+    display: inline-block;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    /* -webkit-line-clamp: 2; */
+    overflow: hidden;
+    float: left;
+    margin-bottom: .1rem;
+}
+.sect_titles{
+    font-size: .35rem;
+    text-align: center;
+    color: #fff;
+    background: #1296db;
+    line-height: 0.6rem;
+    margin-bottom: .1rem;
+    border-radius: .06rem;
+}
+.informa_nums{
+    padding-left: 20%;
+    margin-bottom: .2rem;
+}
+.num_text{
+ font-size: .3rem;
+ line-height: .45rem;;   
+}
+.informa_mats{
+    padding-left: 20%;
+}
+.infor_masect{
+    font-size: .3rem;
+    margin-bottom: .2rem;
+    margin-top: .2rem;
+    height: auto;
+    width: auto;
+    overflow: hidden;
+}
+.infor_masect span{
+    display: inline-block;
+    width: 1.8rem;
+    text-align: right;
+    float: left;
+}
+
+.infor_masect p{
+    width: 3.8rem;
+    display: inline-block;
+    /* display: -webkit-box; */
+    -webkit-box-orient: vertical;
+    /* -webkit-line-clamp: 2; */
+    overflow: hidden;
+    float: right;
+    margin-top: 0.1rem;
+}
+.infor_masect .ligd{
+    margin-top: 0;
+}
+.masect_list{
+   overflow: auto;
+   padding-top: .1rem;
+}
+.red{
+    color: red;
+}
+.informat_ss{
+    padding: 0;
+}
+.footbutton{
+    width: 100%;
+    position: fixed;
+    bottom: 0;
+    height: .9rem;
+    font-size: .4rem;
+    background: #1296db;
+    left: 0;
+    color: #fff;
+    text-align: center;
+    line-height: .9rem;
+}

@@ -1,0 +1,1154 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta charset="UTF-8">
+	<title>电子商务大数据监测平台</title>
+	<meta name="renderer" content="webkit" />
+	<meta name="force-rendering" content="webkit" />
+	<meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1" />
+	<script type="text/javascript" src="js/jquery-1.11.0.js"></script>
+	<link rel="stylesheet" href="css/common.css" />
+	<link rel="stylesheet" href="css/style.css" />
+	<link rel="stylesheet" href="css/swiper.min.css" />
+</head>
+<style>
+.swiper-slide-shadow-left , .swiper-slide-shadow-right {
+	opacity: 0;
+}
+/* .chaerts07 > div{
+	width: 50%;
+	height: 100%;
+	display: inline-block;
+	float: left;
+} */
+#chaerts06  > #retailsListBox{
+	padding-top: 30px;
+}
+</style>
+
+<body style="overflow: hidden;">
+	<div class="longNanContainerBox">
+		<!--浏览器版本过低>>-->
+		<!--<<加载中-->
+		<div class="loadsMianBox">
+			<div class="loader">
+				<span class="text">Loading</span>
+				<span class="spinner"></span>
+			</div>
+		</div>
+		<!--<<浏览器版本过低-->
+		<div class="browserMainBox">
+			<div class="textsMainBox">
+				<p class="textsTitles">您的浏览器版本过低，存在安全风险，请升级或下载新版本浏览器<br />（若您使用的是双核浏览器，请采用极速模式）</p>
+				<div class="downloadsMainBox">
+					<a class="downBtnBox" target="_blank" href="https://www.google.com/intl/zh-CN/chrome/?standalone=1">
+						<img src="images/chrome.png"> 立即下载
+					</a>
+					<a class="downBtnBox" target="_blank"
+						href="https://download-ssl.firefox.com.cn/releases-sha2/stub/official/zh-CN/Firefox-latest.exe">
+						<img src="images/firefox.png"> 立即下载
+					</a>
+					<a class="downBtnBox" target="_blank" href="http://down.360safe.com/cse/360cse_9.5.0.138.exe">
+						<img src="images/360.png"> 立即下载
+					</a>
+				</div>
+			</div>
+		</div>
+		<!-- <div class='longNanContainerBox'></div> -->
+		<!--加载中>>-->
+		<div class="longNan_ContainerBox">
+			<div class="title_header_box"></div>
+			<p class="titlesTextBox">
+				<i class="left_icon" onclick="leftIconClick()"></i>
+				电子商务大数据监测平台 
+				<i class="right_icon" onclick="rightIconClick()"></i>
+			</p>
+			<!--<<地图内容块-->
+			<div class="longNanMainContentBox">
+				<div class="titles">
+					<div class="select-box">
+						<div class='show_tit'onblur="yearhide()" onclick='yearChose()'>
+							<span class='show_val'>2019</span>
+							<i class='icon_down'></i>
+						</div>
+						<ul class='chose_year_list'>
+						</ul>
+					</div>
+					<span>产销统计</span>
+				</div>
+				<p class="smalies" style="display:none"><span id="totalSums" class="counter-value">0.00</span>元</p>
+				<!-- <span class="switchMaps" onclick="mapSwitch();"></span> -->
+				<span class="quitsMainBtn" onclick="goHome();"></span>
+				<!-- <p id="mapsName" style="display: none;">产品码全国数据分布统计</p> -->
+				<!--<<地图详细图表-->
+				<div id="map-wrap" class="mapsMianBox"></div>
+				<!--地图详细图表>>-->
+				<!--<<地图轮询图表-->
+				<div id="map-wrap2" class="mapsMianBox"></div>
+				<!--地图轮询图表>>-->
+			</div>
+			<!--地图内容块>>-->
+			<!--<<电商人才培训-->
+			<div class="chartsMainBox_01">
+				<p class="contentBlockTitles" onclick="Url('index01')" id='title00'>合格率</p>
+				<!--<<图表块--->
+				<div id="chaerts01">
+				</div>
+				<!--图表块>>-->
+			</div>
+			<!--电商人才培训>>-->
+			<!--<<果园产量-->
+			<div class="chartsMainBox_02">
+				<p class="contentBlockTitles" onclick="Url('index02')" id='title01'>果园产量</p>
+				<!--<<图表块--->
+				<div id="chaerts02" class="paddingTop">
+					<ul class="retailersMainList" id="retailsListBox">
+					</ul>
+					<ul class="retailersMainList" id="retailsListBoxtwo">
+					</ul>
+				</div>
+				<!--图表块>>-->
+			</div>
+			<!--果园产量>>-->
+			<!--<<扫码归属地查询-->
+			<div class="chartsMainBox_03">
+				<p class="contentBlockTitles" onclick="Url('index03')" id='title02'>预估产量（套袋消耗）统计</p>
+				<div id="chaerts03">
+				</div>
+			</div>
+			<!--扫码归属地查询>>-->
+			<!--<<仓库库存量统计-->
+			<div class="chartsMainBox_06">
+				<p class="contentBlockTitles" onclick="Url('index05')" id='title05'>仓库库存量统计</p>
+				<div id="chaerts06" class="paddingTop">
+					<ul class="retailersMainList" id="retailsListBox">
+					</ul>
+					<ul class="retailersMainList" id="retailsListBoxtwo">
+					</ul>
+				</div>
+			</div>
+			<!--仓库库存量统计>>-->
+			<!--<<报损统计-->
+			<div class="chartsMainBox_07">
+				<p class="contentBlockTitles" onclick="Url('index06')" id='title04'>报损统计</p>
+				<div class="chaerts07" id="chaerts07">
+					<!-- <div id="chaerts071"></div>
+					<div id="chaerts072"></div> -->
+				</div>
+				
+					<!-- <div class="materialsBox">
+						<div class="textsBox">
+							<p class="names">服务类</p>
+							<p class="moneys"><span id="materialobject" class="counter-value">0.00</span><i>元</i></p>
+						</div>
+						<div class="watersMain01Box">
+							<span><i id="waters01">0</i>%</span>
+							<div id="watersmian01" style="width:100%; height: 100%;"></div>
+						</div>
+					</div>
+					<div class="serviceMainBox">
+						<div class="textsBox">
+							<p class="names">实物类</p>
+							<p class="moneys"><span id="serviceClass" class="counter-value">0.00</span><i>元</i></p>
+						</div>
+						<div class="watersMain02Box">
+							<span><i id="waters02">0</i>%</span>
+							<div id="watersmian02" style="width:100%; height: 100%;"></div>
+						</div>
+					</div> -->
+			</div>
+			<!--报损统计>>-->
+			<!--<<品质等级占比与数量-->
+			<div class="chartsMainBox_08">
+				<p class="contentBlockTitles" onclick="Url('index04')" id='title03'>品质等级占比与数量</p>
+				<div id="chaerts08" ></div>
+			</div>
+			<!--网商TOP5>>-->
+		</div>
+		<!-- 提示框 -->
+		<div class='el-message'>
+			<p class="el-message__content"></p>
+		</div>
+	</div>
+	<!--底部部分>>-->
+	<script>
+		// 判断 浏览器版/本
+		(function (window) {
+			var theUA = window.navigator.userAgent.toLowerCase();
+			if ((theUA.match(/msie\s\d+/) && theUA.match(/msie\s\d+/)[0]) || (theUA.match(/trident\s?\d+/) && theUA
+					.match(/trident\s?\d+/)[0])) {
+				var ieVersion = theUA.match(/msie\s\d+/)[0].match(/\d+/)[0] || theUA.match(/trident\s?\d+/)[0];
+				if (ieVersion <= 9) {
+					// $('.loadsMianBox').hide();
+					$(".longNan_ContainerBox").hide();
+					$(".browserMainBox").show();
+				} else {
+					$(".browserMainBox").hide();
+					$('.loadsMianBox').show();
+					$(".longNan_ContainerBox").show();
+				}
+			}
+		})(window);
+	</script>
+	<script src="js/echarts.min.js"></script>
+	<script src="js/echarts-liquidfill.js"></script>
+	<script src="js/china.js"></script>
+	<script src="js/resize.js"></script>
+	<script src="js/citymap.js"></script>
+	<script src="js/jquery.rotate.min.js"></script>
+	<script src="js/swiper.jquery.min.js"></script>
+<!-- 	<script src="js/swiper.min.js"></script> -->
+	<script>
+		window.onload = function () {
+			$('.el-message').hide();
+			var token = window.location.search
+			adminToken = token.substr(1);
+
+			// 获取当前年份
+			var date = new Date;
+			var year = date.getFullYear();
+			$('.show_val').html(year)
+			const year02 = Number(year) - 2;
+			const year01 = Number(year) - 1;
+			const yearOption = '<li class="year_option" onclick="choseYear(' + year + ')">' + year +
+				'</li><li class="year_option" onclick="choseYear(' + year01 + ')">' + year01 +
+				'</li><li class="year_option" onclick="choseYear(' + year02 + ')">' + year02 + '</li>'
+			$('.chose_year_list').html(yearOption);
+			$(".longNan_ContainerBox").show();
+			// 数据data
+			masterdatastwos(year);
+			// 字体自适应
+			longNanContainer(year);
+
+		}
+		var endtime =0;
+		var dataV1, dataV2, dataV3, dataV4, dataV5, dataV6, dataV7,dataV8,dataMap, dataSl;
+		var geoCoordMap = {};
+		// var baseUrl = "https://" + document.domain + '/';
+		var baseUrltwo = "http://gy.bluearp.com/public/";
+
+		//跳转
+		function Url(url) {
+			var year = $('.show_val').text();
+			// window.location.href = "./html/" + url + ".html?token=" + adminToken + "&year=" + year;
+		}
+		function leftIconClick(){
+			window.location.href = "index02.html?" + adminToken
+		}
+		function rightIconClick() {
+			window.location.href = "index4.html?" + adminToken
+		}
+
+		function goHome() {
+			$('.el-message').removeClass('el-message--success', 'el-message--error')
+			//  退出登录/
+			
+		}
+		// 选择年份
+		function yearChose() {
+			if(endtime===1){
+				$('.chose_year_list').show()
+			}
+		}
+		function yearhide(){
+			$('.chose_year_list').hide()
+		}
+		function choseYear(value) {
+			$('.show_val').html(value)
+			$('.chose_year_list').hide()
+			$("#retailsListBox").removeClass('retailsListBoxtwoes');
+			$("#retailsListBoxtwo").removeClass('retailsListBoxtwoes');
+			$("#retailsListBox").removeClass('retailsListBoxtwohides');
+			$("#retailsListBoxtwo").removeClass('retailsListBoxtwohides');
+			longNanContainer();
+			masterdatastwos(value)
+		}
+
+		//字体适配屏占比控制
+		function longNanContainer() {
+			var heights = $(window).height();
+			var widths = $(window).width();
+			var ratios = heights / widths;
+			if (ratios <= 0.35) {
+				$('.longNanContainerBox').css({
+					'width': widths,
+					'height': widths * 0.35,
+				});
+				$('body').css({
+					'overflow': 'auto',
+				})
+
+			} else {
+				$('.longNanContainerBox').css({
+					'width': widths,
+					'height': heights,
+				});
+				$('body').css({
+					'overflow': 'hidden',
+				})
+			}
+
+			var sizes = widths / 1920 * 100;
+			$('html').css("font-size", sizes);
+			setTimeout("longNanContainer()", 1);
+		}
+		
+		function masterdatastwos(year){
+			$('.el-message').removeClass('el-message--success', 'el-message--error')
+			$.post(baseUrltwo + 'Marke/index', {
+					'api_token': adminToken,
+					'year': year
+				},
+				function (data) {
+					if(data.code == 200){
+						dataV1 = data.data.qualified;
+						dataV2 = data.data.yield;
+						dataV3 = data.data.grade;
+						dataV4 = data.data.estimate;
+						dataV5 = data.data.loss;
+						dataV6 = data.data.ware;
+						dataV7 = data.data.marke;
+						
+						trainsBox(data.data.qualified);
+						retails(data.data.yield);
+						networks(data.data.grade);
+						regionsCode(data.data.estimate);
+						damagedata(data.data.loss);
+						industrys(data.data.ware);
+						for(var i = 0;i<data.data.marke.length;i++){
+							for(var l=0;l<data.data.marke[i].length;l++){
+								console.log(data.data.marke[i][l][0].name);
+								(function(i){
+									var address = data.data.marke[i][l][0].name;
+									var url = 'http://api.map.baidu.com/geocoder/v2/?ak=eIxDStjzbtH0WtU50gqdXYCz&output=json&address=' + encodeURIComponent(address);
+									$.ajax({
+										type: "POST",
+										url: url,
+										dataType: "JSONP",
+										async: false,
+										success: function(datas) {
+											if(datas.status == 0){
+												geoCoordMap[address] = [datas.result.location.lng,datas.result.location.lat];
+												if((i+1) === data.data.marke.length){
+													mapsDataBox(data.data.marke);
+													$(".loadsMianBox").hide();
+												}
+											};
+											if(i+2>data.data.marke.length){
+												$(".loadscoverBox").hide();
+											}
+										}
+									})
+								}(i))
+							}
+						}
+						
+						// for(var i = 0; i<addres.length;i++){
+							
+						// }
+						
+					}else{
+
+					}
+				}
+			)
+		}
+
+
+		//果园产量
+		function retails(text) {
+			$('#retailsListBox').html('');
+			$('#retailsListBoxtwo').html('');
+			if (text.length === 0) {
+				$('#retailsListBox').html('');
+				$('#retailsListBoxtwo').html('');
+				$('#retailsListBox').html('<span class="nodataText">暂无数据</span>')
+				$('#retailsListBoxtwo').html('<span class="nodataText">暂无数据</span>')
+			} else {
+				var moneys = 0;
+				for (var i = 0; i < text.length; i++) {
+					moneys += Number(text[i].count);
+				}
+				for (var i = 0; i < text.length; i++) {
+					var propor = (text[i].count / moneys * 100).toFixed(2) + '%';
+					if(i < 5){
+						$('#retailsListBox').append("<li><span class='names' title='" + text[i].name + "'>" + text[i].name +
+						"</span><p><span style='width:" + propor + "'></span></p><span class='moneys counter-value' title='" +
+						text[i].count + "'>" + text[i].count + "</span></li>")
+					}else{
+						$('#retailsListBoxtwo').append("<li><span class='names' title='" + text[i].name + "'>" + text[i].name +
+						"</span><p><span style='width:" + propor + "'></span></p><span class='moneys counter-value' title='" +
+						text[i].count + "'>" + text[i].count + "</span></li>")
+					}
+					
+				}
+			}
+			if(text.length > 5){
+				showbowx();
+			}
+			textsroll();
+		}
+		
+		// var angle =0;
+		// setInterval(function() {
+		// 	angle += 30;
+		// 	$("#retailsListBoxtwo").css(angle);
+		// }, 2000);
+		function showbowx(){
+			var timer = setTimeout(function(){
+				if($("#retailsListBox").attr('class').indexOf('retailsListBoxtwoes') > -1){
+					$("#retailsListBox").removeClass('retailsListBoxtwoes');
+					$("#retailsListBox").addClass('retailsListBoxtwohides');
+					// $("#retailsListBoxtwo").addClass('retailsListBoxtwoes');
+					$("#retailsListBoxtwo").hide();
+					$("#retailsListBoxtwo").removeClass('retailsListBoxtwohides')
+				}else{
+					$("#retailsListBox").addClass('retailsListBoxtwoes');
+					$("#retailsListBoxtwo").show();
+					$("#retailsListBoxtwo").addClass('retailsListBoxtwohides')
+				}
+				clearTimeout(timer)
+				showbowx();
+			},5000);
+		}
+		function showbowxtwo(){
+			var timert = setTimeout(function(){
+				if($("#chaerts06 #retailsListBox").attr('class').indexOf('retailsListBoxtwoes') > -1){
+					$("#chaerts06 #retailsListBox").removeClass('retailsListBoxtwoes');
+					$("#chaerts06 #retailsListBox").addClass('retailsListBoxtwohides');
+					// $("#chaerts06 #retailsListBoxtwo").addClass('retailsListBoxtwoes');
+					$("#chaerts06 #retailsListBoxtwo").hide();
+					$("#chaerts06 #retailsListBoxtwo").removeClass('retailsListBoxtwohides')
+				}else{
+					$("#chaerts06 #retailsListBox").addClass('retailsListBoxtwoes');
+					$("#chaerts06 #retailsListBoxtwo").show();
+					$("#chaerts06 #retailsListBoxtwo").addClass('retailsListBoxtwohides')
+				}
+				clearTimeout(timert);
+				showbowxtwo();
+			},5000);
+		}
+
+		
+		//品质等级占比与数量
+		var chartSmail08 = echarts.init(document.getElementById('chaerts08'));
+		function networks(text) {
+			
+
+			optionmain08 = {
+				
+				tooltip: {
+					trigger: 'axis',
+					axisPointer: {
+						type: 'shadow'
+					}
+				},
+				grid: {
+					left: '3%',
+					right: '4%',
+					bottom: '15%',
+					top:'25%',
+					containLabel: true
+				},
+				xAxis: [{
+					type: 'category',
+                    axisLabel:{  
+                        interval: 0,
+                        // rotate:-30 ,
+                        // formatter: function (name) {
+                        //     return (name.length>2?name.substr(0,2)+"...":name )
+                        // },
+                    },
+                    triggerEvent:false,
+					axisTick: {
+						// show: false,
+						color: '#fff'
+					},					
+					axisLine: {
+						lineStyle: {
+							color: '#fff'
+						}
+					},
+					data: ['一级数量','二级数量','三级数量','总数量'],
+				}],
+				yAxis: {
+					splitNumber:2,
+					axisLabel: {
+						// interval:1,
+						formatter: '{value}',
+						color: '#e2e9ff',
+					},
+					axisLine: {
+						show: false
+					},
+					splitLine: {
+						lineStyle: {
+							color: 'rgba(255,255,255,0.12)'
+						}
+					}
+					
+				},
+				series: [{
+					name: '数量',
+					type: 'bar',
+					barWidth: '60%',
+					data: [
+						{
+							name: '一级数量',
+							value: text.por_one,
+							itemStyle: {
+								color: '#A6CEE3'
+							}
+						},
+						{
+							name: '二级数量',
+							value: text.por_two,
+							itemStyle: {
+								color: '#B2DF8A'
+							}
+						},
+						{
+							name: '三级数量',
+							value: text.por_three,
+							itemStyle: {
+								color: '#E31A1C'
+							}
+						},
+						{
+							name: '总数量',
+							value: text.por_sum,
+							itemStyle: {
+								color: '#33A02C'
+							}
+						},	
+					]
+				}]
+			};
+			chartSmail08.setOption(optionmain08);
+			chartSmail08.resize();
+			//扫码溯源量
+			var index0_8 = 0; //播放所在下标
+			var timers08 = setInterval(function () {
+				chartSmail08.dispatchAction({
+					type: 'showTip',
+					seriesIndex: 0,
+					dataIndex: index0_8
+				});
+				index0_8++;
+				if (index0_8 > text.length) {
+					index0_8 = 0;
+				}
+			}, 2000);
+		}
+
+
+		var totalsunm =0.0
+		//总金额获取
+		function totalsumMainBox(texts) {
+			// $("#totalSums").empty();
+			// totalsunm = Number(texts)
+			if (totalsunm != texts) {
+				totalsunm = texts;
+				texts=Number(texts)
+				$('#totalSums').html(texts);
+			}
+		}
+		
+		//文字改变滚动效果
+		function textsroll() {
+			// window.setInterval(textsroll(), 3000)
+			//价格效果\
+			endtime=0
+			$('.counter-value').each(function () {
+				$(this).prop('Counter', 0).animate({
+					Counter: $(this).text()
+				}, {
+					duration: 3500,
+					easing: 'swing',
+					step: function (now) {
+						var nows = parseFloat(now.toFixed(2))
+						$(this).text(nows.toLocaleString());
+						// endtime=1
+					}
+				});
+				
+			});
+			setTimeout(function (){
+				 endtime=1
+			},3500)
+
+		}
+		// 下跳地图
+		// var chart = echarts.init(document.getElementById('map-wrap'));
+		// 轮询地图
+		var mapChart = echarts.init(document.getElementById('map-wrap2'));
+
+		//地图数据插入
+		function mapsDataBox(text) {
+			
+			var planePath = 'path://M.6,1318.313v-89.254l-319.9-221.799l0.073-208.063c0.521-84.662-26.629-121.796-63.961-121.491c-37.332-0.305-64.482,36.829-63.961,121.491l0.073,208.063l-319.9,221.799v89.254l330.343-157.288l12.238,241.308l-134.449,92.931l0.531,42.034l175.125-42.917l175.125,42.917l0.531-42.034l-134.449-92.931l12.238-241.308L1705';
+
+			var convertData = function(data) {
+				var res = [];
+				for (var i = 0; i < data.length; i++) {
+					var dataItem = data[i];
+					var fromCoord = geoCoordMap[dataItem[0].name];
+					var toCoord = geoCoordMap[dataItem[1].name];
+					if (fromCoord && toCoord) {
+						res.push([{
+							coord: fromCoord
+						}, {
+							coord: toCoord
+						}]);
+					}
+				}
+				return res;
+			};
+			var datasg = [];
+			for(var i=0;i<text.length;i++){
+				var tedf = '';
+				var datre = '';
+				for(var l =0;l<text[i].length;l++){
+					tedf = text[i][l][0].name;
+					datre = text[i];
+				}
+				datasg.push([tedf,datre])
+			}
+			// dffd = [
+			// 	['新乡', BJData],
+			// 	['九江', SHData],
+			// 	['新疆', GZData]
+			// ];
+			// console.log(dffd)
+			// console.log(datasg);
+			// return false;
+			var color = ['#3ed4ff', '#ffa022', '#a6c84c'];
+			var series = [];
+			datasg.forEach(function(item, i) {
+				series.push({
+					name: item[0] ,
+					type: 'lines',
+					zlevel: 1,
+					effect: {
+						show: true,
+						period: 6,
+						trailLength: 0.7,
+						color: '#fff',
+						symbolSize: 3
+					},
+					lineStyle: {
+						normal: {
+							color: color[i],
+							width: 0,
+							curveness: 0.2
+						}
+					},
+					data: convertData(item[1])
+				}, {
+					name: item[0] ,
+					type: 'lines',
+					zlevel: 2,
+					effect: {
+						show: true,
+						period: 6,
+						trailLength: 0,
+						symbol: planePath,
+						symbolSize: 15
+					},
+					lineStyle: {
+						normal: {
+							color: color[i],
+							width: 1,
+							opacity: 0.4,
+							curveness: 0.2
+						}
+					},
+					data: convertData(item[1])
+				}, {
+					name: item[0] ,
+					type: 'effectScatter',
+					coordinateSystem: 'geo',
+					zlevel: 2,
+					rippleEffect: {
+						brushType: 'stroke'
+					},
+					label: {
+						normal: {
+							show: true,
+							position: 'right',
+							formatter: '{b}'
+						}
+					},
+					symbolSize: function(val) {
+						return val[2];
+					},
+					itemStyle: {
+						normal: {
+							color: color[i]
+						}
+					},
+					data: item[1].map(function(dataItem) {
+						return {
+							name: dataItem[1].name,
+							value: geoCoordMap[dataItem[1].name].concat([dataItem[1].value])
+						};
+					})
+				});
+			});
+
+			options = {
+
+				tooltip: {
+					trigger: 'item',
+					// formatter:function(npros){
+					// 	console.log(npros.'npsdsf')
+					// }
+				},
+				legend: {
+					orient: 'vertical',
+					top: 'bottom',
+					left: 'right',
+					data: ['北京 Top10', '上海 Top10', '广州 Top10'],
+					textStyle: {
+						color: '#fff'
+					},
+					selectedMode: 'single'
+				},
+				geo: {
+					map: 'china',
+					label: {
+						emphasis: {
+							show: false
+						}
+					},
+					roam: true,
+					itemStyle: {
+						normal: {
+							areaColor: '#132937',
+							borderColor: '#0692a4'
+						},
+						emphasis: {
+							areaColor: '#0b1c2d'
+						}
+					}
+				},
+				series: series
+			};
+			//当数据刷新的时候再次调取   mapChart.setOption(option,true)表示数据更新，mapChart.setOption(option,false)表示合并新数据原数据存在
+			mapChart.setOption(options);
+			mapChart.resize();
+			//地图自动轮询
+			// var index = 0; //播放所在下标
+			// var timers = setInterval(function () {
+			// 	mapChart.dispatchAction({
+			// 		type: 'showTip',
+			// 		seriesIndex: 0,
+			// 		dataIndex: index
+			// 	});
+			// 	index++;
+			// 	if (index > data.length) {
+			// 		index = 0;
+			// 	}
+			// }, 2000);
+		}
+
+		var chartSmail01
+
+		function trainsBox(texts) {
+			console.log(texts,'tewxts');
+			// debugger;
+			chartSmail01 = echarts.init(document.getElementById('chaerts01'))
+			// texts=[]
+			//电商人才培训
+			optionmain01 = {
+			
+				tooltip: {
+					trigger: 'item',
+					formatter: function(params, ticket, callback) {
+						var res = params.name;
+						res += '<br/>' + params.value + ' ( ' + params.percent + '%)';
+						return res;
+					}
+				},
+				series: [{
+					name: '占比',
+					type: 'pie',
+					selectedMode: 'single',
+				
+					label: {
+						normal: {
+							position: 'inner',
+							textStyle: {
+								color: '#fff',
+								fontSize: 14
+							}
+						}
+					},
+					labelLine: {
+						normal: {
+							show: false
+						}
+					},
+					data: [ {
+						value: texts.yes,
+						name: '合格量',
+						itemStyle:{
+							color:'#ffcc00'
+						}
+					}, {
+						value: texts.no,
+						name: '不合格',
+						itemStyle:{
+							color:"#b10"
+						}
+					},{
+						value:texts.all,
+						name:'总数量',
+						itemStyle:{
+							color:'#ff6d00'
+						}
+					}]
+				}]
+			};
+			chartSmail01.setOption(optionmain01);
+			chartSmail01.resize()
+			//人才培训轮询
+			var index01 = 0; //播放所在下标
+			var timers01 = setInterval(function () {
+				chartSmail01.dispatchAction({
+					type: 'showTip',
+					seriesIndex: 0,
+					dataIndex: index01
+				});
+				index01++;
+				if (index01 >= 2) {
+					index01 = 0;
+				}
+			}, 2000);
+
+		}
+		//扫码城市
+		var chartSmail03 = echarts.init(document.getElementById('chaerts03'));
+
+		function regionsCode(data) {
+			var dataname = [];
+			var datavaluenew = [];
+			var datavaluold = [];
+			for(var i = 0;i<data.length;i++){
+				dataname.push(data[i].base_name);
+				datavaluenew.push(data[i].now_num);
+				datavaluold.push(data[i].ago_num);
+			}
+			optionmain03 = {
+				tooltip: {
+					trigger: 'axis',
+					axisPointer: { // 坐标轴指示器，坐标轴触发有效
+						type: 'shadow' // 默认为直线，可选为：'line' | 'shadow'
+					}
+				},
+				legend: {
+						x: 'center',
+						itemWidth: 18,
+						color:"#fff",
+						data:['去年','今年'],
+						y:"15%",
+						textStyle:{
+							color:"#fff"
+						}
+				},
+				grid: {
+					left: '8%',
+					right: '4%',
+					bottom: '3%',
+					containLabel: true
+				},
+				xAxis: [
+					{						
+						barMaxWidth:1,
+						type: 'category',
+						data: dataname,
+						fontSize: 6,
+						scale: true,
+						axisTick: {
+							alignWithLabel: false
+						},
+						axisLabel: {        
+                                show: true,
+                                textStyle: {
+                                    color: '#fff',
+                                    fontSize:'12'
+                                }
+                            },
+					}
+				],
+				yAxis: [{
+						splitNumber:2,
+						axisLabel: {
+						formatter: '{value}',
+							color: '#e2e9ff',
+						},
+						axisLine: {
+							show: false
+						},
+						splitLine: {
+							lineStyle: {
+								color: 'rgba(255,255,255,0.12)'
+							}
+						},
+						type: 'value',
+						barGap: 1,
+						padding: 0,
+						
+					}
+				],
+				series : [
+					{
+						name:'去年',
+						type:'bar',
+						itemStyle: {   //配置样式，设置每个柱子的颜色
+							normal:{
+								color: '#56aaff',
+							}
+						},
+						data:datavaluold,
+					},
+					{
+						name:'今年',
+						type:'bar',
+						itemStyle: {   //配置样式，设置每个柱子的颜色
+							normal:{
+								color: '#00d4f8'
+							}
+						},
+						data:datavaluenew,
+					}
+				
+				]
+			};
+			chartSmail03.setOption(optionmain03);
+			chartSmail03.resize();
+			//扫码溯源量
+			var index0_3 = 0; //播放所在下标
+			var timers03 = setInterval(function () {
+				chartSmail03.dispatchAction({
+					type: 'showTip',
+					seriesIndex: 0,
+					dataIndex: index0_3
+				});
+				index0_3++;
+				if (index0_3 > 6) {
+					index03 = 0;
+				}
+			}, 2000);
+			return false;
+			const dataMonth = [],
+				valueData = []
+			for (let i in data) {
+				dataMonth.push(i + '月');
+				valueData.push(data[i])
+			}
+			optionmain03 = {
+				color: ['#00eaf9'],
+				tooltip: {
+					trigger: 'axis',
+					axisPointer: { // 坐标轴指示器，坐标轴触发有效
+						type: 'shadow' // 默认为直线，可选为：'line' | 'shadow'
+					}
+				},
+				grid: {
+					left: '3%',
+					right: '4%',
+					bottom: '3%',
+					top: '25%',
+					containLabel: true
+				},
+				xAxis: [{
+					type: 'category',
+					data: dataMonth,
+					axisLine: {
+						lineStyle: {
+							color: '#ffffff',
+						}
+					},
+					axisTick: {
+						alignWithLabel: true,
+						lineStyle: {
+							color: '#ffffff',
+						}
+					},
+					nameTextStyle: {
+						color: '#ffffff',
+					},
+					splitLine: {
+						show: false
+					}
+				}],
+				yAxis: [{
+					type: 'value',
+					axisLine: {
+						lineStyle: {
+							color: '#ffffff',
+						}
+					},
+					axisTick: {
+						alignWithLabel: true,
+						lineStyle: {
+							color: '#ffffff',
+						}
+					},
+					nameTextStyle: {
+						color: '#ffffff',
+					},
+					splitLine: {
+						show: false
+					}
+
+				}],
+				series: [{
+					name: '发码量',
+					type: 'line',
+					barWidth: '60%',
+					data: valueData
+				}]
+			};
+
+			chartSmail03.setOption(optionmain03);
+			chartSmail03.resize();
+			//扫码溯源量
+			var index0_3 = 0; //播放所在下标
+			var timers03 = setInterval(function () {
+				chartSmail03.dispatchAction({
+					type: 'showTip',
+					seriesIndex: 0,
+					dataIndex: index0_3
+				});
+				index0_3++;
+				if (index0_3 > dataMonth.length) {
+					index03 = 0;
+				}
+			}, 2000);
+
+		}
+
+		//零售行业分布
+		var chartSmail06
+
+		function industrys(text) {
+			$('#chaerts06 #retailsListBox').html('');
+			$('#chaerts06 #retailsListBoxtwo').html('');
+			if (text === '') {
+				$('#chaerts06 #retailsListBox').html('');
+				$('#chaerts06 #retailsListBoxtwo').html('');
+				$('#chaerts06 #retailsListBox').html('<span class="nodataText">暂无数据</span>')
+				$('#chaerts06 #retailsListBoxtwo').html('<span class="nodataText">暂无数据</span>')
+			} else {
+				var moneys = 0;
+				for (var i = 0; i < text.length; i++) {
+					moneys += Number(text[i].count);
+				}
+				for (var i = 0; i < text.length; i++) {
+					var propor = (text[i].count / moneys * 100).toFixed(2) + '%';
+					if(i < 5){
+						$('#chaerts06 #retailsListBox').append("<li><span class='names' title='" + text[i].name + "'>" + text[i].name +
+						"</span><p><span style='width:" + propor + "'></span></p><span class='moneys counter-value' title='" +
+						text[i].count + "'>" + text[i].count + "</span></li>")
+					}else{
+						$('#chaerts06 #retailsListBoxtwo').append("<li><span class='names' title='" + text[i].name + "'>" + text[i].name +
+						"</span><p><span style='width:" + propor + "'></span></p><span class='moneys counter-value' title='" +
+						text[i].count + "'>" + text[i].count + "</span></li>")
+					}
+					
+				}
+				
+			}
+			
+			if(text.length > 5){
+				showbowxtwo();
+			}
+			// textsroll();
+		}
+		var chartSmail071,chartSmail072;
+
+		function damagedata(text) {
+			chartSmail071 = echarts.init(document.getElementById('chaerts07'));
+		
+			//电商人才培训
+			optionmain071 = {
+    
+				tooltip: {
+					trigger: 'item',
+					formatter: function(params, ticket, callback) {
+						var res = params.name;
+						res += '<br/>' + params.value + ' ( ' + params.percent + '%)';
+						return res;
+					}
+				},
+				series: [{
+					name: '占比',
+					type: 'pie',
+					selectedMode: 'single',
+					color: [ '#FBFE27', '#FE5050', '#1DB7E5'], //'#FBFE27','rgb(11,228,96)','#FE5050'
+					label: {
+						normal: {
+							position: 'inner',
+							textStyle: {
+								color: '#fff',
+								fontSize: 14
+							}
+						}
+					},
+					labelLine: {
+						normal: {
+							show: false
+						}
+					},
+					data: [ {
+						value: text.ck_loss,
+						name: '仓库报损',
+						
+					}, {
+						value: text.sc_loss,
+						name: '生产报损',
+						
+					},{
+						value: text.ys_loss,
+						name: '运输报损',
+						
+					}]
+				}]
+			};
+			chartSmail071.setOption(optionmain071);
+			chartSmail071.resize()
+			//人才培训轮询
+			var index01 = 0; //播放所在下标
+			var timers01 = setInterval(function () {
+				chartSmail071.dispatchAction({
+					type: 'showTip',
+					seriesIndex: 0,
+					dataIndex: index01
+				});
+				index01++;
+				if (index01 >= 3) {
+					index01 = 0;
+				}
+			}, 2000);
+
+		}
+		
+	
+		//适配加载图表
+		window.onresize = function () {
+			trainsBox(dataV1);
+			retails(dataV2);
+			networks(dataV3);
+			regionsCode(dataV4);
+			damagedata(dataV5);
+			industrys(dataV6);
+			mapsDataBox(dataV7);
+		};
+
+	</script>
+</body>
+
+</html>

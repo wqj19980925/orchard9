@@ -1,0 +1,465 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>电子商务大数据监测平台</title>
+    <meta name="renderer" content="webkit" />
+    <meta name="force-rendering" content="webkit" />
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1" />
+    <script type="text/javascript" src="../js/jquery-1.11.0.js"></script>
+    <link rel="stylesheet" href="../css/common.css" />
+    <link rel="stylesheet" href="../css/style.css" />
+</head>
+<style>
+
+</style>
+
+<body style="overflow: hidden;">
+    <div class="longNanContainerBox">
+        <!--<<浏览器版本过低-->
+        <!-- <div class="browserMainBox">
+        <div class="textsMainBox">
+            <p class="textsTitles">您的浏览器版本过低，存在安全风险，请升级或下载新版本浏览器<br />（若您使用的是双核浏览器，请采用极速模式）</p>
+            <div class="downloadsMainBox">
+                <a class="downBtnBox" target="_blank" href="https://www.google.com/intl/zh-CN/chrome/?standalone=1">
+                    <img src="../images/chrome.png"> 立即下载
+                </a>
+                <a class="downBtnBox" target="_blank"
+                    href="https://download-ssl.firefox.com.cn/releases-sha2/stub/official/zh-CN/Firefox-latest.exe">
+                    <img src="../images/firefox.png"> 立即下载
+                </a>
+                <a class="downBtnBox" target="_blank" href="http://down.360safe.com/cse/360cse_9.5.0.138.exe">
+                    <img src="../images/360.png"> 立即下载
+                </a>
+            </div>
+        </div>
+    </div> -->
+        <!--浏览器版本过低>>-->
+        <!--<<加载中-->
+        <div class="loadsMianBox">
+            <div class="loader">
+                <span class="text">Loading</span>
+                <span class="spinner"></span>
+            </div>
+        </div>
+        <!--加载中>>-->
+        <div class="longNan_ContainerBox">
+            <div class="title_header_box"></div>
+            <a class="reture" href="javascript:history.go(-1)"></a>
+            <p class="titlesTextBox">农村产品零售商</p>
+            <div class="populationBox" style="overflow: hidden;">
+                <!--人才培训数量-->
+                <div id="chaerts01" style="width: 100%; height: 100%;">
+
+                </div>
+                <div id="chaerts02" style="position: absolute; top: 0%; right: 2%;width: 50%;height: 3.75rem">
+
+                </div>
+            </div>
+
+        </div>
+    </div>
+    <!--底部部分>>-->
+    <script>
+        //判断浏览器是否支持HTML5
+        // if (!window.applicationCache) {
+        //     $(".longNanContainerBox").hide();
+        // } else {
+        //     $(".browserMainBox").hide();
+        // }
+    </script>
+    <script src="../js/echarts.min.js"></script>
+    <script src="../js/resize.js"></script>
+    <script>
+        window.onload = function () {
+            var adminToken, year;
+            var str = location.href; //取得整个地址栏
+            var num = str.indexOf("?")
+            str = str.substr(num + 1); //取得所有参数 stringvar.substr(start [, length ]
+            var arr = str.split("&"); //各个参数放到数组里
+
+            // for (var i = 0; i < arr.length; i++) {
+            //     num = arr[i].indexOf("=");
+            //     adminToken = arr[0].substr(num + 1)
+            //     year = arr[1].substr(num + 1)
+            // }
+            for (var i = 0; i < arr.length; i++) {
+                num=arr[i].indexOf("=");
+                if(i == 0){
+                        adminToken = arr[0].substr(num + 1)
+                }else{
+                        year = arr[1].substr(num + 1)
+                }
+			}
+            masterdatas(year, adminToken);
+            getSixTitle(adminToken)
+
+            longNanContainer();
+            var arr = [];
+        }
+        // var baseUrl = "https://" + document.domain + '/';
+		var baseUrl = "https://lnsybak.bluearp.com/";
+        // 获取6大标题
+        function getSixTitle(adminToken) {
+            $.post(baseUrl + 'public/Bigdata/title', {
+                    'api_token': adminToken,
+                },
+                function (data) {
+                    if (data.code === 200) {
+                        const dataTit = data.data
+                        $('.titlesTextBox').html(dataTit[1].pub_name)
+                    } else {
+                        window.location.href = baseUrl + '#/'
+                    }
+                })
+        }
+         function sort(a, b) {
+                return b - a;
+            }
+        //农产品
+        function masterdatas(year, adminToken) {
+            $.post(baseUrl + 'public/Bigdata/getsales', {
+                    'api_token': adminToken,
+                    'year': year
+                },
+                function (data) {
+                    $('.loadsMianBox').hide()
+                    $('.longNan_ContainerBox').show()
+                     var arr1=[]
+                    if (data.code === 200) {
+                        arr = data.data.goodsall;
+                        var arrvalue1=[];
+                        for (var i = 0; i < arr.length; i++) {     
+                            arrvalue1.push(Number(arr[i].value))
+                        }
+                        console.log(arrvalue1,'arrvalue1')
+                        var maxnum =[]
+                        maxnum=arrvalue1.sort(sort);
+                        for(i in data.data.goodsall){
+                             arr1.push({
+                                name:data.data.goodsall[i].name,
+                                value:Number(data.data.goodsall[i].value),
+                                max:maxnum[0]
+                            })      
+                        }
+                    console.log('arr1',arr1)
+                        trainsBox(arr1)
+                    } else {
+                        window.location.href = baseUrl + '#/'
+                    }
+                })
+        }
+
+
+        var myChart = echarts.init(document.getElementById('chaerts01'));
+        var myChart2 = echarts.init(document.getElementById("chaerts02"));
+
+        function trainsBox(arr1) {
+            var arrNmae = [],
+                arrvalue = [],
+                arrvaluelv = [],
+                arrlv = [];
+
+            var dataShadow = [];
+
+            for (var i = 0; i < arr.length; i++) {
+                arrNmae.push(arr[i].name);
+                arrvalue.push(Number(arr[i].value))
+            }
+            var Yhe = 0;
+            var ymax = Math.max.apply(null, arrvalue);
+            //求和
+
+            for (var i = 0; i < arrvalue.length; i++) {
+                Yhe = Yhe + arrvalue[i];
+            };
+            //销售率
+            for (var i = 0; i < arrvalue.length; i++) {
+                arrvaluelv.push((arrvalue[i] / Yhe * 100).toFixed(2));
+            };
+
+            var min = 0;
+            var maxs = ((Math.max.apply(null, arrvaluelv)) / 10).toFixed(0) * 10 + 5;
+            var option = {
+                backgroundColor: '',
+                title: {
+                    text: "农产品销售概况",
+                    left: "center",
+                    textStyle: {
+                        color: '#fff',
+                    },
+                    top: 20
+
+                },
+
+                color: "#fff",
+                tooltip: {
+                    trigger: 'axis',
+                    // formatter: function(prams) {
+                    //     if (prams[0].data === min) {
+                    //         return "合格率：0%"
+                    //     } else {
+                    //         return "销售率：" + arrvaluelv[it].data + "%"+"<br/>"+"销售量："+prams[0].data
+                    //     }
+                    // }
+                },
+                legend: {
+                    data: ['销售率', '销售量'],
+                    textStyle: {
+                        color: '#FFFFFF',
+                    },
+                    left: 40,
+                    top: 5
+                },
+                textStyle: {
+                    color: '#FFFFFF',
+                    fontSize: '10px'
+                },
+                grid: {
+                    left: '3%',
+                    right: '3%',
+                    bottom: '5%',
+                    top: '10%',
+                    containLabel: true
+                },
+                calculable: true,
+                xAxis: [{
+                    show: true,
+                    type: 'category',
+                    boundaryGap: true,
+                    data: arrNmae,
+                    //刻度线是否显示
+                    axisTick: {
+                        show: false
+                    },
+                    axisLabel: {
+                        interval: 0,
+
+                        show: true,
+                        textStyle: {
+                            fontSize: 16
+                        }
+                    },
+                    splitLine: {
+                        show: true,
+                        lineStyle: {
+                            // 使用深浅的间隔色
+                            color: 'rgb(20,203,215,0.2)',
+                        }
+                    }
+                }],
+                yAxis: [{
+                    name: '销售率(100%)',
+                    type: "value",
+                    namelineStyle: {
+                        fontSize: 18
+                    },
+                    min: min,
+                    max: maxs,
+                    gridIndex: 0,
+                    axisLine: {
+                        show: true,
+                        symbol: ['none', 'arrow'],
+                        symbolSize: [10, 10],
+                        symbolOffset: [0, 10],
+                        lineStyle: {
+                            color: 'rgb(20,203,215,0.2)'
+                        },
+                    },
+                    axisTick: {
+                        show: false
+                    },
+                    splitLine: {
+                        show: false
+                    },
+                    axisLabel: {
+                        color: 'rgb(170,170,170)',
+                        formatter: '{value} %'
+                    },
+                }, {
+                    type: 'value',
+                    name: '销售量(元)',
+                    axisLine: {
+                        onZero: false,
+                        show: true,
+                        symbol: ['none', 'arrow'],
+                        symbolSize: [10, 10],
+                        symbolOffset: [0, 10],
+                        lineStyle: {
+                            color: 'rgb(20,203,215,0.2)'
+                        },
+                    },
+                    axisTick: {
+                        show: false,
+                    },
+                    splitLine: {
+                        show: true,
+                        lineStyle: {
+                            color: 'rgb(20,203,215,0.2)'
+                        }
+                    },
+                }, ],
+                series: [{
+                    name: '销售率',
+                    type: 'line',
+                    symbol: 'none',
+                    itemStyle: {
+                        normal: {
+                            color: '#2cdece',
+                            lineStyle: {
+                                color: new echarts.graphic.LinearGradient(
+                                    0, 0, 1, 0,
+                                    [{
+                                            offset: 0,
+                                            color: '#2cdece'
+                                        },
+                                        {
+                                            offset: 0.5,
+                                            color: '#2cdece'
+                                        },
+                                        {
+                                            offset: 1,
+                                            color: '#2cdece'
+                                        }
+                                    ]
+                                )
+                            }
+                        }
+                    },
+                    data: arrvaluelv
+                }, {
+                    name: '销售量',
+                    type: 'bar',
+                    barWidth: '15%',
+                    yAxisIndex: 1,
+                    itemStyle: {
+                        normal: {
+                            barBorderRadius: [30, 30, 0, 0],
+                            //颜色渐变函数 前四个参数分别表示四个位置依次为左、下、右、上
+                            color: new echarts.graphic.LinearGradient(
+                                0, 0, 0, 1,
+                                [{
+                                        offset: 0,
+                                        color: '#2cdece'
+                                    },
+                                    {
+                                        offset: 0.5,
+                                        color: '#12cbe0'
+                                    },
+                                    {
+                                        offset: 1,
+                                        color: '#12cbe0'
+                                    }
+                                ]
+                            )
+                        }
+                    },
+                    data: arrvalue
+                }]
+            };
+
+            myChart.setOption(option);
+            myChart.resize();
+
+            var option2 = {
+                title: {
+                    text: '售率百分比',
+                    textStyle: {
+                        color: "#fff"
+                    },
+                    right: '10%'
+                },
+                grid: {
+                    left: '0%',
+                    right: '0%',
+                    bottom: '0%',
+                    top: '10%',
+                    containLabel: true
+                },
+                tooltip: { 
+                    trigger: 'item',
+                    position:[350,100]
+                     // confine: true,
+                     // enterable: false, //鼠标是否可以移动到tooltip区域内
+                    },
+                legend: {
+                    data: ['']
+                },
+                radar: {
+                    // shape: 'circle',
+                     // splitNumber: 6, 
+
+                    indicator: arr1
+                },
+
+                series: [{
+                    name: '',
+                    type: 'radar',
+                    color: "#2cdece",
+                    bottom:'80%',
+                    // areaStyle: {normal: {}},
+                    areaStyle: {
+                        normal: {
+                            opacity: 0.8,
+                            color: new echarts.graphic.RadialGradient(0.5, 0.5, 1, [{
+                                    color: '#2cdece',
+                                    offset: 0
+                                },
+                                {
+                                    color: '#12cbe0',
+                                    offset: 1
+                                }
+                            ])
+                        }
+                    },
+                    data: [{
+                        value: arrvalue,
+
+                    }]
+                }]
+            }
+
+            myChart2.setOption(option2);
+            myChart2.resize();
+
+        }
+
+
+        //字体适配屏占比控制
+        function longNanContainer() {
+            var heights = $(window).height();
+            var widths = $(window).width();
+            var ratios = heights / widths;
+
+            if (ratios <= 0.35) {
+                $('.longNanContainerBox').css({
+                    'width': widths,
+                    'height': widths * 0.35,
+                });
+                $('body').css({
+                    'overflow': 'auto',
+                })
+
+            } else {
+                $('.longNanContainerBox').css({
+                    'width': widths,
+                    'height': heights,
+                });
+                $('body').css({
+                    'overflow': 'hidden',
+                })
+            }
+            var sizes = widths / 1920 * 100;
+            $('html').css("font-size", sizes);
+            setTimeout("longNanContainer()", 1);
+        }
+
+        $(".longNanContainerBox").resize(function () {
+            myChart.resize();
+            myChart2.resize();
+        });
+    </script>
+</body>
+
+</html>

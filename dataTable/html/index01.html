@@ -1,0 +1,378 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta charset="UTF-8">
+	<title>电子商务大数据监测平台</title>
+	<meta name="renderer" content="webkit" />
+	<meta name="force-rendering" content="webkit" />
+	<meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1" />
+	<script type="text/javascript" src="../js/jquery-1.11.0.js"></script>
+	<link rel="stylesheet" href="../css/common.css" />
+	<link rel="stylesheet" href="../css/style.css" />
+</head>
+<style lang="">
+	
+</style>
+
+<body style="overflow: hidden;">
+	<div class="longNanContainerBox">
+		<!--<<浏览器版本过低-->
+		<!-- <div class="browserMainBox">
+			<div class="textsMainBox">
+				<p class="textsTitles">您的浏览器版本过低，存在安全风险，请升级或下载新版本浏览器<br/>（若您使用的是双核浏览器，请采用极速模式）</p>
+				<div class="downloadsMainBox">
+					<a class="downBtnBox" target="_blank" href="https://www.google.com/intl/zh-CN/chrome/?standalone=1">
+						<img src="../images/chrome.png"> 立即下载
+					</a>
+					<a class="downBtnBox" target="_blank" href="https://download-ssl.firefox.com.cn/releases-sha2/stub/official/zh-CN/Firefox-latest.exe">
+						<img src="../images/firefox.png"> 立即下载
+					</a>
+					<a class="downBtnBox" target="_blank" href="http://down.360safe.com/cse/360cse_9.5.0.138.exe">
+						<img src="../images/360.png"> 立即下载
+					</a>
+				</div>
+			</div>
+		</div> -->
+		<!--浏览器版本过低>>-->
+		<!--<<加载中-->
+		<div class="loadsMianBox">
+			<div class="loader">
+				<span class="text">Loading</span>
+				<span class="spinner"></span>
+			</div>
+		</div>
+		<!--加载中>>-->
+		<div class="longNan_ContainerBox">
+			<div class="title_header_box"></div>
+			<a class="reture" href="javascript:history.go(-1)"></a>
+			<p class="titlesTextBox"></p>
+			<div class="populationBox">
+				<!--人才培训数量-->
+				<div id="chaerts01" style="width: 100%; height: 100%;">
+
+				</div>
+			</div>
+		</div>
+	</div>
+	<!--底部部分>>-->
+	<script>
+		//判断浏览器是否支持HTML5
+		// if(!window.applicationCache) {
+		// 	$(".longNanContainerBox").hide();　　
+		// } else {
+		// 	$(".browserMainBox").hide();
+		// }
+	</script>
+	<script src="../js/echarts.min.js"></script>
+	<script src="../js/resize.js"></script>
+	<script>
+		window.onload = function () {
+			// var token = window.location.search
+			var adminToken, year;
+			var str = location.href; //取得整个地址栏
+			var num = str.indexOf("?")
+			str = str.substr(num + 1); //取得所有参数 stringvar.substr(start [, length ]
+			var arr = str.split("&"); //各个参数放到数组里
+
+			// for (var i = 0; i < arr.length; i++) {
+			// 	num = arr[i].indexOf("=");
+			// 	adminToken = arr[0].substr(num + 1)
+			// 	year = arr[1].substr(num + 1)
+			// }
+			for (var i = 0; i < arr.length; i++) {
+				num=arr[i].indexOf("=");
+					if(i == 0){
+							adminToken = arr[0].substr(num + 1)
+					}else{
+							year = arr[1].substr(num + 1)
+					}
+			}
+			$('.longNan_ContainerBox').show()
+			
+			longNanContainer();
+			personnels(year, adminToken);
+			// 获取6个标题
+			getSixTitle(adminToken);
+		}
+		// var baseUrl = "https://" + document.domain + '/';
+		var baseUrl = "https://lnsybak.bluearp.com/";
+
+		// 获取6大标题
+		function getSixTitle(adminToken) {
+			$.post(baseUrl + 'public/Bigdata/title', {
+					'api_token': adminToken,
+				},
+				function (data) {
+					$('.loadsMianBox').hide()
+					
+					if (data.code === 200) {
+						const dataTit = data.data
+						$('.titlesTextBox').html(dataTit[0].pub_name)
+					} else {
+						window.location.href = baseUrl + '#/'
+					}
+				})
+		}
+		//人才培训
+		function personnels(year, adminToken) {
+			$.post(baseUrl + 'public/Bigdata/getpersonnel', {
+					'api_token': adminToken,
+					'year': year
+				},
+				function (data) {
+					if (data.code === 200) {
+						trainsBox(data.data.type)
+					} else {
+						window.location.href = baseUrl + '#/'
+					}
+				})
+		}
+
+		var chartSmail01 = echarts.init(document.getElementById('chaerts01'));
+
+		function trainsBox(texts) {
+			texts.data = eval("(" + texts.data + ")");
+			texts.value = eval("(" + texts.value + ")");
+			//电商人才培训
+			optionmain01 = {
+				color: ['#00eaf9'],
+
+				tooltip: {
+					show: true, //---是否显示提示框,默认为true
+					trigger: 'item', //---数据项图形触发
+					axisPointer: { //---指示样式
+						type: 'shadow',
+						axis: 'auto',
+
+					},
+					padding: 5,
+					textStyle: { //---提示框内容样式
+						color: "#fff",
+					},
+				},
+
+
+				grid: {
+					left: '3%',
+					right: '6%',
+					bottom: '5%',
+					top: '10%',
+					containLabel: true
+				},
+				xAxis: [{
+					type: 'category',
+					name: "分类",
+					data: texts.data,
+					axisLine: {
+						lineStyle: {
+							color: '#ffffff',
+						}
+					},
+					axisLabel: {
+						interval: 0,
+						rotate: 40,
+						textStyle: {
+							fontSize: 12
+						}
+					},
+					axisTick: {
+						alignWithLabel: true,
+						lineStyle: {
+							color: '#ffffff',
+						}
+					},
+					nameTextStyle: {
+						color: '#ffffff',
+						fontSize: 12
+					},
+					splitLine: {
+						show: false
+					}
+				}],
+				yAxis: [{
+					type: 'value',
+					name: "人数",
+					axisLine: {
+						lineStyle: {
+							color: '#ffffff',
+						}
+					},
+					axisTick: {
+						alignWithLabel: true,
+						lineStyle: {
+							color: '#ffffff',
+						}
+					},
+					nameTextStyle: {
+						color: '#ffffff',
+						fontSize: 18
+					},
+					splitLine: {
+						show: false
+					}
+
+				}],
+				series: [{
+						name: '培训数量',
+						type: 'bar',
+						barWidth: '40%',
+						data: texts.value,
+						markPoint: {
+							data: [{
+									type: 'max',
+									name: '最大值'
+								},
+								{
+									type: 'min',
+									name: '最小值'
+								}
+							]
+						},
+						markLine: {
+							data: [{
+								type: 'average',
+								name: '平均值',
+								itemStyle: {
+									normal: {
+										color: 'red'
+									}
+								}
+							}]
+						},
+						itemStyle: {
+							normal: {
+								barBorderRadius: [5, 5, 0, 0],
+								color: new echarts.graphic.LinearGradient(
+									0, 0, 0, 1, [{
+											offset: 0,
+											color: '#188df0'
+										},
+										{
+											offset: 0.5,
+											color: '#188df0'
+										},
+										{
+											offset: 1,
+											color: '#83bff6'
+										}
+									]
+								)
+							},
+							emphasis: {
+								color: new echarts.graphic.LinearGradient(
+									0, 0, 0, 1, [{
+											offset: 0,
+											color: '#2378f7'
+										},
+										{
+											offset: 0.7,
+											color: '#2378f7'
+										},
+										{
+											offset: 1,
+											color: '#83bff6'
+										}
+									]
+								)
+							}
+						},
+					},
+					{
+						name: '培训数量',
+						type: 'line',
+						data: texts.value,
+						markLine: {
+							data: [{
+								type: 'average',
+								name: '平均值',
+								itemStyle: {
+									normal: {
+										color: 'red'
+									}
+								}
+							}]
+						},
+						itemStyle: {
+							normal: {
+								color: new echarts.graphic.LinearGradient(
+									0, 0, 0, 1, [{
+											offset: 0,
+											color: '#83bff6'
+										},
+										{
+											offset: 0.5,
+											color: '#fff'
+										},
+										{
+											offset: 1,
+											color: '#188df0'
+										}
+									]
+								)
+							},
+							emphasis: {
+								color: new echarts.graphic.LinearGradient(
+									0, 0, 0, 1, [{
+											offset: 0,
+											color: '#2378f7'
+										},
+										{
+											offset: 0.7,
+											color: '#2378f7'
+										},
+										{
+											offset: 1,
+											color: '#83bff6'
+										}
+									]
+								)
+							}
+						},
+					}
+				],
+
+			};
+
+			chartSmail01.setOption(optionmain01);
+			chartSmail01.resize();
+		};
+
+		//字体适配屏占比控制
+		function longNanContainer() {
+			var heights = $(window).height();
+			var widths = $(window).width();
+			var ratios = heights / widths;
+
+			if (ratios <= 0.35) {
+				$('.longNanContainerBox').css({
+					'width': widths,
+					'height': widths * 0.35,
+				});
+				$('body').css({
+					'overflow': 'auto',
+				})
+
+			} else {
+				$('.longNanContainerBox').css({
+					'width': widths,
+					'height': heights,
+				});
+				$('body').css({
+					'overflow': 'hidden',
+				})
+			}
+
+			var sizes = widths / 1920 * 100;
+			$('html').css("font-size", sizes);
+
+			setTimeout("longNanContainer()", 1);
+		}
+
+		$(".longNanContainerBox").resize(function () {
+			chartSmail01.resize();
+		});
+	</script>
+</body>
+
+</html>

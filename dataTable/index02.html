@@ -1,0 +1,1372 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta charset="UTF-8">
+	<title>电子商务大数据监测平台</title>
+	<meta name="renderer" content="webkit" />
+	<meta name="force-rendering" content="webkit" />
+	<meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1" />
+	<script type="text/javascript" src="js/jquery-1.11.0.js"></script>
+	<link rel="stylesheet" href="css/common.css" />
+	<link rel="stylesheet" href="css/style.css" />
+	<link rel="stylesheet" href="css/swiper.min.css" />
+	<!-- <script src="https://gallery.echartsjs.com/dep/ace/src-min/mode-javascript.js"></script> -->
+	<!-- <script src="https://gallery.echartsjs.com/dep/ace/src-min/snippets/text.js"></script> -->
+	<!-- <script src="https://gallery.echartsjs.com/dep/ace/src-min/snippets/javascript.js"></script> -->
+	<!-- <script src="https://gallery.echartsjs.com/dep/ace/src-min/ext-searchbox.js"></script> -->
+</head>
+<style>
+.swiper-slide-shadow-left , .swiper-slide-shadow-right {
+	opacity: 0;
+}
+</style>
+
+<body style="overflow: hidden;">
+	<div class="longNanContainerBox">
+		<!--浏览器版本过低>>-->
+		<!--<<加载中-->
+		<div class="loadsMianBox">
+			<div class="loader">
+				<span class="text">Loading</span>
+				<span class="spinner"></span>
+			</div>
+		</div>
+		<!--<<浏览器版本过低-->
+		<div class="browserMainBox">
+			<div class="textsMainBox">
+				<p class="textsTitles">您的浏览器版本过低，存在安全风险，请升级或下载新版本浏览器<br />（若您使用的是双核浏览器，请采用极速模式）</p>
+				<div class="downloadsMainBox">
+					<a class="downBtnBox" target="_blank" href="https://www.google.com/intl/zh-CN/chrome/?standalone=1">
+						<img src="images/chrome.png"> 立即下载
+					</a>
+					<a class="downBtnBox" target="_blank"
+						href="https://download-ssl.firefox.com.cn/releases-sha2/stub/official/zh-CN/Firefox-latest.exe">
+						<img src="images/firefox.png"> 立即下载
+					</a>
+					<a class="downBtnBox" target="_blank" href="http://down.360safe.com/cse/360cse_9.5.0.138.exe">
+						<img src="images/360.png"> 立即下载
+					</a>
+				</div>
+			</div>
+		</div>
+		<!-- <div class='longNanContainerBox'></div> -->
+		<!--加载中>>-->
+		<div class="longNan_ContainerBox">
+			<div class="title_header_box"></div>
+			<p class="titlesTextBox">
+				<i class="left_icon" onclick="leftIconClick()"></i>
+				电子商务大数据监测平台 
+				<i class="right_icon" onclick="rightIconClick()"></i>
+			</p>
+			<!--<<地图内容块-->
+			<div class="longNanMainContentBox">
+				<div class="titles">
+					<div class="select-box">
+						<div class='show_tit'onblur="yearhide()" onclick='yearChose()'>
+							<span class='show_val'>2019</span>
+							<i class='icon_down'></i>
+						</div>
+						<ul class='chose_year_list'>
+						</ul>
+					</div>
+					<span>全国城市查询分布</span>
+				</div>
+				<p class="smalies" style="display:none"><span id="totalSums" class="counter-value">0.00</span>元</p>
+				<!-- <span class="switchMaps" onclick="mapSwitch();"></span> -->
+				<span class="quitsMainBtn" onclick="goHome();"></span>
+				<!-- <p id="mapsName" style="display: none;">产品码全国数据分布统计</p> -->
+				<!--<<地图详细图表-->
+				<div id="map-wrap" class="mapsMianBox"></div>
+				<!--地图详细图表>>-->
+				<!--<<地图轮询图表-->
+				<div id="map-wrap2" class="mapsMianBox"></div>
+				<!--地图轮询图表>>-->
+			</div>
+			<!--地图内容块>>-->
+			<!--<<电商人才培训-->
+			<div class="chartsMainBox_01">
+				<p class="contentBlockTitles" onclick="Url('index01')" id='title00'>商品发码量TOP10</p>
+				<!--<<图表块--->
+				<div id="chaerts01">
+				</div>
+				<!--图表块>>-->
+			</div>
+			<!--电商人才培训>>-->
+			<!--<<商品收获量TOP10-->
+			<div class="chartsMainBox_02">
+				<p class="contentBlockTitles" onclick="Url('index02')" id='title01'>商品收获量TOP10</p>
+				<!--<<图表块--->
+				<div id="chaerts02" class="paddingTop">
+					<ul class="retailersMainList" id="retailsListBox">
+					</ul>
+					<ul class="retailersMainList" id="retailsListBoxtwo">
+					</ul>
+				</div>
+				<!--图表块>>-->
+			</div>
+			<!--商品收获量TOP10>>-->
+			<!--<<扫码归属地查询-->
+			<div class="chartsMainBox_03">
+				<p class="contentBlockTitles" onclick="Url('index03')" id='title02'>库房损耗量</p>
+				<div id="chaerts03">
+				</div>
+			</div>
+			<!--扫码归属地查询>>-->
+			<!--<<网络零售行业分布-->
+			<div class="chartsMainBox_06">
+				<p class="contentBlockTitles" onclick="Url('index05')" id='title05'>网络零售行业分布</p>
+				<div id="chaerts06">
+				</div>
+			</div>
+			<!--网络零售行业分布>>-->
+			<!--<<2018年整体交易-->
+			<div class="chartsMainBox_07">
+				<p class="contentBlockTitles" onclick="Url('index06')" id='title04'>运输损坏</p>
+				<div id="chaerts07">
+					<!-- <div class="materialsBox">
+						<div class="textsBox">
+							<p class="names">服务类</p>
+							<p class="moneys"><span id="materialobject" class="counter-value">0.00</span><i>元</i></p>
+						</div>
+						<div class="watersMain01Box">
+							<span><i id="waters01">0</i>%</span>
+							<div id="watersmian01" style="width:100%; height: 100%;"></div>
+						</div>
+					</div>
+					<div class="serviceMainBox">
+						<div class="textsBox">
+							<p class="names">实物类</p>
+							<p class="moneys"><span id="serviceClass" class="counter-value">0.00</span><i>元</i></p>
+						</div>
+						<div class="watersMain02Box">
+							<span><i id="waters02">0</i>%</span>
+							<div id="watersmian02" style="width:100%; height: 100%;"></div>
+						</div>
+					</div> -->
+				</div>
+			</div>
+			<!--2018年整体交易>>-->
+			<!--<<网商TOP10-->
+			<div class="chartsMainBox_08">
+				<p class="contentBlockTitles" onclick="Url('index04')" id='title03'>农户员工量TOP10</p>
+				<div id="chaerts08" style="">
+					<div class="swiper-container">
+						<div class="swiper-wrapper">
+							<div class="swiper-slide">
+								<ul class="rankingsList" id="networks01">
+
+								</ul>
+							</div>
+							<div class="swiper-slide swiper-slide02">
+								<ul class="rankingsList" id="networks02">
+
+								</ul>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<!--网商TOP5>>-->
+		</div>
+		<!-- 提示框 -->
+		<div class='el-message'>
+			<p class="el-message__content"></p>
+		</div>
+	</div>
+	<!--底部部分>>-->
+	<script>
+		// 判断 浏览器版/本
+		(function (window) {
+			var theUA = window.navigator.userAgent.toLowerCase();
+			if ((theUA.match(/msie\s\d+/) && theUA.match(/msie\s\d+/)[0]) || (theUA.match(/trident\s?\d+/) && theUA
+					.match(/trident\s?\d+/)[0])) {
+				var ieVersion = theUA.match(/msie\s\d+/)[0].match(/\d+/)[0] || theUA.match(/trident\s?\d+/)[0];
+				if (ieVersion <= 9) {
+					// $('.loadsMianBox').hide();
+					$(".longNan_ContainerBox").hide();
+					$(".browserMainBox").show();
+				} else {
+					$(".browserMainBox").hide();
+					$('.loadsMianBox').show();
+					$(".longNan_ContainerBox").show();
+				}
+			}
+		})(window);
+	</script>
+	<script src="js/echarts.min.js"></script>
+	<script src="js/echarts-liquidfill.js"></script>
+	<script src="js/china.js"></script>
+	<script src="js/resize.js"></script>
+	<script src="js/citymap.js"></script>
+	<script src="js/jquery.rotate.min.js"></script>
+	<script src="js/swiper.jquery.min.js"></script>
+<!-- 	<script src="js/swiper.min.js"></script> -->
+	<script>
+		window.onload = function () {
+			$('.el-message').hide();
+			var token = window.location.search
+			adminToken = token.substr(1);
+
+			// 获取当前年份
+			var date = new Date;
+			var year = date.getFullYear();
+			$('.show_val').html(year)
+			const year02 = Number(year) - 2;
+			const year01 = Number(year) - 1;
+			const yearOption = '<li class="year_option" onclick="choseYear(' + year + ')">' + year +
+				'</li><li class="year_option" onclick="choseYear(' + year01 + ')">' + year01 +
+				'</li><li class="year_option" onclick="choseYear(' + year02 + ')">' + year02 + '</li>'
+			$('.chose_year_list').html(yearOption);
+			$(".longNan_ContainerBox").show();
+			// 获取数据data
+			masterdatastwo(year);
+			// 字体自适应
+			longNanContainer(year);
+
+		}
+		var endtime =0;
+		var dataV1, dataV2, dataV3, dataV4, dataV5, dataV6, dataV7,dataMap, dataSl;
+		// var baseUrl = "https://" + document.domain + '/';
+		var baseUrltwo = "http://gybd.com/public/";
+
+		//跳转
+		function Url(url) {
+			var year = $('.show_val').text();
+			// window.location.href = "./html/" + url + ".html?token=" + adminToken + "&year=" + year;
+		}
+		function leftIconClick(){
+			window.location.href = "index.html?" + adminToken			
+		}
+		function rightIconClick() {
+			window.location.href = "index03.html?" + adminToken
+		}
+
+		function goHome() {
+			$('.el-message').removeClass('el-message--success', 'el-message--error')
+			//  退出登录/
+		
+		}
+		// 选择年份
+		function yearChose() {
+			if(endtime===1){
+				$('.chose_year_list').show()
+			}
+		}
+		function yearhide(){
+			$('.chose_year_list').hide()
+		}
+		function choseYear(value) {
+			$('.show_val').html(value)
+			$('.chose_year_list').hide()
+			$(".loadsMianBox").show();
+			masterdatastwo(value);
+			longNanContainer();		
+			$("#retailsListBox").removeClass('retailsListBoxtwoes');
+			$("#retailsListBoxtwo").removeClass('retailsListBoxtwoes');
+			$("#retailsListBox").removeClass('retailsListBoxtwohides');
+			$("#retailsListBoxtwo").removeClass('retailsListBoxtwohides');
+		}
+
+		//字体适配屏占比控制
+		function longNanContainer() {
+			var heights = $(window).height();
+			var widths = $(window).width();
+			var ratios = heights / widths;
+			if (ratios <= 0.35) {
+				$('.longNanContainerBox').css({
+					'width': widths,
+					'height': widths * 0.35,
+				});
+				$('body').css({
+					'overflow': 'auto',
+				})
+
+			} else {
+				$('.longNanContainerBox').css({
+					'width': widths,
+					'height': heights,
+				});
+				$('body').css({
+					'overflow': 'hidden',
+				})
+			}
+
+			var sizes = widths / 1920 * 100;
+			$('html').css("font-size", sizes);
+			setTimeout("longNanContainer()", 1);
+		}
+	
+		function masterdatastwo(yearDate) {
+			$('.el-message').removeClass('el-message--success', 'el-message--error')
+			$.post(baseUrltwo + 'City/index', {
+					'api_token': adminToken,
+					'year': yearDate
+				},
+				function (data) {
+					console.log(data,'0000');
+					if(data.code == 200){
+						// $(".nodataText").remove();
+						dataV1 = data.data.sendCode;
+						dataV2 = data.data.reap;
+						dataV3 = data.data.staff;
+						dataV4 = data.data.loss;
+						dataV5 = data.data.traffic;
+						dataV6 = data.data.traffic;
+						trainsBox(data.data.sendCode);
+						retails(data.data.reap);
+						networks(data.data.staff);
+						regionsCode(data.data.loss);
+						damagedata(data.data.traffic);
+						industrys(data.data.worm);
+					}else{
+						// $('#chaerts01').html('<span class="nodataText">暂无数据</span>');
+						// $('#chaerts02').html('<span class="nodataText">暂无数据</span>');				
+						// $('#chaerts08').html('<span class="nodataText">暂无数据</span>');					
+						// $('#chaerts03').html('<span class="nodataText">暂无数据</span>');	
+						// $('#chaerts07').html('<span class="nodataText">暂无数据</span>');	
+						// $('#chaerts06').html('<span class="nodataText">暂无数据</span>');	
+						document.getElementById('chaerts01').setAttribute('_echarts_instance_', '')
+					}
+
+				})
+		}
+		
+		
+		
+		//农产品排行
+		function retails(text) {
+			$('#retailsListBox').html('');
+			$('#retailsListBoxtwo').html('');
+			if (text.length === 0) {
+				// $('#retailsListBox').html('');
+				// $('#retailsListBoxtwo').html('');
+				// $('#chaerts02').append('<span style="position: absolute;top:0px;" class="nodataText">暂无数据</span>')
+				$('#retailsListBoxtwo').html('<span class="nodataText">暂无数据</span>')
+			} else {
+				var moneys = 0;
+				for (var i = 0; i < text.length; i++) {
+					moneys += Number(text[i].count);
+				}
+				for (var i = 0; i < text.length; i++) {
+					var propor = (text[i].count / moneys * 100).toFixed(2) + '%';
+					if(i < 5){
+						$('#retailsListBox').append("<li><span class='names' title='" + text[i].name + "'>" + text[i].name +
+						"</span><p><span style='width:" + propor + "'></span></p><span class='moneys counter-value' title='" +
+						text[i].count + "'>" + text[i].count + "</span></li>")
+					}else{
+						$('#retailsListBoxtwo').append("<li><span class='names' title='" + text[i].name + "'>" + text[i].name +
+						"</span><p><span style='width:" + propor + "'></span></p><span class='moneys counter-value' title='" +
+						text[i].count + "'>" + text[i].count + "</span></li>")
+					}
+				}
+			}
+			if(text.length>5){
+				showbowx();
+			}
+			textsroll();
+			
+		}
+		
+	
+		function showbowx(){
+			var timer =	setTimeout(function(){
+				if($("#retailsListBox").attr('class').indexOf('retailsListBoxtwoes') > -1){
+					$("#retailsListBox").removeClass('retailsListBoxtwoes');
+					$("#retailsListBox").addClass('retailsListBoxtwohides');
+					// $("#retailsListBoxtwo").addClass('retailsListBoxtwoes');
+					$("#retailsListBoxtwo").hide();
+					$("#retailsListBoxtwo").removeClass('retailsListBoxtwohides')
+				}else{
+					$("#retailsListBox").addClass('retailsListBoxtwoes');
+					$("#retailsListBoxtwo").show();
+					$("#retailsListBoxtwo").addClass('retailsListBoxtwohides')
+				};
+				clearTimeout(timer);
+				if(dataV2.length != 0){
+					showbowx();
+				}
+			},5000);
+		}
+
+		var mySwiper = new Swiper('.swiper-container', {
+			autoplay: 5000,
+			speed: 500,
+			effect: 'flip',
+			observeParents: true,
+			autoplayDisableOnInteraction: false,
+		});
+		//农户员工量TOP10
+		function networks(text) {
+			$('#networks01').html('')
+			$('#networks02').html('')
+			if (text.length === 0) {
+				console.log(text)
+				// $('#chaerts08').html('<span class="nodataText">暂无数据</span>')
+			} else {
+				for (var i = 0; i < text.length; i++) {
+					var ranking = i + 1;
+					if (i <= 4) {
+						$('#networks01').append("<li>" + ranking +
+							"<span title='" + text[i].name + "'>" + text[i].name + "</span></li>")
+					} else {
+						$('#networks02').append("<li>" + ranking +
+							"<span title='" + text[i].name + "'>" + text[i].name + "</span></li>")
+					}
+				}
+
+				if (text.length < 6) {
+					$('.swiper-slide02').hide()
+					// mySwiper.update(false);
+					mySwiper.update(false);
+
+				} else {
+					mySwiper.update(true);
+				}
+				$(".loadsMianBox").hide();
+				// textsroll();
+			}
+		}
+
+
+		var totalsunm =0.0
+		//总金额获取
+		function totalsumMainBox(texts) {
+			// $("#totalSums").empty();
+			// totalsunm = Number(texts)
+			if (totalsunm != texts) {
+				totalsunm = texts;
+				texts=Number(texts)
+				$('#totalSums').html(texts);
+			}
+				// totalsunm= 0.00;
+				// $("#totalSums").append(texts
+				// endtime  =1
+				// return 0
+			// }
+			
+		}
+		
+		//文字改变滚动效果
+		function textsroll() {
+			// window.setInterval(textsroll(), 3000)
+			//价格效果\
+			endtime=0
+			$('.counter-value').each(function () {
+				$(this).prop('Counter', 0).animate({
+					Counter: $(this).text()
+				}, {
+					duration: 3500,
+					easing: 'swing',
+					step: function (now) {
+						var nows = parseFloat(now.toFixed(2))
+						$(this).text(nows.toLocaleString());
+						// endtime=1
+					}
+				});
+				
+			});
+			setTimeout(function (){
+				 endtime=1
+			},3500)
+
+		}
+		// 下跳地图
+		// var chart = echarts.init(document.getElementById('map-wrap'));
+		// 轮询地图
+		var mapChart = echarts.init(document.getElementById('map-wrap2'));
+
+		//地图数据插入
+		function mapsDataBox(text) {
+		// 市区坐标
+// var mapChart =  echarts.init(document.getElementById('chart-panel'));
+// mapChart.setOption(new Object)
+var geoCoordMap = {
+    "北京市": [116.41433, 39.91095],
+    "天津市": [117.191041, 39.134857],
+    "河北省": [114.511934, 38.058785],
+    "山西省": [112.543424, 37.887658],
+    "内蒙古": [111.694848, 40.836106],
+    "辽宁省": [123.425425, 41.819004],
+    "吉林省": [126.322646, 43.871432],
+    "黑龙江省": [128.60352, 47.758573],
+    "上海市": [121.477611, 31.226174],
+    "江苏省": [118.799398, 32.045042],
+    "浙江省": [120.158498, 30.291092],
+    "安徽省": [117.293119, 31.87839],
+    "福建省": [119.307623, 26.068211],
+    "江西省": [115.92252, 28.68553],
+    "山东省": [116.989563, 36.682589],
+    "河南省": [113.627458, 34.762387],
+    "湖北省": [114.305858, 30.605913],
+    "湖南省": [112.93296, 28.236376],
+    "广东省": [113.261811, 23.118408],
+    "广西": [108.326736, 22.824533],
+    "海南省": [110.290648, 20.012453],
+    "重庆市": [107.546798, 30.978004],
+    "四川省": [102.063163, 30.667561],
+    "贵州省": [106.661781, 27.609054],
+    "云南省": [102.702913, 25.050202],
+    "西藏": [88.112616, 31.668426],
+    "陕西省": [108.925798, 34.296079],
+    "甘肃省": [103.834346, 36.072614],
+    "青海省": [95.778449, 36.625145],
+    "宁夏": [106.230594, 38.490587],
+    "新疆": [83.61023, 40.83845],
+    "台湾省": [121.511849, 25.060677],
+    "香港": [114.179376, 22.318339],
+    "澳门": [113.546969, 22.202741]
+};
+var rawData = {
+    "北京市": [10, 20, 30],
+    "天津市": [10, 20, 30],
+    "河北省": [10, 20, 30],
+    "山西省": [10, 20, 30],
+    "内蒙古": [10, 20, 30],
+    "辽宁省": [10, 20, 30],
+    "吉林省": [10, 20, 30],
+    "黑龙江省": [20, 50, 30],
+    "上海市": [10, 20, 30],
+    "江苏省": [10, 20, 30],
+    "浙江省": [10, 208, 300],
+    "安徽省": [10, 20, 30],
+    "福建省": [10, 20, 30],
+    "江西省": [10, 20, 30],
+    "山东省": [10, 20, 30],
+    "河南省": [10, 20, 30],
+    "湖北省": [10, 20, 30],
+    "湖南省": [10, 20, 30],
+    "广东省": [10, 20, 30],
+    "广西": [10, 20, 30],
+    "海南省": [10, 20, 30],
+    "重庆市": [10, 20, 30],
+    "四川省": [10, 20, 30],
+    "贵州省": [10, 20, 30],
+    "云南省": [10, 20, 30],
+    "西藏": [10, 20, 30],
+    "陕西省": [10, 20, 30],
+    "甘肃省": [10, 20, 30],
+    "青海省": [10, 20, 30],
+    "宁夏": [10, 20, 30],
+    "新疆": [10, 20, 30],
+    "台湾省": [10, 20, 30],
+    "香港": [10, 20, 30],
+    "澳门": [10, 20, 30]
+};
+
+
+function makeMapData(rawData) {
+    var mapData = [];
+    for (var i = 0; i < rawData.length; i++) {
+        var geoCoord = geoCoordMap[rawData[i][0]];
+        if (geoCoord) {
+            mapData.push({
+                name: rawData[i][0],
+                value: geoCoord.concat(rawData[i].slice(1))
+            });
+        }
+    }
+    return mapData;
+};
+
+option = {
+    animation: false,
+    // 地图背景颜色
+    backgroundColor:'none',
+    geo: {
+        scaleLimit: {
+            min: 1,
+            max: 1
+        },
+        map: 'china',
+        silent: true,
+        roam: true,
+        zoom: 1.5, // 地图初始大小
+        center: [102.925798, 35.296079], // 初始中心位置
+        label: {
+            emphasis: {
+                show: false,
+                areaColor: '#eee'
+            }
+        },
+
+        // 地区块儿颜色
+        itemStyle: {
+            normal: {
+                areaColor: '#999',
+                borderColor: '#fff'
+            },
+            emphasis: {
+                areaColor: '#999'
+            }
+        }
+    },
+    tooltip: {
+        padding: 0,
+        enterable: true,
+        transitionDuration: 1,
+        textStyle: {
+            color: '#fff',
+            decoration: 'none',
+        },
+
+        formatter: function(params) {
+            console.log(params)
+            var tipHtml = '<span>' + params.seriesId + '：</span><br/><span>' + params.name + ":" + params.value + "</span>";
+            // tipHtml = '<div style="height:360px;width:400px;border-radius:5px;background:#fff;box-shadow:0 0 10px 5px #aaa">' +
+            //     '    111</div>';
+            // setTimeout(function() {
+            //     tooltipCharts(params.name);
+            // }, 10);
+            return tipHtml;
+        }
+    },
+    series: []
+};
+
+function renderEachCity() {
+    var options = {
+        xAxis: [],
+        yAxis: [],
+        grid: [],
+        // tooltip:[],
+        //  legend: {
+        //     data: ['数据A','数据B','数据C']
+        // },
+
+        series: []
+    };
+    // 	
+    for (let keys in rawData) {
+        console.log('dataItem, idx', rawData[keys], keys)
+        //geoCoord 经纬度
+        var geoCoord = geoCoordMap[keys];
+		console.log(geoCoord);
+		// return false;
+        var coord = mapChart.convertToPixel({geoId: 'bb'}, geoCoord);
+        console.log(coord,'1312331323',geoCoord)
+        // var boundL = -12.782788213627585;
+        // var boundR = 35.92763028872384;
+        // var boundT = 32.22854555899493;
+        // var boundB = 95.18817097360194;
+        // if (!coord ||
+        //     geoCoord[0] < boundL ||
+        //     geoCoord[0] > boundR ||
+        //     geoCoord[1] > boundB ||
+        //     geoCoord[1] < boundT
+        // ) {
+        //     return;
+        // }
+        keys += '';
+
+        inflationData = rawData[keys];
+        // for (var k = 0; k < inflationYearCount; k++) {
+        //     inflationData.push(dataItem[inflationStartIdx + k]);
+        // }
+
+        // option.tooltip.push({
+        //     padding: 0,
+        //     enterable: true,
+        //     transitionDuration: 1,
+        //     textStyle: {
+        //         color: '#000',
+        //         decoration: 'none',
+        //     },
+
+        //     formatter: function(params) {
+        //         // console.log(params)
+        //         var tipHtml = '';
+        //         tipHtml = '<div style="height:360px;width:400px;border-radius:5px;background:#fff;box-shadow:0 0 10px 5px #aaa">' +
+        //             '    111</div>';
+        //         setTimeout(function() {
+        //             tooltipCharts(params.name);
+        //         }, 10);
+        //         return tipHtml;
+        //     }
+        // });
+        options.xAxis.push({
+            id: keys,
+            gridId: keys,
+            type: 'category',
+            name: keys,
+            // nameStyle: {
+            //     color: 'red',
+            //     fontSize: 12
+            // },
+            nameLocation: 'middle',
+            nameGap: 3,
+            splitLine: {
+                show: false
+            },
+            axisTick: {
+                show: false
+            },
+            axisLabel: {
+                show: false
+            },
+            axisLine: {
+                onZero: false,
+                lineStyle: {
+                    color: '#fff'
+                }
+            },
+            // data: xAxisCategory,
+            data: ["数据A", "数据B", "数据C"],
+            z: 100
+
+        });
+
+
+        options.yAxis.push({
+            id: keys,
+            gridId: keys,
+            splitLine: {
+                show: false
+            },
+            axisTick: {
+                show: false
+            },
+            axisLabel: {
+                show: false
+            },
+            axisLine: {
+                show: false,
+                lineStyle: {
+                    color: '#1C70B6'
+                }
+            },
+            z: 100
+        });
+        options.grid.push({
+            id: keys,
+            width: 30,
+            height: 40,
+            left: 'auto',
+            top: 'auto',
+            z: 100
+        });
+        options.series.push({
+            id: keys,
+            type: 'bar',
+            xAxisId: keys,
+            yAxisId: keys,
+            barGap: 0,
+            barCategoryGap: 0,
+            // data: inflationData,
+            data: inflationData,
+            z: 100,
+            itemStyle: {
+                normal: {
+                    color: function(params) {
+                        // 柱状图每根柱子颜色
+                        var colorList = ['#F75D5D', 'yellow', '#4C60E3'];
+                        return colorList[params.dataIndex];
+                    }
+                }
+            }
+        });
+        
+    };
+    // console.time('a');
+   mapChart.setOption(options);
+   mapChart.resize();
+    // console.timeEnd('a');
+}
+
+
+
+setTimeout(renderEachCity, 0);
+// 缩放和拖拽
+function throttle(fn, delay, debounce) {
+
+    var currCall;
+    var lastCall = 0;
+    var lastExec = 0;
+    var timer = null;
+    var diff;
+    var scope;
+    var args;
+
+    delay = delay || 0;
+
+    function exec() {
+        lastExec = (new Date()).getTime();
+        timer = null;
+        fn.apply(scope, args || []);
+    }
+
+    var cb = function() {
+        currCall = (new Date()).getTime();
+        scope = this;
+        args = arguments;
+        diff = currCall - (debounce ? lastCall : lastExec) - delay;
+
+        clearTimeout(timer);
+
+        if (debounce) {
+            timer = setTimeout(exec, delay);
+        } else {
+            if (diff >= 0) {
+                exec();
+            } else {
+                timer = setTimeout(exec, -diff);
+            }
+        }
+
+        lastCall = currCall;
+    };
+
+    return cb;
+}
+
+var throttledRenderEachCity = throttle(renderEachCity, 0);
+var index10 = 0; //播放所在下标
+var timers10 = setInterval(function() {
+    console.log(mapChart)
+    mapChart.dispatchAction({
+        type: 'showTip',
+        seriesIndex: 0,
+        dataIndex: index10
+    });
+    index10++;
+    if (index10 > 18817097360194) {
+        index10 = 0;
+    }
+}, 2000);
+// // 点击显示柱状图
+
+		}
+
+		var chartSmail01; 
+		function trainsBox(texts) {
+			if(texts.length === 0){
+				// $('#chaerts01').html('<span class="nodataText">暂无数据</span>');
+				return false;
+			}
+			chartSmail01	= echarts.init(document.getElementById('chaerts01'));
+				// $('#chaerts01').html('');
+			// console.log(texts);
+			var textsname  = [];
+			var textsvalue = [];
+			if(texts == undefined){
+				return false;
+			}
+			for(var i= 0;i<texts.length;i++){
+				textsname.push(texts[i].name);
+				textsvalue.push(texts[i].count);
+			}
+			//商品发码量TOP10
+			let optionmain01 = {
+				color: ['#00eaf9'],
+				tooltip: {
+					trigger: 'axis',
+					axisPointer: { // 坐标轴指示器，坐标轴触发有效
+						type: 'shadow' // 默认为直线，可选为：'line' | 'shadow'
+					},
+				
+				},
+				grid: {
+					left: '0%',
+					right: '10%',
+					bottom: '3%',
+					top: '25%',
+					containLabel: true
+				},
+				xAxis: [{
+					type: 'category',
+					data:textsname,
+					axisLine: {
+						lineStyle: {
+							color: '#ffffff',
+						}
+					},
+					axisLabel:{
+						// interval:0
+					},
+					axisTick: {
+						// alignWithLabel: true,/
+						lineStyle: {
+							color: '#ffffff',
+						}
+						
+
+					},
+					nameTextStyle: {
+						color: '#ffffff',
+					},
+					splitLine: {
+						// show: false
+					}
+				}],
+				yAxis: [{
+					show:false,
+					type: 'value',
+					axisLine: {
+						lineStyle: {
+							color: '#ffffff',
+						}
+					},
+					axisTick: {
+						alignWithLabel: true,
+						lineStyle: {
+							color: '#ffffff',
+						}
+					},
+					nameTextStyle: {
+						color: '#ffffff',
+					},
+					splitLine: {
+						show: false
+					}
+
+				}],
+				series: [{
+					name: '培训数量',
+					type: 'bar',
+					barWidth: '20%',
+					data: textsvalue
+				}]
+			};
+
+			chartSmail01.setOption(optionmain01);
+			// console.log('123131',optionmain01,textsname);
+			chartSmail01.resize()
+			//人才培训轮询
+			var index01 = 0; //播放所在下标
+			var timers01 = setInterval(function () {
+				chartSmail01.dispatchAction({
+					type: 'showTip',
+					seriesIndex: 0,
+					dataIndex: index01
+				});
+				index01++;
+				if (index01 > textsname.length) {
+					index01 = 0;
+			 	};
+				// if(year == 2019){
+				// 	console.log('12313a')
+				// }
+			}, 2000);
+
+		}
+		//扫码城市
+		var chartSmail03 = echarts.init(document.getElementById('chaerts03'));
+
+		function regionsCode(data) {
+			var dataname = [];
+			var datavalue = [];
+			if(data.length === 0){
+				// $("#chaerts03").html('<span class="nodataText">暂无数据</span>');
+				return false;
+			}
+			for(var i=0;i<data.length;i++){
+				dataname.push(data[i].name);
+				datavalue.push(data[i].count);
+			}
+
+			optionmain03 = {
+				
+				tooltip: {
+					trigger: 'axis',
+					axisPointer: {
+						type: 'shadow'
+					}
+				},
+				grid: {
+					left: '3%',
+					right: '4%',
+					bottom: '15%',
+					top:'30%',
+					containLabel: true
+				},
+				xAxis: [{
+					splitLine:{show: false},//去除网格线
+					type: 'category',
+                    axisLabel:{  
+                        interval: 0,
+                        rotate:-30 ,
+                        formatter: function (name) {
+                            return (name.length>2?name.substr(0,2)+"...":name )
+                        },
+                    },
+                    triggerEvent:false,
+					axisTick: {
+						// show: false,
+						color: '#fff'
+					},					
+					axisLine: {
+						lineStyle: {
+							color: '#fff'
+						}
+					},
+					data: dataname,
+				}],
+				yAxis: {
+					splitLine:{show: false},//去除网格线
+					type : 'value',
+					splitNumber: 2,
+					scale: true,
+					min:0,
+					axisLabel: {
+						textStyle: {
+							fontSize: 14,
+							color: '#fff'
+						}
+					},
+					
+				},
+				series: [{
+					name: '直接访问',
+					type: 'bar',
+					barWidth: '60%',
+					data: datavalue,
+					itemStyle: {
+						normal:{  
+							color: function (value){ return "#"+("00000"+((Math.random()*16777215+0.5)>>0).toString(16)).slice(-6); }
+						}
+					}
+				}]
+			};
+			chartSmail03.setOption(optionmain03);
+			chartSmail03.resize();
+			//扫码溯源量
+			var index0_3 = 0; //播放所在下标
+			var timers03 = setInterval(function () {
+				chartSmail03.dispatchAction({
+					type: 'showTip',
+					seriesIndex: 0,
+					dataIndex: index0_3
+				});
+				index0_3++;
+				if (index0_3 > data.length) {
+					index03 = 0;
+				}
+			}, 2000);
+			return false;
+			const dataMonth = [],
+				valueData = []
+			for (let i in data) {
+				dataMonth.push(i + '月');
+				valueData.push(data[i])
+			}
+			optionmain03 = {
+				color: ['#00eaf9'],
+				tooltip: {
+					trigger: 'axis',
+					axisPointer: { // 坐标轴指示器，坐标轴触发有效
+						type: 'shadow' // 默认为直线，可选为：'line' | 'shadow'
+					}
+				},
+				grid: {
+					left: '3%',
+					right: '4%',
+					bottom: '3%',
+					top: '25%',
+					containLabel: true
+				},
+				xAxis: [{
+					type: 'category',
+					data: dataMonth,
+					axisLine: {
+						lineStyle: {
+							color: '#ffffff',
+						}
+					},
+					axisTick: {
+						alignWithLabel: true,
+						lineStyle: {
+							color: '#ffffff',
+						}
+					},
+					nameTextStyle: {
+						color: '#ffffff',
+					},
+					splitLine: {
+						show: false
+					}
+				}],
+				yAxis: [{
+					type: 'value',
+					axisLine: {
+						lineStyle: {
+							color: '#ffffff',
+						}
+					},
+					axisTick: {
+						alignWithLabel: true,
+						lineStyle: {
+							color: '#ffffff',
+						}
+					},
+					nameTextStyle: {
+						color: '#ffffff',
+					},
+					splitLine: {
+						show: false
+					}
+
+				}],
+				series: [{
+					name: '发码量',
+					type: 'line',
+					barWidth: '60%',
+					data: valueData
+				}]
+			};
+
+			chartSmail03.setOption(optionmain03);
+			chartSmail03.resize();
+			//扫码溯源量
+			var index0_3 = 0; //播放所在下标
+			var timers03 = setInterval(function () {
+				chartSmail03.dispatchAction({
+					type: 'showTip',
+					seriesIndex: 0,
+					dataIndex: index0_3
+				});
+				index0_3++;
+				if (index0_3 > dataMonth.length) {
+					index03 = 0;
+				}
+			}, 2000);
+
+		}
+
+		//零售行业分布
+		var chartSmail06
+
+		function industrys(data) {
+			chartSmail06 = echarts.init(document.getElementById('chaerts06'));
+			if(data.length === 0){
+				// $("#chaerts06").html('<span class="nodataText">暂无数据</span>');
+				return false;
+			}
+			var datanaem = [];
+			var datavalue = [];
+			for(var i=0;i<data.length;i++){
+				datanaem.push(data[i].name);
+				datavalue.push(data[i].count);
+			}
+			optionmain06 = {
+				
+				tooltip: {
+					trigger: 'axis',
+					axisPointer: {
+						type: 'shadow'
+					}
+				},
+
+				grid: {
+					left: '3%',
+					right: '4%',
+					bottom: '3%',
+					containLabel: true
+				},
+				xAxis: [{
+					type: 'category',
+					data:datanaem,
+					axisLine: {
+						show: true,
+						lineStyle: {
+							color: "#00c7ff",
+							width: 1,
+							type: "solid"
+						}
+					},
+					axisTick: {
+						show: true,
+					},
+					axisLabel: {
+						show: true,
+						textStyle: {
+							color: "#00c7ff",
+						}
+					},
+				}],
+				yAxis: [{
+					type: 'value',
+					axisLabel: {
+						formatter: '{value}'
+					},
+					axisTick: {
+						show: false,
+					},
+					axisLine: {
+						show: true,
+						lineStyle: {
+							color: "#00c7ff",
+							width: 1,
+							type: "solid"
+						},
+					},
+					splitLine: {
+						lineStyle: {
+							color: "#0F55B9",
+						}
+					}
+				}],
+				series: [  {
+					// name: '总和',
+					type: 'bar',
+					data: datavalue,
+					barWidth: 16,
+					barGap: 1,
+					itemStyle: {
+						normal: {
+							color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [{
+								offset: 0,
+								color: '#7CB8F8'
+							}, {
+								offset: 1,
+								color: '#051B8F'
+							}]),
+							opacity: 1,
+							barBorderRadius: 12,
+						}
+					}
+				}]
+			};
+			chartSmail06.setOption(optionmain06);
+			chartSmail06.resize();
+
+			//行业分布轮询
+			var index06 = 0; //播放所在下标
+			var timers06 = setInterval(function () {
+				chartSmail06.dispatchAction({
+					type: 'showTip',
+					seriesIndex: 0,
+					dataIndex: index06
+				});
+				index06++;
+				if (index06 > data.length) {
+					index06 = 0;
+				}
+			}, 2000);
+
+		}
+		var chartSmail07
+
+		function damagedata(data) {
+			chartSmail07 = echarts.init(document.getElementById('chaerts07'));
+			if(data.length === 0){
+				// $("#chaerts07").html('<span class="nodataText">暂无数据</span>');
+				return false;
+			}
+			var dataname = [];
+			var datavalue = [];
+			for(var i=0;i<data.length;i++){
+				dataname.push(data[i].name);
+				datavalue.push(data[i].count);
+			}
+			optionmain07 = {
+				tooltip: {
+					trigger: 'axis',
+					axisPointer: {
+						type: 'shadow'
+					}
+				},
+				grid: {
+					top: '18%',
+					right: '3%',
+					left: '10%',
+					bottom: '25%'
+				},
+				xAxis: [{
+					type: 'category',
+					data: dataname,
+					axisLine: {
+						lineStyle: {
+							color: 'rgba(255,255,255,0.12)'
+						}
+					},
+					
+					axisLabel: {
+						interval: 0,
+						margin: 10,
+						color: '#e2e9ff',
+						textStyle: {
+							fontSize: 12,
+						},
+						rotate:-30 ,
+                        formatter: function (name) {
+                            return (name.length>2?name.substr(0,2)+"...":name )
+                        },
+					},
+				}],
+				yAxis: [{
+					axisLabel: {
+						formatter: '{value}',
+						color: '#e2e9ff',
+					},
+					axisLine: {
+						show: false
+					},
+					splitLine: {
+						lineStyle: {
+							color: 'rgba(255,255,255,0.12)'
+						}
+					}
+				}],
+				series: [{
+					type: 'bar',
+					data: datavalue,
+					barWidth: '10%',
+					itemStyle: {
+						normal: {
+							color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [{
+								offset: 0,
+								color: 'rgba(0,244,255,1)' // 0% 处的颜色
+							}, {
+								offset: 1,
+								color: 'rgba(0,77,167,1)' // 100% 处的颜色
+							}], false),
+							barBorderRadius: [30, 30, 30, 30],
+							shadowColor: 'rgba(0,160,221,1)',
+							shadowBlur: 4,
+						}
+					},
+					label: {
+						normal: {
+							show: true,
+							lineHeight: 30,
+							width: 80,
+							height: 30,
+							backgroundColor: 'rgba(0,160,221,0.1)',
+							borderRadius: 200,							
+						}
+					}
+				}]
+			};
+			chartSmail07.setOption(optionmain07);
+			chartSmail07.resize();
+
+			//行业分布轮询
+			var index07 = 0; //播放所在下标
+			var timers07 = setInterval(function () {
+				chartSmail07.dispatchAction({
+					type: 'showTip',
+					seriesIndex: 0,
+					dataIndex: index07
+				});
+				index07++;
+				if (index07 > data.length) {
+					index07 = 0;
+				}
+			}, 2000);
+
+		}
+		//适配加载图表
+		window.onresize =  function () {
+			trainsBox(dataV1);
+			retails(dataV2);
+			networks(dataV3);
+			regionsCode(dataV4);
+			damagedata(dataV5);
+			industrys(dataV6);
+		};
+
+		
+	</script>
+</body>
+
+</html>

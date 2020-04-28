@@ -1,0 +1,1242 @@
+@charset "utf-8";
+
+html {
+	font-size: 100px;
+}
+
+
+
+/*主体宽高控制*/
+.longNanContainerBox {
+	display: block;
+	position: relative;
+	width: 100%;
+	height: 8rem;
+	overflow: hidden;
+	background: url('../images/dataBg.jpg') no-repeat center;
+	background-size: 100% 100%;
+	z-index: 1;
+}
+
+.longNan_ContainerBox {
+	display: none;
+
+}
+
+.longNanContainerBox .title_header_box {
+	background: url('../images/data_head.png') no-repeat center;
+	background-size: 100%;
+	height: 1.4rem;
+	width: 100%;
+	position: fixed;
+	z-index: 100;
+	top:0;
+}
+
+.longNanContainerBox .titlesTextBox {
+	width: 100%;
+	position: absolute;
+	top: 0.65rem;
+	font-size: 0.3rem;
+	color: #FFFFFF;
+	text-align: center;
+	height: 0.9rem;
+	line-height: 0.9rem;
+	padding-bottom: 0.3rem;
+	z-index: 999;
+}
+
+.longNanContainerBox .titlesTextBox i {
+	width: 0.2rem;
+	height: 100%;
+	display: inline-block;
+	vertical-align: top;
+	text-align: center;
+	cursor: pointer;
+}
+
+.longNanContainerBox .titlesTextBox i.left_icon {
+	background: url(../images/left_icon.png) no-repeat center;
+	background-size: 100%;
+	margin-right: 0.15rem;
+}
+
+.longNanContainerBox .titlesTextBox i.right_icon {
+	background: url(../images/right_icon.png) no-repeat center;
+	background-size: 100%;
+	margin-left: 0.15rem;
+}
+
+/*中部地图区*/
+.longNanContainerBox .longNanMainContentBox {
+	width: 8.9rem;
+	height: 86%;
+	display: block;
+	position: absolute;
+	top: 16%;
+	left: 50%;
+	margin-left: -4.45rem;
+}
+
+.longNanContainerBox .longNanMainContentBox #map-wrap {
+	display: none;
+}
+
+.longNanContainerBox .longNanMainContentBox .mapsMianBox {
+	width: 100%;
+	height: 90%;
+}
+
+/*其他图形块*/
+/* 修改选择框样式 */
+.longNanMainContentBox .select-box {
+	width: 1rem;
+	height: 0.32rem;
+	position: absolute;
+	top: 0;
+	left: 20%;
+	z-index: 10000;
+}
+
+.longNanMainContentBox .select-box.select_titile {
+	left: 22%;
+}
+
+.longNanMainContentBox .select-box .show_tit {
+	border: 1px solid #00d4f8;
+	width: 100%;
+	height: 0.32rem;
+	line-height: 0.32rem;
+	position: relative;
+	text-align: left;
+	padding-left: 0.2rem;
+}
+
+.longNanMainContentBox .select-box .show_tit .show_val {
+	font-size: 0.26rem;
+	color: #00d4f8;
+}
+
+.longNanMainContentBox .select-box .show_tit .icon_down {
+	display: inline-block;
+	position: absolute;
+	top: 30%;
+	right: 0.05rem;
+	width: 0.18rem;
+	height: 0.12rem;
+	background: url('../images/down_icon.png') no-repeat center;
+	background-size: contain;
+	cursor: pointer;
+	z-index: 9999;
+}
+
+.longNanMainContentBox .chose_year_list {
+	width: 1.2rem;
+	border: 1px solid #00d4f8;
+	border-top: none;
+	display: none;
+}
+
+.longNanMainContentBox .chose_year_list .year_option {
+	position: relative;
+	z-index: 999;
+	cursor: pointer;
+}
+
+.longNanMainContentBox .chose_year_list .year_option:hover {
+	background-color: #00d4f8;
+
+}
+
+.longNanContainerBox .longNanMainContentBox .titles {
+	font-size: 0.26rem;
+	color: #ffffff;
+	/* line-height: 0.4rem; */
+	position: absolute;
+	top: -0.1rem;
+	left: 0;
+	z-index: 9999;
+	right: 0;
+	text-align: center;
+}
+
+.longNanContainerBox .longNanMainContentBox .smalies {
+	font-size: 0.5rem;
+	color: #ffcc00;
+	line-height: 0.6rem;
+	position: absolute;
+	top: 0.4rem;
+	left: 0;
+	/* z-index: 99; */
+	right: 0;
+	text-align: center;
+}
+
+.longNanContainerBox .longNanMainContentBox .switchMaps {
+	width: 0.36rem;
+	position: absolute;
+	z-index: 99;
+	text-align: center;
+	height: 0.36rem;
+	cursor: pointer;
+	top: 5%;
+	background-image: url(../images/switch.png);
+	background-size: cover;
+	right: 0;
+}
+
+.longNanContainerBox .longNanMainContentBox .switchMaps:hover {
+	opacity: 0.8;
+}
+
+.longNanContainerBox .longNanMainContentBox .quitsMainBtn {
+	width: 1.38rem;
+	position: fixed;
+	z-index: 9999;
+	right: 0;
+	height: 0.74rem;
+	cursor: pointer;
+	top: 0;
+	background-image: url(../images/signOut.png);
+	background-size: cover;
+}
+
+.longNanContainerBox .longNanMainContentBox .quitsMainBtn:hover {
+	opacity: 0.8;
+}
+
+.longNanContainerBox .longNan_ContainerBox .chaerts_nodata {
+	display: none;
+}
+
+.longNanContainerBox #chaerts01,
+.longNanContainerBox #chaerts03,
+.longNanContainerBox #chaerts06 {
+	display: block;
+	width: 100%;
+	height: 100%;
+}
+
+.chartsMainBox_02 #chaerts02 {
+	display: block;
+	width: 100%;
+	height: 92%;
+}
+
+.chartsMainBox_02 #chaerts02.paddingTop {
+	padding-top: 5%;
+}
+
+.longNanContainerBox #chaerts07 {
+	display: block;
+	width: 100%;
+	height: 90%;
+	margin-top: 4%;
+}
+
+.longNanContainerBox #chaerts08 {
+	display: block;
+	width: 100%;
+	height: 93%;
+	padding-top: 4.5%;
+	overflow: hidden;
+}
+
+.longNanContainerBox #chaerts08 .swiper-container {
+	display: block;
+	height: 90%;
+	margin: 0 5%;
+}
+
+.longNanContainerBox #chaerts08 .swiper-container .swiper-wrapper {
+	width: 100%;
+	height: 100%;
+}
+
+.longNanContainerBox #chaerts08 .swiper-container .swiper-wrapper .swiper-slide {
+	width: 100%;
+	height: 100%;
+}
+
+.longNanContainerBox .chartsMainBox_01 {
+	width: 4.67rem;
+	height: 25%;
+	display: block;
+	position: absolute;
+	top: 18%;
+	left: 0.2rem;
+	background-image: url(../images/data_sbg.png);
+	background-size: 100% 100%;
+}
+
+.longNanContainerBox .chartsMainBox_02 {
+	width: 4.67rem;
+	height: 25%;
+	display: block;
+	position: absolute;
+	top: 46%;
+	left: 0.2rem;
+	background-image: url(../images/data_sbg.png);
+	background-size: 100% 100%;
+}
+
+.longNanContainerBox .chartsMainBox_03 {
+	width: 4.59rem;
+	height: 25%;
+	display: block;
+	position: absolute;
+	top: 18%;
+	right: 0.2rem;
+	background-image: url(../images/data_sbg.png);
+	background-size: 100% 100%;
+}
+
+.longNanContainerBox .chartsMainBox_04 {
+	width: 4.37rem;
+	height: 24%;
+	display: block;
+	position: absolute;
+	top: 74%;
+	left: 5.05rem;
+	background-image: url(../images/data_sbg.png);
+	background-size: 100% 100%;
+}
+
+.longNanContainerBox .chartsMainBox_05 {
+	width: 4.44rem;
+	height: 24%;
+	display: block;
+	position: absolute;
+	top: 73.5%;
+	right: 5rem;
+	background-image: url(../images/data_sbg.png);
+	background-size: 100% 100%;
+}
+
+.longNanContainerBox .chartsMainBox_06 {
+	width: 4.59rem;
+	height: 25%;
+	display: block;
+	position: absolute;
+	top: 74%;
+	right: 0.2rem;
+	background-image: url(../images/data_sbg.png);
+	background-size: 100% 100%;
+}
+
+.longNanContainerBox .chartsMainBox_07 {
+	width: 4.59rem;
+	height: 25%;
+	display: block;
+	position: absolute;
+	top: 46%;
+	right: 0.2rem;
+	background-image: url(../images/data_sbg.png);
+	background-size: 100% 100%;
+}
+
+.longNanContainerBox .chartsMainBox_08 {
+	width: 4.67rem;
+	height: 25%;
+	display: block;
+	position: absolute;
+	top: 74%;
+	left: 0.2rem;
+	background-image: url(../images/data_sbg.png);
+	background-size: 100% 100%;
+}
+
+.longNanContainerBox .contentBlockTitles {
+	font-size: 0.2rem;
+	color: #ffffff;
+	position: absolute;
+	top: 0.1rem;
+	padding-left: 0.2rem;
+	background: url('../images/data_tit_bg.png') no-repeat right center;
+	background-size: contain;
+	width: 95%;
+	height: 0.35rem;
+	line-height: 0.24rem;
+	z-index: 99999;
+	cursor: pointer;
+}
+
+.longNanContainerBox .chartsMainBox_07 .materialsBox {
+	height: 50%;
+	font-size: 0.16rem;
+	color: #FFFFFF;
+	position: relative;
+}
+
+.longNanContainerBox .chartsMainBox_07 .materialsBox .names {
+	padding-left: 0.7rem;
+}
+
+.longNanContainerBox .chartsMainBox_07 .materialsBox .moneys {
+	color: #ffcc00;
+	line-height: 0.24rem;
+	padding-left: 0.7rem;
+	font-size: 0.18rem;
+	font-weight: 600;
+}
+
+.longNanContainerBox .chartsMainBox_07 .materialsBox .moneys i {
+	font-size: 0.14rem;
+	color: #FFFFFF;
+	padding: 0 0.05rem;
+}
+
+.longNanContainerBox .chartsMainBox_07 .materialsBox .watersMain01Box,
+.longNanContainerBox .chartsMainBox_07 .serviceMainBox .watersMain02Box {
+	width: 1.1rem;
+	height: 100%;
+}
+
+.longNanContainerBox .chartsMainBox_07 .materialsBox .watersMain01Box {
+	position: absolute;
+	left: 2.8rem;
+}
+
+.longNanContainerBox .chartsMainBox_07 .materialsBox .watersMain01Box span {
+	width: 100%;
+	display: block;
+	font-size: 0.22rem;
+	color: #FFFFFF;
+	font-weight: 600;
+	line-height: 0.22rem;
+	position: absolute;
+	top: 50%;
+	margin-top: -0.11rem;
+	text-align: center;
+	z-index: 9;
+}
+
+.longNanContainerBox .chartsMainBox_07 .serviceMainBox {
+	height: 50%;
+	font-size: 0.18rem;
+	color: #FFFFFF;
+	position: relative;
+}
+
+.longNanContainerBox .chartsMainBox_07 .serviceMainBox .names {
+	padding-left: 0.7rem;
+}
+
+.longNanContainerBox .chartsMainBox_07 .serviceMainBox .moneys {
+	color: #ffcc00;
+	line-height: 0.24rem;
+	padding-left: 0.7rem;
+	font-size: 0.18rem;
+	font-weight: 600;
+}
+
+.longNanContainerBox .chartsMainBox_07 .serviceMainBox .moneys i {
+	font-size: 0.14rem;
+	color: #FFFFFF;
+	padding: 0 0.05rem;
+	font-weight: 500;
+}
+
+.longNanContainerBox .chartsMainBox_07 .serviceMainBox .watersMain02Box {
+	position: absolute;
+	left: 2.8rem;
+}
+
+.longNanContainerBox .chartsMainBox_07 .serviceMainBox .watersMain02Box span {
+	width: 100%;
+	display: block;
+	font-size: 0.22rem;
+	color: #FFFFFF;
+	font-weight: 600;
+	line-height: 0.22rem;
+	position: absolute;
+	top: 50%;
+	margin-top: -0.11rem;
+	text-align: center;
+	z-index: 9;
+}
+
+.longNanContainerBox .chartsMainBox_07 .textsBox {
+	position: absolute;
+	top: 50%;
+	margin-top: -0.24rem;
+	line-height: 0.24rem;
+}
+
+/*零售商*/
+.retailersMainList {
+	display: block;
+	height: 83%;
+	padding: 0.2rem 0.1rem 0;
+	overflow: hidden;
+}
+
+.retailersMainList li {
+	height: 19%;
+	overflow: hidden;
+	display: block;
+	position: relative;
+	color: #FFFFFF;
+	padding: 0 0.8rem;
+}
+
+.retailersMainList li .names {
+	font-size: 0.14rem;
+	display: block;
+	position: absolute;
+	left: 0rem;
+	line-height: 0.16rem;
+	top: 50%;
+	margin-top: -0.08rem;
+	width: 0.7rem;
+	text-align: right;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+	cursor: pointer;
+}
+@keyframes rotateYs
+{
+	from {
+		transform: rotateY(0deg);
+		transform-origin:center 
+	}
+	to {
+		transform: rotateY(90deg);
+		transform-origin:center 
+	}
+}
+@-moz-keyframes rotateYs
+{
+	from {
+		transform: rotateY(0deg);
+		transform-origin:center 
+	}
+	to {
+		transform: rotateY(90deg);
+		transform-origin:center 
+	}
+}
+@-webkit-keyframes rotateYs
+{
+	from {
+		transform: rotateY(0deg);
+		transform-origin:center 
+	}
+	to {
+		transform: rotateY(90deg);
+		transform-origin:center 
+	}
+}
+@-o-keyframes rotateYs
+{
+	from {
+		transform: rotateY(0deg);
+		transform-origin:center 
+	}
+	to {
+		transform: rotateY(90deg);
+		transform-origin:center 
+	}
+}
+/* ===== */
+@keyframes rotateYstwo
+{
+	from {
+		transform: rotateY(90deg);
+		transform-origin:center 
+	}
+	to {
+		transform: rotateY(0deg);
+		transform-origin:center 
+	}
+}
+@-moz-keyframes rotateYstwo
+{
+	from {
+		transform: rotateY(90deg);
+		transform-origin:center 
+	}
+	to {
+		transform: rotateY(0deg);
+		transform-origin:center 
+	}
+}
+@-webkit-keyframes rotateYstwo
+{
+	from {
+		transform: rotateY(90deg);
+		transform-origin:center 
+	}
+	to {
+		transform: rotateY(0deg);
+		transform-origin:center 
+	}
+}
+@-o-keyframes rotateYstwo
+{
+	from {
+		transform: rotateY(90deg);
+		transform-origin:center 
+	}
+	to {
+		transform: rotateY(0deg);
+		transform-origin:center 
+	}
+}
+#chaerts02{
+	position: relative;
+}
+#chaerts02 #retailsListBoxtwo {
+	position: absolute;
+	width: 96%;
+	top: 15px;
+}
+#chaerts02 .retailsListBoxtwoes{
+	animation: rotateYs 1s;
+	-moz-animation: rotateYs 1s;	/* Firefox */
+	-webkit-animation: rotateYs 1s;	/* Safari 和 Chrome */
+	-o-animation: rotateYs 1s;
+	animation-fill-mode: forwards;
+}
+#chaerts06{
+	position: relative;
+}
+#chaerts06 #retailsListBoxtwo {
+	position: absolute;
+	width: 96%;
+	top: 15px;
+}
+#chaerts06 .retailsListBoxtwoes{
+	animation: rotateYs 1s;
+	-moz-animation: rotateYs 1s;	/* Firefox */
+	-webkit-animation: rotateYs 1s;	/* Safari 和 Chrome */
+	-o-animation: rotateYs 1s;
+	animation-fill-mode: forwards;
+}
+#retailsListBoxtwo {
+	transform: rotateY(90deg);
+	transform-origin:center;
+	display: none;
+}
+.retailsListBoxtwohides{
+	animation: rotateYstwo 1s;
+	-moz-animation: rotateYstwo 1s;	/* Firefox */
+	-webkit-animation: rotateYstwo 1s;	/* Safari 和 Chrome */
+	-o-animation: rotateYstwo 1s;
+	animation-fill-mode: forwards;
+}
+.retailersMainList li .moneys {
+	font-size: 0.14rem;
+	display: block;
+	position: absolute;
+	right: 0rem;
+	line-height: 0.16rem;
+	top: 50%;
+	margin-top: -0.08rem;
+	width: 0.7rem;
+	text-align: left;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+	cursor: pointer;
+}
+
+.retailersMainList li p {
+	background-color: rgba(6, 18, 57, 0.6);
+	border-radius: 0.2rem;
+	height: 30%;
+	position: relative;
+	top: 35%;
+}
+
+.retailersMainList li p>span {
+	width: 10%;
+	display: block;
+	border-radius: 0.2rem;
+	background-color: #01f1cc;
+	height: 100%;
+}
+
+#chaerts02 .retailersMainList:nth-child(1) li:nth-child(1) p>span {
+	background-color: #ffcc00;
+}
+
+#chaerts02 .retailersMainList:nth-child(1) li:nth-child(2) p>span {
+	background-color: #ff6d00;
+}
+
+#chaerts02 .retailersMainList:nth-child(1) li:nth-child(3) p>span {
+	background-color: #fe7678;
+}
+#chaerts06 .retailersMainList:nth-child(1) li:nth-child(1) p>span {
+	background-color: #ffcc00;
+}
+
+#chaerts06 .retailersMainList:nth-child(1) li:nth-child(2) p>span {
+	background-color: #ff6d00;
+}
+
+#chaerts06 .retailersMainList:nth-child(1) li:nth-child(3) p>span {
+	background-color: #fe7678;
+}
+
+/*排行榜*/
+.rankingsList {
+	display: block;
+	height: 100% !important;
+	overflow: hidden;
+	position: relative;
+}
+
+.rankingsList li {
+	width: 18%;
+	display: block;
+	height: 95%;
+	background-color: #00eaf9;
+	position: absolute;
+	bottom: 5%;
+	font-size: 0.18rem;
+	color: #1a1843;
+	text-align: center;
+	font-weight: 600;
+	line-height: 0.26rem;
+}
+
+.rankingsList li:nth-child(1) {
+	background-color: #ffcc00;
+	left: 2%;
+	height: 65%;
+}
+
+.rankingsList li:nth-child(2) {
+	background-color: #ff6d00;
+	left: 22%;
+	height: 55%;
+}
+
+.rankingsList li:nth-child(3) {
+	background-color: #fe7678;
+	left: 42%;
+	height: 45%;
+}
+
+.rankingsList li:nth-child(4) {
+	background-color: #01f1cc;
+	left: 62%;
+	height: 35%;
+}
+
+.rankingsList li:nth-child(5) {
+	background-color: #00eaf9;
+	left: 82%;
+	height: 25%;
+}
+
+.rankingsList li span {
+	color: #FFFFFF;
+	position: absolute;
+	top: -0.3rem;
+	display: block;
+	width: 100%;
+	line-height: 0.26rem;
+	font-size: 0.14rem;
+	font-weight: 500;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+	cursor: pointer;
+}
+
+/*浏览器版本提示*/
+.browserMainBox {
+	display: none;
+	position: fixed;
+	background-color: #403833;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	z-index: 9999999;
+}
+
+.browserMainBox .textsMainBox {
+	width: 800px;
+	height: 340px;
+	position: absolute;
+	top: 50%;
+	margin-top: -170px;
+	left: 50%;
+	margin-left: -400px;
+}
+
+.browserMainBox .textsMainBox .textsTitles {
+	font-size: 26px;
+	font-weight: 600;
+	text-align: center;
+	color: #FFFFFF;
+	line-height: 2;
+	margin-bottom: 10px;
+}
+
+.browserMainBox .textsMainBox .downloadsMainBox {
+	width: 600px;
+	display: block;
+	margin: 0 auto;
+}
+
+.browserMainBox .textsMainBox .downloadsMainBox .downBtnBox {
+	width: 200px;
+	height: 180px;
+	float: left;
+	font-size: 18px;
+	color: #ffffff;
+	font-weight: 600;
+	display: block;
+	text-align: center;
+}
+
+.browserMainBox .textsMainBox .downloadsMainBox .downBtnBox img {
+	display: block;
+	margin: 20px auto;
+	width: 100px;
+}
+
+/*加载中提示*/
+.loadsMianBox {
+	display: block;
+	position: relative;
+	width: 100%;
+	height: 9rem;
+	/* top: 0; */
+	/* left: 0; */
+	z-index: 2;
+	background: url('../images/dataBg.jpg') no-repeat center;
+	background-size: 100% 100%;
+	/* background-color:transparent; */
+}
+
+.loadsMianBox .loader {
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	-webkit-transform: translate(-50%, -50%);
+	-moz-transform: translate(-50%, -50%);
+	-mos-transform: translate(-50%, -50%);
+	-o-transform: translate(-50%, -50%);
+	transform: translate(-50%, -50%);
+	text-align: center;
+	-webkit-touch-callout: none;
+	-webkit-user-select: none;
+	-khtml-user-select: none;
+	-moz-user-select: none;
+	-ms-user-select: none;
+	user-select: none;
+	cursor: default;
+}
+
+.loadsMianBox .loader .text {
+	color: #FFFFFF;
+	position: absolute;
+	top: 0.45rem;
+	left: 0.1rem;
+	z-index: 5;
+	font-size: 0.22rem;
+	text-transform: uppercase;
+	-webkit-animation: text 2.5s cubic-bezier(0.750, 0.000, 0.500, 1.000) infinite normal;
+	-moz-animation: text 2.5s cubic-bezier(0.750, 0.000, 0.500, 1.000) infinite normal;
+	-ms-animation: text 2.5s cubic-bezier(0.750, 0.000, 0.500, 1.000) infinite normal;
+	-o-animation: text 2.5s cubic-bezier(0.750, 0.000, 0.500, 1.000) infinite normal;
+	animation: text 2.5s cubic-bezier(0.750, 0.000, 0.500, 1.000) infinite normal;
+}
+
+.loadsMianBox .spinner {
+	position: relative;
+	width: 1rem;
+	height: 1rem;
+	color: #fff;
+}
+
+.loadsMianBox .spinner:before,
+.loadsMianBox .spinner:after {
+	content: "";
+	position: relative;
+	display: block;
+}
+
+.loadsMianBox .spinner:before {
+	-webkit-animation: spinner 2.5s cubic-bezier(0.750, 0.000, 0.500, 1.000) infinite normal;
+	-moz-animation: spinner 2.5s cubic-bezier(0.750, 0.000, 0.500, 1.000) infinite normal;
+	-ms-animation: spinner 2.5s cubic-bezier(0.750, 0.000, 0.500, 1.000) infinite normal;
+	-o-animation: spinner 2.5s cubic-bezier(0.750, 0.000, 0.500, 1.000) infinite normal;
+	animation: spinner 2.5s cubic-bezier(0.750, 0.000, 0.500, 1.000) infinite normal;
+	width: 10em;
+	height: 10em;
+	background-color: #DB2F00;
+}
+
+.loadsMianBox .spinner:after {
+	-webkit-animation: shadow 2.5s cubic-bezier(0.750, 0.000, 0.500, 1.000) infinite normal;
+	-moz-animation: shadow 2.5s cubic-bezier(0.750, 0.000, 0.500, 1.000) infinite normal;
+	-ms-animation: shadow 2.5s cubic-bezier(0.750, 0.000, 0.500, 1.000) infinite normal;
+	-o-animation: shadow 2.5s cubic-bezier(0.750, 0.000, 0.500, 1.000) infinite normal;
+	animation: shadow 2.5s cubic-bezier(0.750, 0.000, 0.500, 1.000) infinite normal;
+	position: relative;
+	bottom: -1.75rem;
+	height: .25rem;
+	border-radius: 50%;
+	background-color: #322b27;
+}
+
+/* loading动画效果 */
+@-webkit-keyframes spinner {
+	50% {
+		-webkit-border-radius: 50%;
+		-webkit-transform: scale(.5) rotate(360deg);
+		background-color: #13A3A5;
+	}
+
+	100% {
+		-webkit-transform: scale(1) rotate(720deg);
+		background-color: #DB2F00;
+	}
+}
+
+@-moz-keyframes spinner {
+	50% {
+		-moz-border-radius: 50%;
+		-moz-transform: scale(.5) rotate(360deg);
+		background-color: #13A3A5;
+	}
+
+	100% {
+		-moz-transform: scale(1) rotate(720deg);
+		background-color: #DB2F00;
+	}
+}
+
+@-mos-keyframes spinner {
+	50% {
+		-mos-border-radius: 50%;
+		-mos-transform: scale(.5) rotate(360deg);
+		background-color: #13A3A5;
+	}
+
+	100% {
+		-mos-transform: scale(1) rotate(720deg);
+		background-color: #DB2F00;
+	}
+}
+
+@-o-keyframes spinner {
+	50% {
+		-o-border-radius: 50%;
+		-o-transform: scale(.5) rotate(360deg);
+		background-color: #13A3A5;
+	}
+
+	100% {
+		-o-transform: scale(1) rotate(720deg);
+		background-color: #DB2F00;
+	}
+}
+
+@keyframes spinner {
+	50% {
+		border-radius: 50%;
+		transform: scale(.5) rotate(360deg);
+		background-color: #13A3A5;
+	}
+
+	100% {
+		transform: scale(1) rotate(720deg);
+		background-color: #DB2F00;
+	}
+}
+
+
+/* loading动画效果 */
+@-webkit-keyframes shadow {
+	50% {
+		-webkit-transform: scale(.5);
+		background-color: #322b27;
+	}
+}
+
+@-moz-keyframes shadow {
+	50% {
+		-moz-transform: scale(.5);
+		background-color: #322b27;
+	}
+}
+
+@-mos-keyframes shadow {
+	50% {
+		-mos-transform: scale(.5);
+		background-color: #322b27;
+	}
+}
+
+@-o-keyframes shadow {
+	50% {
+		-o-transform: scale(.5);
+		background-color: #322b27;
+	}
+}
+
+@keyframes shadow {
+	50% {
+		transform: scale(.5);
+		background-color: #322b27;
+	}
+}
+
+/* animation text */
+@-webkit-keyframes text {
+	0% {
+		-webkit-transform: scale(1, 1);
+	}
+
+	50% {
+		-webkit-transform: scale(.5, .5);
+	}
+
+	100% {
+		-webkit-transform: scale(1, 1);
+	}
+}
+
+@-moz-keyframes text {
+	0% {
+		-moz-transform: scale(1, 1);
+	}
+
+	50% {
+		-moz-transform: scale(.5, .5);
+	}
+
+	100% {
+		-moz-transform: scale(1, 1);
+	}
+}
+
+@-mos-keyframes text {
+	0% {
+		-mos-transform: scale(1, 1);
+	}
+
+	50% {
+		-mos-transform: scale(.5, .5);
+	}
+
+	100% {
+		-mos-transform: scale(1, 1);
+	}
+}
+
+@-o-keyframes text {
+	0% {
+		-o-transform: scale(1, 1);
+	}
+
+	50% {
+		-o-transform: scale(.5, .5);
+	}
+
+	100% {
+		-o-transform: scale(1, 1);
+	}
+}
+
+@keyframes text {
+	0% {
+		transform: scale(1, 1);
+	}
+
+	50% {
+		transform: scale(.5, .5);
+	}
+
+	100% {
+		transform: scale(1, 1);
+	}
+}
+
+/*培训人群分类*/
+.populationBox {
+	position: absolute;
+	width: 90%;
+	left: 5%;
+	top: 1.2rem;
+	bottom: 0.5rem;
+}
+
+/* 第三个页面-- */
+.longNanContainerBox .chartsMain_01 {
+	width: 5rem;
+	height: 40%;
+	display: block;
+	position: absolute;
+	top: 18%;
+	left: 0.2rem;
+	background-image: url(../images/data_sbg.png);
+	background-size: 100% 100%;
+
+}
+
+.longNanContainerBox .chartsMain_02 {
+	width: 5rem;
+	height: 40%;
+	display: block;
+	position: absolute;
+	top: 60%;
+	left: 0.2rem;
+	background-image: url(../images/data_sbg.png);
+	background-size: 100% 100%;
+}
+
+.longNanContainerBox .chartsMain_03 {
+	width: 5rem;
+	height: 40%;
+	display: block;
+	position: absolute;
+	top: 18%;
+	right: 0.2rem;
+	background-image: url(../images/data_sbg.png);
+	background-size: 100% 100%;
+}
+
+.longNanContainerBox .chartsMain_04 {
+	width: 5rem;
+	height: 40%;
+	display: block;
+	position: absolute;
+	top: 60%;
+	right: 0.2rem;
+	background-image: url(../images/data_sbg.png);
+	background-size: 100% 100%;
+}
+
+.longNanContainerBox .chartsMainBox .contentBlockTitles {
+	height: 0.5rem;
+	line-height: 0.38rem;
+}
+
+.longNanContainerBox #echarts_01,
+.longNanContainerBox #echarts_02,
+.longNanContainerBox #echarts_03,
+.longNanContainerBox #echarts_04 {
+	width: 100%;
+	height: 100%;
+	display: block;
+}
+
+.length_box {
+	padding: 0.1rem 0.3rem;
+	color: #fff;
+	font-size: 0.24rem;
+}
+
+.length_box .length_unit {
+	display: inline-block;
+	line-height: 0.3rem;
+	padding: 0 0.15rem;
+}
+
+.length_box .length_unit span {
+	display: block;
+	float: left;
+}
+
+.length_box .length_unit .length_unit_tit {
+	border-radius: 0.1rem;
+	background: #ff6d00;
+	width: 0.2rem;
+	height: 0.2rem;
+	margin: 0.05rem 0.08rem 0 0;
+}
+
+.longNan_ContainerBox .nodataText {
+	text-align: center;
+	color: #fff;
+	font-size: 0.2rem;
+	display: block;
+	width: 100%;
+	padding-top: 0.8rem;
+}
+
+.longNan_ContainerBox .chartsMainBox .nodataText {
+	padding-top: 1.4rem;
+}
+
+.longNanContainerBox .longNan_ContainerBox .reture {
+	width: 1.38rem;
+	position: fixed;
+	z-index: 9999 !important;
+	right: 1rem;
+	height: 0.74rem;
+	cursor: pointer;
+	top: 0;
+	background-image: url(../images/signOut.png);
+	background-size: cover;
+}
+
+
+
+
+.el-message {
+	min-width: 380px;
+	-webkit-box-sizing: border-box;
+	box-sizing: border-box;
+	border-width: 1px;
+	border-style: solid;
+	border-color: #ebeef5;
+	position: fixed;
+	left: 50%;
+	top: 20px;
+	-webkit-transform: translateX(-50%);
+	transform: translateX(-50%);
+	background-color: #edf2fc;
+	-webkit-transition: opacity .3s, -webkit-transform .4s;
+	transition: opacity .3s, -webkit-transform .4s;
+	transition: opacity .3s, transform .4s;
+	transition: opacity .3s, transform .4s, -webkit-transform .4s;
+	padding: 15px 15px 15px 20px;
+	display: -webkit-box;
+	display: -ms-flexbox;
+	display: flex;
+	-webkit-box-align: center;
+	-ms-flex-align: center;
+	align-items: center;
+	z-index:999999;
+}
+
+.el-message--success {
+	background-color: #f0f9eb;
+	border-color: #e1f3d8;
+}
+
+.el-message__icon el-icon-success {}
+
+.el-message__content {
+	padding: 0;
+	font-size: 14px;
+	line-height: 1;
+}
+
+.el-message p {
+	margin: 0;
+}
+
+.el-message--success .el-message__content {
+	color: #67c23a;
+}
+
+.el-message--error {
+	background-color: #fef0f0;
+	border-color: #fde2e2;
+}
+
+.el-message--error .el-message__content {
+	color: #f56c6c;
+}

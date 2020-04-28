@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta charset="UTF-8">
+	<title>电子商务大数据监测平台</title>
+	<meta name="renderer" content="webkit" />
+	<meta name="force-rendering" content="webkit" />
+	<meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1" />
+	<script type="text/javascript" src="../js/jquery-1.11.0.js"></script>
+	<link rel="stylesheet" href="../css/common.css" />
+	<link rel="stylesheet" href="../css/style.css" />
+</head>
+<style lang="">
+	#chaerts01 {
+		margin-top: .5rem;
+		overflow: hidden;
+	}
+
+	#chaerts01 div {
+		display: inline-block;
+	}
+
+	#chaerts01>div {
+		width: 45%;
+		/* height: 100%; */
+	}
+
+	.chaer_right {
+		margin-right: 4%;
+		float: right;
+	}
+
+	.chaer_left {
+		margin-left: 4%;
+		float: left;
+	}
+
+	.chaer ul {
+		width: 100%;
+		height: 100%;
+	}
+
+	.chaer ul li {
+		width: 100%;
+		display: inline-block;
+		margin: 1.25% auto;
+	}
+
+	.left div:nth-child(1) {
+		padding: .1rem .2rem;
+		font-size: .18rem;
+		color: #fff;
+		border: 0;
+		background: #06c;
+		position: absolute;
+		border-radius: .05rem;
+		top: 0;
+		left: 0;
+		width: 0.2rem;
+		text-align: center;
+	}
+
+	.left div:nth-child(2) {
+		padding-left: .2rem;
+		font-size: .18rem;
+		width: 78%;
+		overflow: hidden;
+		text-overflow: ellipsis;
+		white-space: nowrap;
+		color: #fff;
+		margin-left: .5rem;
+		line-height: .48rem;
+	}
+
+	.left div:nth-child(3) {
+		position: absolute;
+		top: 0;
+		right: 0;
+		padding: 0.05rem 0.2rem;
+		font-size: 0.25rem;
+		color: #fff;
+	}
+
+	.left {
+		width: 100%;
+		position: relative;
+		height: .48rem;
+	}
+
+	.clearfix li:nth-child(1) .left>div:nth-child(1) {
+		background: red;
+	}
+
+	.clearfix li:nth-child(3) .left>div:nth-child(1) {
+		background: #ffcc00;
+	}
+
+	.clearfix li:nth-child(2) .left>div:nth-child(1) {
+		background: #ff6d00;
+	}
+
+	
+</style>
+
+<body style="overflow: hidden;">
+	<div class='longNanContainerBox'>
+		<!--<<浏览器版本过低-->
+		<!-- <div class="browserMainBox">
+			<div class="textsMainBox">
+				<p class="textsTitles">您的浏览器版本过低，存在安全风险，请升级或下载新版本浏览器<br/>（若您使用的是双核浏览器，请采用极速模式）</p>
+				<div class="downloadsMainBox">
+					<a class="downBtnBox" target="_blank" href="https://www.google.com/intl/zh-CN/chrome/?standalone=1">
+						<img src="images/chrome.png"> 立即下载
+					</a>
+					<a class="downBtnBox" target="_blank" href="https://download-ssl.firefox.com.cn/releases-sha2/stub/official/zh-CN/Firefox-latest.exe">
+						<img src="images/firefox.png"> 立即下载
+					</a>
+					<a class="downBtnBox" target="_blank" href="http://down.360safe.com/cse/360cse_9.5.0.138.exe">
+						<img src="images/360.png"> 立即下载
+					</a>
+				</div>
+			</div>
+		</div> -->
+		<!--浏览器版本过低>>-->
+		<!--<<加载中-->
+		<div class="loadsMianBox">
+			<div class="loader">
+				<span class="text">Loading</span>
+				<span class="spinner"></span>
+			</div>
+		</div>
+		<!--加载中>>-->
+		<div class="longNan_ContainerBox">
+			<div class="title_header_box"></div>
+			<a class="reture" href="javascript:history.go(-1)"></a>
+			<p class="titlesTextBox">网商TOP</p>
+			<div class="populationBox">
+				<!--人才培训数量-->
+				<div id="chaerts01" style="width: 100%; height: 100%;">
+					<div class="chaer_left chaer">
+						<ul class="clearfix">
+						</ul>
+					</div>
+					<div class="chaer_right chaer">
+						<ul>
+						</ul>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!--底部部分>>-->
+	<script>
+		//判断浏览器是否支持HTML5
+		// if (!window.applicationCache) {
+		// 	$(".longNanContainerBox").hide();
+		// } else {
+		// 	$(".browserMainBox").hide();
+		// }
+	</script>
+	<script src="../js/echarts.min.js"></script>
+	<script src="../js/resize.js"></script>
+	<script>
+		window.onload = function () {
+			var adminToken, year;
+			var str = location.href; //取得整个地址栏
+			var num = str.indexOf("?")
+			str = str.substr(num + 1); //取得所有参数 stringvar.substr(start [, length ]
+			var arr = str.split("&"); //各个参数放到数组里
+			// for (var i = 0; i < arr.length; i++) {
+			// 	num = arr[i].indexOf("=");
+			// 	adminToken = arr[0].substr(num + 1)
+			// 	year = arr[1].substr(num + 1)
+			// }
+			for (var i = 0; i < arr.length; i++) {
+				num=arr[i].indexOf("=");
+				if(i == 0){
+						adminToken = arr[0].substr(num + 1)
+				}else{
+						year = arr[1].substr(num + 1)
+				}
+			}
+			$('.longNan_ContainerBox').show()
+			longNanContainer();
+			regions(year, adminToken);
+			getSixTitle(adminToken)
+		}
+		// var baseUrl = "https://" + document.domain + '/';
+		var baseUrl = "https://lnsybak.bluearp.com/";
+		// 获取6大标题
+		function getSixTitle(adminToken) {
+			$.post(baseUrl + 'public/Bigdata/title', {
+					'api_token': adminToken,
+				},
+				function (data) {
+					if (data.code === 200) {
+						const dataTit = data.data
+						$('.titlesTextBox').html('网商TOP')//dataTit[3].pub_name
+					} else {
+						window.location.href = baseUrl + '#/'
+					}
+				})
+		}
+		//网商TOP
+		function regions(year, adminToken) {
+			$.post(baseUrl + 'public/Bigdata/getsales', {
+					'api_token': adminToken,
+					'year': year
+				},
+				function (data) {
+					$('.loadsMianBox').hide()
+					if (data.code === 200) {
+						arr = data.data.goodsall;
+						trainsBox(data.data.comall)
+					} else {
+						window.location.href = baseUrl + '#/'
+					}
+				})
+
+		}
+
+		var chartSmail01 = document.getElementById('chaerts01');
+
+		function trainsBox(axis) {
+			var data = axis;
+			var one_ength = "";
+			var enth = "";
+			for (var i = 0; i < data.length; i++) {
+				if (i <= 7) {
+					var num = i + 1;
+					one_ength += ' <li><div class="left"><div >' + num + '</div><div>' + data[i].name + '</div><div> ' + 
+					data[i].value + '</div></div></li>';
+
+				} else if(i <= 16 && i >= 8){
+					var num = i + 1;
+					enth += '<li><div class="left"><div >' + num + '</div><div>' + data[i].name + '</div><div> ' + data[i].value +
+						'</div></div></li>';
+				}
+			}
+			$(".chaer_left ul").html(one_ength);
+			$(".chaer_right ul").html(enth);
+
+		};
+
+		//字体适配屏占比控制
+		function longNanContainer() {
+			var heights = $(window).height();
+			var widths = $(window).width();
+			var ratios = heights / widths;
+
+			if (ratios <= 0.35) {
+				$('.longNanContainerBox').css({
+					'width': widths,
+					'height': widths * 0.35,
+				});
+				$('body').css({
+					'overflow': 'auto',
+				})
+
+			} else {
+				$('.longNanContainerBox').css({
+					'width': widths,
+					'height': heights,
+				});
+				$('body').css({
+					'overflow': 'hidden',
+				})
+			}
+
+			var sizes = widths / 1920 * 100;
+			$('html').css("font-size", sizes);
+
+			setTimeout("longNanContainer()", 1);
+		}
+
+		$(".longNanContainerBox").resize(function () {
+			chartSmail01.resize();
+		});
+	</script>
+</body>
+
+</html>

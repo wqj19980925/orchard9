@@ -1,0 +1,343 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta charset="UTF-8">
+	<title>电子商务大数据监测平台</title>
+	<meta name="renderer" content="webkit" />
+	<meta name="force-rendering" content="webkit" />
+	<meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1" />
+	<script type="text/javascript" src="js/jquery-1.11.0.js"></script>
+	<link rel="stylesheet" href="css/common.css" />
+	<link rel="stylesheet" href="css/style.css" />
+	<link rel="stylesheet" href="css/stylecover.css" />
+	<link rel="stylesheet" href="css/swiper.min.css" />
+	<script type="text/javascript" src="https://api.map.baidu.com/api?v=2.0&ak=eIxDStjzbtH0WtU50gqdXYCz"></script>
+</head>
+<style>
+	/* .longNanContainerBox {
+		background: url("./images/dataBg.png")
+	} */
+	.titles > span{
+		margin-left: 12%;
+	}
+	.titles > p{
+		font-size: 16px;
+   		font-weight: 600;
+	}
+	.titles > h2{
+		font-size: 26px;
+    	color: #E1CA44;
+	}
+	.nodatas{
+		font-size: 20px;
+		text-align: center;
+		margin-top: 200px;
+		color: #fff;
+	}
+</style>
+
+<body style="overflow: hidden;">
+	<div class='longNanContainerBox'>
+		<!--浏览器版本过低>>-->
+		<!--<<加载中-->
+		<div class="loadsMianBox" style="display:none">
+			<div class="loader">
+				<span class="text">Loading</span>
+				<span class="spinner"></span>
+			</div>
+		</div>
+		<div class="loadscoverBox">
+			<div class="loader">
+				<span class="text">Loading</span>
+				<span class="spinner"></span>
+			</div>
+		</div>
+		<!--<<浏览器版本过低-->
+		<!-- <div class="browserMainBox">
+			<div class="textsMainBox">
+				<p class="textsTitles">您的浏览器版本过低，存在安全风险，请升级或下载新版本浏览器<br />（若您使用的是双核浏览器，请采用极速模式）</p>
+				<div class="downloadsMainBox">
+					<a class="downBtnBox" target="_blank" href="https://www.google.com/intl/zh-CN/chrome/?standalone=1">
+						<img src="images/chrome.png"> 立即下载
+					</a>
+					<a class="downBtnBox" target="_blank"
+						href="https://download-ssl.firefox.com.cn/releases-sha2/stub/official/zh-CN/Firefox-latest.exe">
+						<img src="images/firefox.png"> 立即下载
+					</a>
+					<a class="downBtnBox" target="_blank" href="http://down.360safe.com/cse/360cse_9.5.0.138.exe">
+						<img src="images/360.png"> 立即下载
+					</a>
+				</div>
+			</div>
+		</div> -->
+
+		<!--加载中>>-->
+
+		<div class="longNan_ContainerBox">
+			<div class="title_header_box"></div>
+			<p class="titlesTextBox">
+                <i class="left_icon" onclick="leftIconClick()"></i>
+				电子商务大数据监测平台
+				
+			</p>
+			<!--<<地图内容块-->
+			<div class="longNanMainContentBox">
+				<span class="quitsMainBtn" onclick="goHome();"></span>
+				<!-- <p class="smalies"><span id="totalSums" class="counter-value">0.00</span>元</p> -->
+				<!-- <span class="switchMaps" onclick="mapSwitch();"></span> -->
+				<!-- <a class="quitsMainBtn" href="##"></a> -->
+				<!-- <p id="mapsName" style="display: none;">产品码全国数据分布统计</p> -->
+				<!--<<地图详细图表-->
+				<!-- <div id="map-wrap" class="mapsMianBox"></div> -->
+				<!--地图详细图表>>-->
+				<!--<<地图轮询图表-->
+				<div class="mapsMianBox">
+                    <div class="dataicon">
+                        <div class="section-head">
+                            <p class="left"><img src="../images/u8655.png"><span>基地名称</span></p>
+                            <p class="right"><img src="../images/u8608.png"><span>负责人</span></p>
+                        </div> 
+                        <div class="secton-text">
+                            <p>
+                                <img src="./images/u12117.png">
+                                <span>北京网二撒酒疯垃圾分类进洛杉矶的连接法兰连发四六级</span>
+                            </p>
+                        </div>
+                    </div>
+                    <div class="dataicon imgdata" onclick="dectildata()" >
+                        <img src="./images/u12123.jpg">
+                        <p>我暂时不知道叫啥</p>
+                        <p>1313</p>
+                    </div>
+                    <div class="dataicon imgdata" onclick="dectildata()" >
+                        <img src="./images/u12120.jpg">
+                        <p>我暂时不知道叫啥</p>
+                        <p>1313</p>
+                    </div>
+                    <div class="dataicon imgdata" onclick="dectildata()" >
+                        <img src="./images/u12121.jpg">
+                        <p>我暂时不知道叫啥</p>
+                        <p>1313</p>
+                    </div>
+                    <div class="dataicon imgdata" onclick="dectildata()" >
+                        <img src="./images/u12122.jpg">
+                        <p>我暂时不知道叫啥</p>
+                        <p>1313</p>
+                    </div>
+                    <div class="dataicon imgdata" onclick="dectildata()" >
+                        <img src="./images/u12128.png">
+                        <p>我暂时不知道叫啥</p>
+                        <p>1313</p>
+                    </div>
+                    <div class="dataicon imgdata" onclick="dectildata()" >
+                        <img src="./images/u12100.png">
+                        <p>我暂时不知道叫啥</p>
+                        <p>1313</p>
+                    </div>
+                    <div class="dataicon imgdata" onclick="dectildata()" >
+                        <img src="./images/u12124.jpg">
+                        <p>我暂时不知道叫啥</p>
+                        <p>1313</p>
+                    </div>
+                    <div class="dataicon imgdata" onclick="dectildata()" >
+                        <img src="./images/u12127.jpg">
+                        <p>我暂时不知道叫啥</p>
+                        <p>1313</p>
+                    </div>
+                    <div class="dataicon imgdata" onclick="dectildata()" >
+                        <img src="./images/u12118.jpg">
+                        <p>我暂时不知道叫啥</p>
+                        <p>1313</p>
+                    </div>
+                    <div class="dataicon imgdata" onclick="dectildata()" >
+                        <img src="./images/u12119.jpg">
+                        <p>我暂时不知道叫啥</p>
+                        <p>1313</p>
+                    </div>
+                    <div class="dataicon imgdata" onclick="dectildata()" >
+                        <img src="./images/u12129.jpg">
+                        <p>我暂时不知道叫啥</p>
+                        <p>1313</p>
+                    </div>
+                   
+                </div>
+				
+				<!--地图轮询图表>>-->
+			</div>
+		
+		</div>
+		<div id="l-map" style='width:0px;height:0px;'></div>
+	</div>
+	<!--底部部分>>-->
+	<script>
+		//判断浏览器是否支持HTML5
+		// if (!window.applicationCache) {
+		// 	$(".longNanContainerBox").hide();
+
+		// } else {
+		// 	$(".browserMainBox").hide();
+		// }
+	</script>
+	<script src="js/echarts.min.js"></script>
+	<script src="js/echarts-liquidfill.js"></script>
+	<script src="js/china.js"></script>
+	<script src="js/resize.js"></script>
+	<script src="js/citymap.js"></script>
+	<script src="js/swiper.jquery.min.js"></script>
+	<script>
+		window.onload = function () {
+			var token = window.location.search
+			adminToken = token.substr(1);
+			// 获取当前年份
+			// var date = new Date;
+			// var year = date.getFullYear();
+			// $('.show_val').html(year)
+			// const year02 = Number(year) - 2;
+			// const year01 = Number(year) - 1;
+			// const yearOption = '<li class="year_option" onclick="choseYear(' + year + ')">' + year +
+			// 	'</li> <li class = "year_option" onclick = "choseYear(' + year01 + ')" > ' + year01 +
+			// 	'</li> <li class = "year_option" onclick = "choseYear(' + year02 + ')" > ' + year02 + '</li>'
+
+            $('.longNan_ContainerBox').show();
+            $(".loadscoverBox").hide();
+			// 字体自适应
+			longNanContainer();
+			//获取数据
+			// mapdatas(adminToken, year);
+			
+		}
+		// var baseUrl = "https://" + document.domain + '/';
+		var baseUrl = "http://gybd.com/public/";
+		var dataV1;
+		var cityPos = [],
+			cityName = [],
+			dataCity = []
+		var geoCoordMap = {};
+
+		function goHome() {
+			// 退出登录/
+			// $.post(baseUrl + 'public/loginout', {
+			// 		'api_token': adminToken,
+			// 	},
+			// 	function (data) {
+			// 		window.location.href = baseUrl + '#/'
+			// 	}
+			// )
+		}
+
+        function dectildata(){
+            window.location.href='./html/index01.html?+token=1&year=2019'
+        }
+		
+        function leftIconClick(){
+            window.location.href = 'index03.html?'+adminToken;
+        }
+		
+		//字体适配屏占比控制
+		function longNanContainer() {
+			var heights = $(window).height();
+			var widths = $(window).width();
+			var ratios = heights / widths;
+			if (ratios <= 0.35) {
+				$('.longNanContainerBox').css({
+					'width': widths,
+					'height': widths * 0.35,
+				});
+				$('body').css({
+					'overflow': 'auto',
+				})
+
+			} else {
+				$('.longNanContainerBox').css({
+					'width': widths,
+					'height': heights,
+				});
+				$('body').css({
+					'overflow': 'hidden',
+				})
+			}
+
+			var sizes = widths / 1920 * 100;
+			$('html').css("font-size", sizes);
+
+			// setTimeout("longNanContainer()", 1);
+		}
+	
+		//适配加载图表
+		$(".longNanContainerBox").resize(function () {
+			mapsDataBox(dataCity);
+		});
+
+		
+	</script>
+</body>
+<style>
+.longNanContainerBox .longNanMainContentBox{
+    width: 18rem;
+    margin-left: -9rem;
+}
+.dataicon{
+    width: 15.66%;
+    height: 190px;
+    display: inline-block;
+    float: left;
+    margin-right: 1%;
+    margin-bottom: 10px;
+    margin-top: 20px;
+}
+.section-head {
+    height: auto;
+    overflow: hidden;
+}
+.section-head .left{
+    width: 60%;
+    color: #fff;
+    display: inline-block;
+    float: left;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;  
+}
+.section-head  img{
+    width: 20px;
+    height: 20px;
+    float: left;
+    margin-right: 5px;
+}
+.section-head .right{
+    float: right;
+    color: #fff;
+}
+.secton-text{
+    margin-top: 10px;
+    height: auto;
+    overflow: hidden;
+}
+.secton-text img{
+    width: auto;
+    height: 20px;
+    float: left;
+    margin-right: 10px;
+}
+.secton-text p{
+    color: #fff;
+    font-size: 18px;
+    line-height: 30px;
+
+}
+.imgdata {
+    text-align: center;
+    cursor: pointer;
+}
+.imgdata img{
+    width: 100px;
+    margin: 10px auto;
+}
+.imgdata p{
+    color: #fff;
+    font-size: 16px;
+    line-height: 30px;
+}
+</style>
+</html>

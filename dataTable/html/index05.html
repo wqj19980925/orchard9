@@ -1,0 +1,487 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>电子商务大数据监测平台</title>
+    <meta name="renderer" content="webkit" />
+    <meta name="force-rendering" content="webkit" />
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1" />
+    <script type="text/javascript" src="../js/jquery-1.11.0.js"></script>
+    <link rel="stylesheet" href="../css/common.css" />
+    <link rel="stylesheet" href="../css/style.css" />
+</head>
+<style>
+    .populationBox {
+        height: 82%;
+    }
+
+    .populationBox_title {
+        position: absolute;
+        top: 40%;
+        right: 30%;
+    }
+
+    .bili {
+        font-size: .32rem;
+        color: yellow;
+    }
+
+    .se {
+        font-size: .32rem;
+        color: #fff
+    }
+
+    .button {
+        width: 100%;
+        position: absolute;
+        bottom: 4%;
+        text-align: center;
+        display: none;
+    }
+
+    .button button {
+        background: #00eaf9;
+        padding: .1rem 2.2rem;
+        border: 0;
+        border-radius: .05rem;
+        color: #fff;
+    }
+
+    .button button:nth-child(1) {
+        background: #ffcc00;
+    }
+
+    #chaerts02 {
+        position: absolute;
+        top: 10%;
+        right: 10%;
+    }
+
+    #chaerts03 {
+        width: 50%;
+        position: absolute;
+        height: 50%;
+        right: 0;
+    }
+</style>
+
+<body style="overflow: hidden;">
+    <div class="longNanContainerBox">
+        <!--<<浏览器版本过低-->
+        <!-- <div class="browserMainBox">
+			<div class="textsMainBox">
+				<p class="textsTitles">您的浏览器版本过低，存在安全风险，请升级或下载新版本浏览器<br/>（若您使用的是双核浏览器，请采用极速模式）</p>
+				<div class="downloadsMainBox">
+					<a class="downBtnBox" target="_blank" href="https://www.google.com/intl/zh-CN/chrome/?standalone=1">
+						<img src="../images/chrome.png"> 立即下载
+					</a>
+					<a class="downBtnBox" target="_blank" href="https://download-ssl.firefox.com.cn/releases-sha2/stub/official/zh-CN/Firefox-latest.exe">
+						<img src="../images/firefox.png"> 立即下载
+					</a>
+					<a class="downBtnBox" target="_blank" href="http://down.360safe.com/cse/360cse_9.5.0.138.exe">
+						<img src="../images/360.png"> 立即下载
+					</a>
+				</div>
+			</div>
+		</div> -->
+        <!--浏览器版本过低>>-->
+        <!--<<加载中-->
+        <div class="loadsMianBox">
+            <div class="loader">
+                <span class="text">Loading</span>
+                <span class="spinner"></span>
+            </div>
+        </div>
+        <!--加载中>>-->
+        <div class="longNan_ContainerBox">
+            <div class="title_header_box"></div>
+            <a class="reture" href="javascript:history.go(-1)"></a>
+            <p class="titlesTextBox"></p>
+            <div class="populationBox">
+                <!--整体交易额-->
+                <div id="chaerts01" style="width: 100%; height: 100%;">
+
+                </div>
+                <div id="chaerts02" style="width: 50%; height: 50%;">
+                    <div id="chaerts03" style="width: 50%; height: 50%;">
+
+                    </div>
+                    <div class="populationBox_title">
+                        <p class="bili"></p>
+                        <p class="se"></p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="button">
+                <button class="one"></button>
+                <button class="two"></button>
+            </div>
+        </div>
+    </div>
+    <!--底部部分>>-->
+    <script>
+        //判断浏览器是否支持HTML5
+        // if (!window.applicationCache) {
+        //     $(".longNan_ContainerBox").hide();
+        // } else {
+        //     $(".browserMainBox").hide();
+        // }
+    </script>
+    <script src="../js/echarts.min.js"></script>
+    <script src="../js/resize.js"></script>
+    <script>
+        window.onload = function () {
+            var adminToken, year;
+            var str = location.href; //取得整个地址栏
+            var num = str.indexOf("?")
+            str = str.substr(num + 1); //取得所有参数 stringvar.substr(start [, length ]
+            var arr = str.split("&"); //各个参数放到数组里
+            // console.log('arr',arr);
+            for (var i = 0; i < arr.length; i++) {
+                num = arr[i].indexOf("=");
+                if(i == 0){
+                    adminToken = arr[0].substr(num + 1)
+                }else{
+                    year = arr[1].substr(num + 1)
+                }
+            }
+            // num = arr[0].indexOf("=");
+            // adminToken = arr[0].substr(num + 1);
+            // num = arr[1].indexOf("=");
+            // year = arr[1].substr(num + 1);
+            // console.log('token',adminToken,'year',year);
+            longNanContainer();
+            getSixTitle(adminToken)
+            regions(adminToken, year);
+            var clickdata;
+        }
+        // var baseUrl = "https://" + document.domain + '/';
+		var baseUrl = "https://lnsybak.bluearp.com/";
+        // 获取6大标题
+        function getSixTitle(adminToken) {
+            $.post(baseUrl + 'public/Bigdata/title', {
+                    'api_token': adminToken,
+                },
+                function (data) {
+                    $('.loadsMianBox').hide()
+                    $('.longNan_ContainerBox').show()
+                    if (data.code === 200) {
+                        const dataTit = data.data
+                        // console.log('dataTit',dataTit);
+                        $('.titlesTextBox').html(dataTit[5].pub_name)
+                    } else {
+                        window.location.href = baseUrl + '#/'
+                    }
+                })
+        }
+        //整体交易额
+        function regions(adminToken, year) {
+            $.post(baseUrl + 'public/Bigdata/getsales', {
+                    'api_token': adminToken,
+                    'year': year
+                },
+                function (data) {
+                    if (data.code === 200) {
+
+                        clickdata = data.data.classall;
+                        // console.log(clickdata);
+                        for(var i=0;i<2;i++){
+                            if(clickdata[i] != ''){
+                                trainsBox(data.data.classall[i]);
+                                if(i == 1){
+                                    $(".two").css("background","#ffcc00");
+                                }
+                                break;
+                            }
+                            
+                        }
+                        for(var i=0;i<2;i++){
+                            if(clickdata[i] == ''){
+                                if(i == 0){
+                                    $(".one").hide();
+                                }else{
+                                    $(".two").hide();
+                                }
+                            }
+                            
+                        }
+                        
+                        // if(clickdata[0] == ''){
+                        //     $("#chaerts02").hide();
+                        // }else{
+                        //     $("#chaerts01").hide();
+                        // }
+                        
+                        $(".one").text("实体类");
+                        $(".two").text("服务类");
+                    } else {
+                        window.location.href = baseUrl + '#/'
+                    }
+                })
+            
+
+        }
+        $(".button").on("click", "button", function () {
+
+            if ($(this).index() == 0) {
+
+                trainsBox(clickdata[0]);
+
+            } else {
+
+                trainsBox(clickdata[1]);
+            }
+
+            $(this).css("background", "#ffcc00").siblings("button").css("background", "#00eaf9")
+        })
+        var chartSmail01 = echarts.init(document.getElementById('chaerts01'));
+        var chaert02 = echarts.init(document.getElementById("chaerts03"));
+
+        function trainsBox(axis) {
+            var data = axis;
+            var dataName = [];
+            var dataValue = [];
+            var colores = [];
+            var pie = [];
+            var pielv = [],
+                piehe = 0;
+            //名字和金额
+            for (var i = 0; i < data.length; i++) {
+                dataValue.push(Number(data[i].value));
+                dataName.push(data[i].name)
+            }
+            dataValue = dataValue.sort(sort);
+
+            for (var i = 0; i < data.length; i++) {
+                pie.push(Number(data[i].value));
+                piehe +=  Number(data[i].value);
+                
+            }
+
+
+            for (var i = 0; i < dataValue.length; i++) {
+                var nextnum=(( Number(dataValue[i+1]) / piehe) * 100).toFixed(2)
+                 if((( Number(dataValue[i]) / piehe) * 100).toFixed(2)==='0.00'){
+                        pielv.push('0.01')
+                 }else{
+                    pielv.push((( Number(dataValue[i]) / piehe) * 100).toFixed(2));
+                 }
+                 // console.log(pielv,'pielv223')
+            };
+            if (data.length < 4) {
+                colores = ["#ffcc00", "#00eaf9", "#00eaf9"];
+            } else {
+                for (var i = 0; i < data.length; i++) {
+                    if (i == 0 || i == 1 || i == 2) {
+                        colores.push("#ffcc00");
+                    } else {
+                        colores.push("#00eaf9");
+                    }
+                };
+            }
+
+            function sort(a, b) {
+                return b - a;
+            }
+            var Option = {
+                title: {
+                    text: "第 1 位 " + dataName[0] + " 交易额 " + dataValue[0] + " 元",
+                    left: "center",
+                    textStyle: {
+                        color: "#fff",
+                    },
+                    top: 20
+                },
+                tooltip: {
+                    // 	show:true,                  //---是否显示提示框,默认为true
+                    // 	trigger:'item',             //---数据项图形触发
+                    // 	axisPointer:{               //---指示样式
+                    // 		type:'shadow',      
+                    // 		axis:'auto', 
+
+                    // 	},
+                    // 	padding:5,
+                    // 	textStyle:{                 //---提示框内容样式
+                    // 		color:"#fff",           
+                    // },
+                    // trigger: 'axis'
+                },
+                xAxis: {
+                    data: data.map(function (item) {
+                        return item[0];
+                    }),
+                    type: 'category',
+
+                    data: dataName,
+                    axisLine: {
+                        lineStyle: {
+                            color: '#ffffff',
+                        },
+                    },
+                    axisLabel: {
+                        interval: 0,
+                        rotate: 40,
+                        textStyle: {
+                            fontSize: 12
+                        }
+                    },
+                    // axisTick: {
+                    //     alignWithLabel: false,
+                    //     lineStyle: {
+                    //         color: '#ffffff',
+                    //     }
+                    // },
+                    nameTextStyle: {
+                        color: '#ffffff',
+                        fontSize: 18,
+                    },
+                    // splitLine: {
+                    //     show: false
+                    // }
+                },
+                yAxis: {
+                    // name:"交易额",
+
+                    // splitLine: {
+                    show: false
+                    // }
+                },
+                // dataZoom: [
+                //     {
+                //         type: 'inside'
+                //     }
+                // ],
+                grid: {
+                    top: "5%",
+                    left: "5%",
+                    right: "5%",
+                    bottom: "12%"
+                },
+                series: [{
+                    type: 'bar',
+                    barWidth: "20%",
+                    data: pie,
+                    itemStyle: {
+                        normal: {
+                            barBorderRadius: [10, 10, 0, 0],
+                            color: function (params) {
+                                var colorList = colores;
+
+                                return colorList[params.dataIndex];
+                            },
+                            label: {
+                                show: true, //开启显示
+                                position: 'top', //在上方显示
+                                textStyle: { //数值样式
+                                    fontSize: 16,
+                                    color: "#fff"
+                                }
+                            }
+
+                        },
+                        // emphasis: {
+                        //     color: new echarts.graphic.LinearGradient(
+                        //         0, 0, 0, 1,
+                        //         [
+                        //             {offset: 0, color: '#2378f7'},
+                        //             {offset: 0.7, color: '#2378f7'},
+                        //             {offset: 1, color: '#83bff6'}
+                        //         ]
+                        //     )
+                        // }
+                    },
+                    data: dataValue,
+                }, ]
+            };
+            // console.log(pielv,'datas')
+            var option02 = {
+                tooltip: {
+                    // trigger: 'item',
+                    // formatter: "{a} <br/>{b} : {c} ({d}%)"
+                    formatter:function(data){
+                        var perc=data.percent.toFixed(1)
+                      if(data.percent.toFixed(1)==='0.0'){
+                        perc='0.1'
+                      }
+                      return data.seriesName + "<br/>"+ data.name+ " : " + data.value + " ("+perc+"%)";    
+                    }
+                },
+                grid:{
+                   left: '5%',
+                   right: '5%',
+                   bottom: '5%',
+                   top: '10%',
+                   containLabel: true
+                },
+
+                series: [{
+                    name:'',
+                    type: 'pie',
+                    radius: '70%',
+                    center: ['50%', '50%'],
+                    selectedMode: 'single',
+                    data: data,
+                    itemStyle: {
+                        color: function (params) {
+                            var colorList = ["#ffcc00", "#00eaf9",'#61a0a8', '#d48265', '#91c7ae','#749f83',  '#ca8622', '#bda29a','#6e7074', '#546570', '#c4ccd3'];
+                            // ["#ffcc00", "#00eaf9"];
+                            return colorList[params.dataIndex];
+                        },
+                    }
+
+                }]
+            }
+
+            chartSmail01.setOption(Option);
+            chaert02.setOption(option02)
+            chartSmail01.resize();
+            chaert02.resize();
+            setTimeout(function () {
+                $(".bili").text(dataName[0] + "占比" + pielv[0] + "%");
+                $(".se").text(dataName[0] + "交易额合计" + dataValue[0] + "元");
+                $(".populationBox_title").fadeIn();
+                $(".button").fadeIn();
+            }, 200)
+        };
+
+        //字体适配屏占比控制
+        function longNanContainer() {
+            var heights = $(window).height();
+            var widths = $(window).width();
+            var ratios = heights / widths;
+
+            if (ratios <= 0.35) {
+                $('.longNanContainerBox').css({
+                    'width': widths,
+                    'height': widths * 0.35,
+                });
+                $('body').css({
+                    'overflow': 'auto',
+                })
+
+            } else {
+                $('.longNanContainerBox').css({
+                    'width': widths,
+                    'height': heights,
+                });
+                $('body').css({
+                    'overflow': 'hidden',
+                })
+            }
+
+            var sizes = widths / 1920 * 100;
+            $('html').css("font-size", sizes);
+
+            setTimeout("longNanContainer()", 1);
+        }
+
+        $(".longNanContainerBox").resize(function () {
+            chartSmail01.resize();
+            chaert02.resize();
+        });
+    </script>
+</body>
+
+</html>

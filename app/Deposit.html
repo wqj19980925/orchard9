@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0,maximum-scale=1.0, user-scalable=no"/>
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta http-equiv="x-ua-compatible Content-Type" content="text/html;IE=edge,chrome=1"/>
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <link rel="stylesheet" href="./css/index.css">
+    <link rel="stylesheet" href="./css/Select.css">
+    <link rel="stylesheet" href="./css/deposit.css">
+    <script src="./js/rem.js"></script>
+    <script src="./js/jquery-3.4.1.min.js"></script>
+    <script src="./js/jquery-3.4.1.js"></script>
+    <script>
+        var _hmt = _hmt || [];
+        (function() {
+        var hm = document.createElement("script");
+        hm.src = "//hm.baidu.com/hm.js?b25bf95dd99f58452db28b1e99a1a46f";
+        var s = document.getElementsByTagName("script")[0]; 
+        s.parentNode.insertBefore(hm, s);
+        })();
+    </script>
+    <style>
+    .information{
+        margin-bottom: 1rem;
+    }
+    </style>
+</head>
+<body>
+            <!-- <span id="showBank">点击这里选择银行</span>   -->
+    <section>
+        <div class="deposit_section information">
+            <div class="deposit_select">
+                <span>运输方式:</span>
+                <span  id="showBank" class="transport transportfd">请选择运输方式</span>
+            </div>
+            <div class="deposit_informat ormode deposit_select">
+                <div class="section_infor">
+                    <span>运输单位：</span>
+                    <input type="text" class="unitid" placeholder="请输入运输单位">
+                </div>
+                <div class="section_infor">
+                    <span>负责人：</span>
+                    <input type="text" class="user" placeholder="请输入负责人">
+                </div>
+                <div class="section_infor">
+                    <span>联系电话：</span>
+                    <input type="text" class="tel" placeholder="请输入联系电话">
+                </div>
+                <div class="section_plate palts">
+                    <div class="section_infor">
+                        <span>车牌号：</span>
+                        <input type="text" placeholder="请输入车牌号" class="calinput">
+                        <i class="plus"></i>
+                    </div>
+                </div>
+            </div>
+            <div class="deposit_informat orCompany deposit_select">
+                    <div class="section_infor">
+                        <span>运输单位：</span>
+                        <span  id="showBanktwo" class="transport transpd">请选择运输单位</span>
+                    </div>
+                    <div class="section_plate express">
+                        <div class="section_infor">
+                            <span>快递单号：</span>
+                            <input type="text" class="calinputsd" placeholder="请输入单号">
+                            <i class="plus"></i>
+                        </div>
+                    </div>
+            </div>
+            <div class="footbutton">
+                <p>提交</p>
+            </div>
+        </div>
+    </section>
+</body>
+<script src="./js/Select.js"></script>
+<script>
+    var calinput;
+    var calinputtwo;
+    var newdatas ={
+        wl_type:'',
+        tra_id:'',
+        courier:[],
+        unitid:'',
+        user:'',
+        tel:'',
+        license:[],
+    };
+    var newdatastwos = {
+        wl_type:'',
+        tra_id:'',
+        courier:[],
+        unitid:'',
+        user:'',
+        tel:'',
+        license:[],
+    };
+
+    $(".palts").on('click','.plus',function(){
+        var html = '<div class="section_infor section_reduce"><span>车牌号：</span><input type="text" placeholder="请输入车牌号" class="calinput"><i class="reduce"></i></div>'
+        $(".palts").append(html);
+    })
+    $(".express").on('click','.plus',function(){
+        var html = '<div class="section_infor section_reduce"><span>快递单号：</span><input type="text" placeholder="请输入单号" class="calinputsd"><i class="reduce"></i></div>'
+        $(".express").append(html);
+    })
+    $(".section_plate").on("click",'.reduce',function(){
+        this.parentNode.remove();
+    })
+    $(".footbutton").on('click','p',function(){
+        if($(".transportfd").text() == '请选择运输方式'){
+            window.android.showToast('请选择运输方式');
+            return false;
+        }
+        newdatas.wl_type = calinput;
+        if($("#showBank").text() == '快递包裹'){
+            if($("#showBanktwo").text() == '请选择运输单位'){
+                window.android.showToast('请选择运输单位');
+                return false;
+            }
+            var inputsg = document.getElementsByClassName("calinputsd");
+            for(var i=0;i<inputsg.length;i++){
+                if(inputsg[i].value === ''){
+                    window.android.showToast('请输入快递单号');
+                    return false;
+                }
+            }
+            newdatas.courier = [];
+            for(var i=0;i<inputsg.length;i++){
+                newdatas.courier.push(inputsg[i].value);
+            }
+            newdatas.tra_id = calinputtwo;
+            if((new Set(newdatas.courier)).size != newdatas.courier.length){
+                window.android.showToast('重复单号，请重新核对输入');
+                return false;
+            }else{
+                window.android.postLogistics(JSON.stringify(newdatas));
+            }
+            
+        }else{
+            // alert('111111');
+            if($('.unitid').val() == ''){
+                window.android.showToast('请输入运输单位');
+                return false;
+            }
+            newdatas.unitid = $('.unitid').val();
+            if($('.user').val() == ''){
+                window.android.showToast('请输入负责人');
+                return false;
+            }
+            newdatas.user = $('.user').val();
+            
+            if($('.tel').val() == ''){
+                window.android.showToast('请输入联系电话');
+                return false;
+            }
+            newdatas.tel = $('.tel').val();
+
+            var inputs = document.getElementsByClassName("calinput");
+            for(var i=0;i<inputs.length;i++){
+                if(inputs[i].value === ''){
+                    window.android.showToast('请输入车牌号');
+                    return false;
+                }
+            }
+            newdatas.license = [];
+            for(var i=0;i<inputs.length;i++){
+                newdatas.license.push(inputs[i].value);
+            }
+            if((new Set(newdatas.license)).size != newdatas.license.length){
+                window.android.showToast('重复车牌号，请重新核对输入');
+                return false;
+            }else{
+                window.android.postLogistics(JSON.stringify(newdatas));
+            }
+        }
+    })
+
+    var data = [
+        {'id': '1', 'value': '快递包裹'},
+        {'id': '2', 'value': '发货方配送'},
+    ];
+    var datatwo = [
+        // {'id': '1', 'value': '顺风'},
+        // {'id': '2', 'value': '中通'},
+        // {'id': '3', 'value': '韵达'},
+        // {'id': '4', 'value': '邮政'},
+    ];
+    // 运输单位 数据
+    function transportunit(data){
+        // datatwo = data;
+        for(var i=0;i<data.length;i++){
+            datatwo.push({id:data[i].tra_id,value:data[i].tra_name})
+        };
+    }
+
+
+    // 运输方式
+    var showBankDom = document.querySelector('#showBank');
+    var bankIdDom = document.querySelector('#showBank');
+    showBankDom.addEventListener('click', function () {
+        var bankId = showBankDom.dataset['id'];
+        var bankName = showBankDom.dataset['value'];
+        var bankSelect = new IosSelect(1, 
+            [data],
+            {
+                container: '.container',
+                title: '运输方式',
+                itemHeight: 60,
+                itemShowCount: 3,
+                oneLevelId: bankId,
+                callback: function (selectOneObj) {
+                    // console.log(selectOneObj);
+                    $(".deposit_informat").hide();
+                    calinput = selectOneObj.id;
+                    if(selectOneObj.id === '2'){
+                        $('.ormode').show();
+                    }else{
+                        $(".orCompany").show();
+                    }
+                    $('#showBank').removeClass("transportfd");
+                    bankIdDom.value = selectOneObj.value;
+                    showBankDom.innerHTML = selectOneObj.value;
+                    showBankDom.dataset['id'] = selectOneObj.id;
+                    showBankDom.dataset['value'] = selectOneObj.value;
+                },
+                fallback: function () {
+                    if($("#showBank").text() === '请选择运输方式'){
+                        $('#showBank').addClass("transportfd");
+                    }
+                },
+                maskCallback: function () {
+                    if($("#showBank").text() === '请选择运输方式'){
+                        $('#showBank').addClass("transportfd");
+                    }
+                }
+        });
+    });
+    //////////运输单位
+    var showBankDomtwos = document.querySelector('#showBanktwo');
+    var bankIdDomtwos = document.querySelector('#showBanktwo');
+    showBankDomtwos.addEventListener('click', function () {
+        var bankId = showBankDomtwos.dataset['id'];
+        var bankName = showBankDomtwos.dataset['value'];
+        var bankSelect = new IosSelect(1, 
+            [datatwo],
+            {
+                container: '.container',
+                title: '运输方式',
+                itemHeight: 60,
+                itemShowCount: 3,
+                oneLevelId: bankId,
+                callback: function (selectOneObj) {
+                    $('#showBanktwo').removeClass("transpd");
+                    calinputtwo = selectOneObj.id;
+                    bankIdDomtwos.value = selectOneObj.value;
+                    showBankDomtwos.innerHTML = selectOneObj.value;
+                    showBankDomtwos.dataset['id'] = selectOneObj.id;
+                    showBankDomtwos.dataset['value'] = selectOneObj.value;
+                },
+                fallback: function () {
+                    if($("#showBanktwo").text() === '请选择运输单位'){
+                        $('#showBanktwo').addClass("transpd");
+                    }
+                },
+                maskCallback: function () {
+                    if($("#showBanktwo").text() === '请选择运输单位'){
+                        $('#showBanktwo').addClass("transpd");
+                    }
+                }
+        });
+    });
+   
+</script>
+</html>

@@ -1,0 +1,1368 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta charset="UTF-8">
+	<title>电子商务大数据监测平台</title>
+	<meta name="renderer" content="webkit" />
+	<meta name="force-rendering" content="webkit" />
+	<meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1" />
+	<script type="text/javascript" src="js/jquery-1.11.0.js"></script>
+	<link rel="stylesheet" href="css/common.css" />
+	<link rel="stylesheet" href="css/style.css" />
+	<link rel="stylesheet" href="css/swiper.min.css" />
+	<script type="text/javascript" src="https://api.map.baidu.com/api?v=3.0&ak=dnT9GV3Ryp2xLpkhKrcIFBwScizyZT0k"></script>
+</head>
+<style>
+	/* .longNanContainerBox {
+		background: url("./images/dataBg.png")
+	} */
+</style>
+
+<body style="overflow: hidden;">
+	<div class='longNanContainerBox'>
+		<!--浏览器版本过低>>-->
+		<!--<<加载中-->
+		<div class="loadsMianBox">
+			<div class="loader">
+				<span class="text">Loading</span>
+				<span class="spinner"></span>
+			</div>
+		</div>
+		<!-- <<浏览器版本过低 -->
+		<!-- <div class="browserMainBox">
+			<div class="textsMainBox">
+				<p class="textsTitles">您的浏览器版本过低，存在安全风险，请升级或下载新版本浏览器<br />（若您使用的是双核浏览器，请采用极速模式）</p>
+				<div class="downloadsMainBox">
+					<a class="downBtnBox" target="_blank" href="https://www.google.com/intl/zh-CN/chrome/?standalone=1">
+						<img src="images/chrome.png"> 立即下载
+					</a>
+					<a class="downBtnBox" target="_blank"
+						href="https://download-ssl.firefox.com.cn/releases-sha2/stub/official/zh-CN/Firefox-latest.exe">
+						<img src="images/firefox.png"> 立即下载
+					</a>
+					<a class="downBtnBox" target="_blank" href="http://down.360safe.com/cse/360cse_9.5.0.138.exe">
+						<img src="images/360.png"> 立即下载
+					</a>
+				</div>
+			</div>
+		</div> -->
+
+		<!--加载中>>-->
+		<div class="longNan_ContainerBox">
+			<div class="title_header_box"></div>
+			<p class="titlesTextBox">
+				<i class="left_icon" onclick="leftIconClick()"></i>
+				电子商务大数据监测平台
+				<i class="right_icon" onclick="rightIconClick()"></i>
+			</p>
+			<!--<<地图内容块-->
+			<div class="longNanMainContentBox">
+				<div class="titles">
+					<div class="select-box select_titile">
+						<div class='show_tit' onclick='yearChose()'>
+							<span class='show_val'>2019</span>
+							<i class='icon_down'></i>
+						</div>
+						<ul class='chose_year_list'>
+						</ul>
+					</div>
+					<span>年全国城市查询分布</span>
+				</div>
+				<span class="quitsMainBtn" onclick="goHome();"></span>
+				<!-- <p class="smalies"><span id="totalSums" class="counter-value">0.00</span>元</p> -->
+				<!-- <span class="switchMaps" onclick="mapSwitch();"></span> -->
+				<!-- <a class="quitsMainBtn" href="##"></a>
+			<p id="mapsName" style="display: none;">产品码全国数据分布统计</p> -->
+				<!--<<地图详细图表-->
+				<!--地图详细图表>>-->
+				<!--<<地图轮询图表-->
+				<div id="map-wrap2" class="mapsMianBox"></div>
+				<!--地图轮询图表>>-->
+			</div>
+			<!--地图内容块>>-->
+			<!--<<网络查询量占比-->
+			<div class="chartsMainBox_01">
+				<p class="contentBlockTitles" onclick="Url('index01')" id='title00'>网络查询量占比</p>
+				<!--<<图表块--->
+				<div id="chaerts01">
+				</div>
+				<!--图表块>>-->
+			</div>
+			<!--网络查询量占比>>-->
+			<!--<<查询软件统计-->
+			<div class="chartsMainBox_02">
+				<p class="contentBlockTitles" onclick="Url('index02')" id='title01'>查询软件统计</p>
+				<!--<<图表块--->
+				<div id="chaerts02">
+				</div>
+				<!--图表块>>-->
+			</div>
+			<!--查询软件统计>>-->
+			<!--<<查询操作系统占比-->
+			<div class="chartsMainBox_03">
+				<p class="contentBlockTitles" onclick="Url('index03')" id='title02'>查询操作系统占比</p>
+				<div id="chaerts03">
+				</div>
+			</div>
+			<!--查询操作系统占比>>-->
+			<!--<<企业注册量统计-->
+			<div class="chartsMainBox_06">
+				<p class="contentBlockTitles" onclick="Url('index05')" id='title05'>三品一标 商品统计</p>
+				<div id="chaerts06">
+
+				</div>
+			</div>
+			<!--企业注册量统计>>-->
+			<!--<<三品一标 企业商品质量认证统计-->
+			<div class="chartsMainBox_07">
+				<p class="contentBlockTitles" onclick="Url('index06')" id='title04'>三品一标 企业商品质量认证统计</p>
+				<div id="chaerts07">
+				</div>
+			</div>
+			<!--三品一标 企业商品质量认证统计>>-->
+			<!--<<三品一标 商品统计-->
+			<div class="chartsMainBox_08">
+				<p class="contentBlockTitles" onclick="Url('index04')" id='title03'>企业注册量统计</p>
+				<div id="chaerts08">
+
+				</div>
+			</div>
+			<!--三品一标 商品统计>>-->
+		</div>
+		<div id="l-map" style='width:0px;height:0px;'></div>
+	</div>
+
+	<!--底部部分>>-->
+	<script>
+		//判断浏览器是否支持HTML5
+		// if (!window.applicationCache) {
+		// 	$(".longNanContainerBox").hide();
+
+		// } else {
+		// 	$(".browserMainBox").hide();
+		// }
+	</script>
+	<script src="js/echarts.min.js"></script>
+	<script src="js/echarts-liquidfill.js"></script>
+	<script src="js/china.js"></script>
+	<script src="js/resize.js"></script>
+	<script src="js/citymap.js"></script>
+	<script src="js/swiper.jquery.min.js"></script>
+	<script>
+		window.onload = function () {
+			var token = window.location.search
+			adminToken = token.substr(1);
+			// 获取当前年份
+			var date = new Date;
+			var year = date.getFullYear();
+			$('.show_val').html(year)
+			const year02 = Number(year) - 2;
+			const year01 = Number(year) - 1;
+			const yearOption = '<li class="year_option" onclick="choseYear(' + year + ')">' + year +
+				'</li><li class="year_option" onclick="choseYear(' + year01 + ')">' + year01 +
+				'</li><li class="year_option" onclick="choseYear(' + year02 + ')">' + year02 + '</li>'
+			$('.chose_year_list').html(yearOption)
+			$(".longNan_ContainerBox").show();
+			// 字体自适应
+			longNanContainer();
+			//获取数据
+			//getAllData(adminToken, year);
+			getRegist(adminToken, year);
+			getAskinterface(adminToken, year);
+			getQualitycert(adminToken, year);
+			getGoodsStat(adminToken, year);
+		}
+		var baseUrl = "https://" + document.domain + '/';
+		// var baseUrl = "http://lnsy.bluearp.com/";
+		var cityPos = [],
+			cityName = [],
+			dataCity = []
+		var geoCoordMap = {};
+		var dataV1, dataV2, dataV3, dataV4, dataV5, dataV6
+
+		function leftIconClick() {
+			window.location.href = "index.html?" + adminToken
+		}
+
+		function rightIconClick() {
+			window.location.href = "index03.html?" + adminToken
+		}
+
+		function goHome() {
+			// 退出登录/
+			$.post(baseUrl + 'public/loginout', {
+					'api_token': adminToken,
+				},
+				function (data) {
+					window.location.href = baseUrl + '#/'
+				}
+			)
+		}
+		// 选择年份
+		function yearChose() {
+			$('.chose_year_list').show()
+		}
+
+		function choseYear(value) {
+			$('.show_val').html(value)
+			$('.chose_year_list').hide()
+			//人才数量接口
+			// getAllData(adminToken, value);
+			getRegist(adminToken, value);
+			getAskinterface(adminToken, value);
+			getQualitycert(adminToken, value);
+			getGoodsStat(adminToken, value);
+		}
+		//字体适配屏占比控制
+		function longNanContainer() {
+			var heights = $(window).height();
+			var widths = $(window).width();
+			var ratios = heights / widths;
+			if (ratios <= 0.35) {
+				$('.longNanContainerBox').css({
+					'width': widths,
+					'height': widths * 0.35,
+				});
+				$('body').css({
+					'overflow': 'auto',
+				})
+
+			} else {
+				$('.longNanContainerBox').css({
+					'width': widths,
+					'height': heights,
+				});
+				$('body').css({
+					'overflow': 'hidden',
+				})
+			}
+
+			var sizes = widths / 1920 * 100;
+			$('html').css("font-size", sizes);
+
+			setTimeout("longNanContainer()", 1);
+		}
+		//企业注册
+		function getRegist(adminToken, year) {
+			$.post(baseUrl + 'public/City/register', {
+					'api_token': adminToken,
+					'year': year
+				},
+				function (data) {
+					$(".loadsMianBox").hide();
+					if (data.code === 200) {
+						const dataTit = data.data_info
+						dataV4 = dataTit;
+						//企业注册量统计
+						compChart(dataTit)
+						$(".loadsMianBox").hide();
+					}
+				})
+		}
+		//分布查询接口
+		function getAskinterface(adminToken, year){
+			var cityName = [];
+			cityPos = []
+			cityName = []
+			dataCity = []
+			geoCoordMap = {}
+			$.post(baseUrl + 'public/City/check', {
+				'api_token': adminToken,
+				'year': year
+			},
+			function (data) {
+				$(".loadsMianBox").hide();
+				if (data.code === 200) {
+					const dataTit = data.data_info
+						dataV1 = dataTit.network_pro;
+						dataV2 = dataTit.browser_sum;
+						dataV3 = dataTit.platform_pro;
+						for (let i in dataTit.provin_pro) {
+							dataCity.push({
+								name: i,
+								value: dataTit.provin_pro[i]
+							})
+							cityName.push(i)
+						}
+						if (cityName.length > 0) {
+							// 百度地图API功能
+							var map = new BMap.Map("l-map");
+							map.centerAndZoom(new BMap.Point(117.269945, 31.86713), 13);
+							map.enableScrollWheelZoom(true);
+							var index = 0;
+							var myGeo = new BMap.Geocoder();
+							bdGEO()
+
+							function bdGEO() {
+								var cityNm = cityName[index];
+								geocodeSearch(cityNm);
+							}
+
+							function geocodeSearch(cityNm) {
+								if (index < cityName.length) {
+									setTimeout(window.bdGEO, 400);
+								}
+								myGeo.getPoint(cityNm, function (point) {
+									if (point) {
+										geoCoordMap[cityNm] = [point.lng, point.lat];
+										if ((index + 1) === cityName.length) { //全国城市查询分布
+											mapsDataBox(dataCity);
+
+											// 网络查询量占比\
+											if (dataTit.network_pro.length === 0) {
+
+												$('#chaerts01').html('<span class="nodataText">暂无数据</span>')
+												document.getElementById('chaerts01').setAttribute('_echarts_instance_', '')
+											} else {
+												netWorkChart(dataTit.network_pro)
+											}
+											if (dataTit.browser_sum.length === 0) {
+												$('#chaerts02').html('<span class="nodataText">暂无数据</span>')
+												document.getElementById('chaerts02').setAttribute('_echarts_instance_', '')
+											} else {
+
+												//查询软件统计
+												softwareChart(dataTit.browser_sum)
+											}
+											if (dataTit.platform_pro.length === 0) {
+												$('#chaerts03').html('<span class="nodataText">暂无数据</span>')
+												document.getElementById('chaerts03').setAttribute('_echarts_instance_', '')
+											} else {
+												//查询操作系统占比
+												optionChart(dataTit.platform_pro)
+											}}
+										index++
+										bdGEO()
+									}
+								});
+							}
+
+						} else {
+							$(".loadsMianBox").hide();
+							// 网络查询量占比\
+							if (dataTit.network_pro.length === 0) {
+								$('#chaerts01').html('<span class="nodataText">暂无数据</span>')
+								document.getElementById('chaerts01').setAttribute('_echarts_instance_', '')
+							} else {
+								netWorkChart(dataTit.network_pro)
+							}
+							if (dataTit.browser_sum.length === 0) {
+								$('#chaerts02').html('<span class="nodataText">暂无数据</span>')
+								document.getElementById('chaerts02').setAttribute('_echarts_instance_', '')
+							} else {
+								//查询软件统计
+								softwareChart(dataTit.browser_sum)
+							}
+							if (dataTit.platform_pro.length === 0) {
+								$('#chaerts03').html('<span class="nodataText">暂无数据</span>')
+								document.getElementById('chaerts03').setAttribute('_echarts_instance_', '')
+							} else {
+								//查询操作系统占比
+								optionChart(dataTit.platform_pro)
+							}
+							mapsDataBox(dataCity);
+
+						}
+
+					} else {
+						// window.location.href = baseUrl + '#/'
+					}
+				})
+		}
+		//商品质量认证
+		function getQualitycert(adminToken, year){
+			$.post(baseUrl + 'public/City/attes', {
+				'api_token': adminToken,
+				'year': year
+			},
+			function (data) {
+				$(".loadsMianBox").hide();
+				if (data.code === 200) {
+					const dataTit = data.data_info
+					dataV5 = dataTit;
+					threeChart(dataTit)
+					$(".loadsMianBox").hide();
+				}
+			})
+		}
+		//商品统计
+		function getGoodsStat(adminToken, year){
+			$.post(baseUrl + 'public/City/goods', {
+				'api_token': adminToken,
+				'year': year
+			},
+			function (data) {
+				$(".loadsMianBox").hide();
+				if (data.code === 200) {
+					const dataTit = data.data_info
+					dataV6 = dataTit;
+					threGodsChart(dataTit)
+					$(".loadsMianBox").hide();
+				}
+			})
+		}
+/*		// 获取
+		function getAllData(adminToken, year) {
+			var cityName = [];
+			cityPos = []
+			cityName = []
+			dataCity = []
+			geoCoordMap = {}
+			$.post(baseUrl + 'public/City/check', {
+					'api_token': adminToken,
+					'year': year
+				},
+				function (data) {
+					$(".loadsMianBox").hide();
+					if (data.code === 200) {
+						// $('#chaerts02').html('')
+						const dataTit = data.data_info
+						dataV1 = dataTit.network_pro;
+						dataV2 = dataTit.browser_sum;
+						dataV3 = dataTit.platform_pro;
+						dataV4 = dataTit.codeAmount;
+						dataV5 = dataTit.t_com;
+						dataV6 = dataTit.t_goods;
+						for (let i in dataTit.provin_pro) {
+							dataCity.push({
+								name: i,
+								value: dataTit.provin_pro[i]
+							})
+							cityName.push(i)
+						}
+						if (cityName.length > 0) {
+							// 百度地图API功能
+							var map = new BMap.Map("l-map");
+							map.centerAndZoom(new BMap.Point(117.269945, 31.86713), 13);
+							map.enableScrollWheelZoom(true);
+							var index = 0;
+							var myGeo = new BMap.Geocoder();
+							bdGEO()
+
+							function bdGEO() {
+								var cityNm = cityName[index];
+								geocodeSearch(cityNm);
+							}
+
+							function geocodeSearch(cityNm) {
+								if (index < cityName.length) {
+									setTimeout(window.bdGEO, 400);
+								}
+								myGeo.getPoint(cityNm, function (point) {
+									if (point) {
+										geoCoordMap[cityNm] = [point.lng, point.lat];
+										if ((index + 1) === cityName.length) { //全国城市查询分布
+											mapsDataBox(dataCity);
+
+											// 网络查询量占比\
+											if (dataTit.network_pro.length === 0) {
+
+												$('#chaerts01').html('<span class="nodataText">暂无数据</span>')
+												document.getElementById('chaerts01').setAttribute('_echarts_instance_', '')
+											} else {
+												netWorkChart(dataTit.network_pro)
+											}
+											if (dataTit.browser_sum.length === 0) {
+												$('#chaerts02').html('<span class="nodataText">暂无数据</span>')
+												document.getElementById('chaerts02').setAttribute('_echarts_instance_', '')
+											} else {
+
+												//查询软件统计
+												softwareChart(dataTit.browser_sum)
+											}
+											if (dataTit.platform_pro.length === 0) {
+												$('#chaerts03').html('<span class="nodataText">暂无数据</span>')
+												document.getElementById('chaerts03').setAttribute('_echarts_instance_', '')
+											} else {
+												//查询操作系统占比
+												optionChart(dataTit.platform_pro)
+											}
+
+											//企业注册量统计
+											compChart(dataTit.codeAmount)
+											//三品一标
+											threeChart(dataTit.t_com)
+											//三品一标 商品统计
+											threGodsChart(dataTit.t_goods)
+										}
+										index++
+										bdGEO()
+									}
+								});
+							}
+
+						} else {
+							$(".loadsMianBox").hide();
+							// 网络查询量占比\
+							if (dataTit.network_pro.length === 0) {
+								$('#chaerts01').html('<span class="nodataText">暂无数据</span>')
+								document.getElementById('chaerts01').setAttribute('_echarts_instance_', '')
+							} else {
+								netWorkChart(dataTit.network_pro)
+							}
+							if (dataTit.browser_sum.length === 0) {
+								$('#chaerts02').html('<span class="nodataText">暂无数据</span>')
+								document.getElementById('chaerts02').setAttribute('_echarts_instance_', '')
+							} else {
+								//查询软件统计
+								softwareChart(dataTit.browser_sum)
+							}
+							if (dataTit.platform_pro.length === 0) {
+								$('#chaerts03').html('<span class="nodataText">暂无数据</span>')
+								document.getElementById('chaerts03').setAttribute('_echarts_instance_', '')
+							} else {
+								//查询操作系统占比
+								optionChart(dataTit.platform_pro)
+							}
+
+							//企业注册量统计
+							compChart(dataTit.codeAmount)
+							//三品一标
+							threeChart(dataTit.t_com)
+							//三品一标 商品统计
+							threGodsChart(dataTit.t_goods)
+							mapsDataBox(dataCity);
+
+						}
+
+					} else {
+						// window.location.href = baseUrl + '#/'
+					}
+				})
+		}*/
+
+		var echartO1
+		// 网络查询量占比
+		function netWorkChart(data) {
+			echartO1 = echarts.init(document.getElementById('chaerts01'));
+			var dataName1 = [],
+				dataVal1 = []
+			for (let i in data) {
+				if (data[i] !== 0) {
+					dataName1.push(i)
+					dataVal1.push({
+						value: data[i],
+						name: i
+					})
+				}
+			}
+			option01 = {
+				grid: {
+					left: '10%',
+					right: '4%',
+					bottom: '3%',
+					top: '25%',
+					containLabel: true
+				},
+				tooltip: {
+					trigger: 'item',
+					formatter: "{b}:<br />{d}%",
+				},
+				series: [{
+					radius: '60%',
+					center: ['50%', '55%'],
+					color: ['#00e6f4', '#ffcc00', '#ff6d00', '#01f1cc'],
+					// name: '销量',
+					// roseType : 'area',
+					type: 'pie',
+					avoidLabelOverlap: false,
+					data: dataVal1,
+					label: {
+						normal: {
+							show: true,
+							formatter: "{b}:{d}%",
+							position: 'outside'
+						},
+					},
+					labelLine: {
+						normal: {
+							show: true,
+							length: 5,
+							length: 5
+						},
+						emphasis: {
+							show: true
+						}
+					},
+				}],
+			}
+			echartO1.setOption(option01);
+			echartO1.resize();
+			//行业分布轮询
+			var index1 = 0; //播放所在下标
+			var timers1 = setInterval(function () {
+				echartO1.dispatchAction({
+					type: 'showTip',
+					seriesIndex: 0,
+					dataIndex: index1
+				});
+				index1++;
+				if (index1 > dataVal1.length) {
+					index1 = 0;
+				}
+			}, 2000);
+		}
+
+		var chartSmail02
+		// 查询软件统计
+		function softwareChart(data) {
+			chartSmail02 = echarts.init(document.getElementById('chaerts02'));
+			var dataName2 = [],
+				dataVal2 = []
+			for (let i in data) {
+				dataName2.push(i)
+				dataVal2.push(data[i])
+			}
+			optionmain01 = {
+				color: ['#00eaf9'],
+				tooltip: {
+					trigger: 'axis',
+					axisPointer: { // 坐标轴指示器，坐标轴触发有效
+						type: 'shadow' // 默认为直线，可选为：'line' | 'shadow'
+					}
+				},
+				grid: {
+					left: '3%',
+					right: '4%',
+					bottom: '3%',
+					top: '25%',
+					containLabel: true
+				},
+				xAxis: [{
+					type: 'category',
+					data: dataName2,
+					axisLine: {
+						lineStyle: {
+							color: '#ffffff',
+						}
+					},
+					axisTick: {
+						alignWithLabel: true,
+						lineStyle: {
+							color: '#ffffff',
+						}
+					},
+					nameTextStyle: {
+						color: '#ffffff',
+					},
+					splitLine: {
+						show: false
+					}
+				}],
+				yAxis: [{
+					type: 'value',
+					axisLine: {
+						lineStyle: {
+							color: '#ffffff',
+						}
+					},
+					axisTick: {
+						alignWithLabel: true,
+						lineStyle: {
+							color: '#ffffff',
+						}
+					},
+					nameTextStyle: {
+						color: '#ffffff',
+					},
+					splitLine: {
+						show: false
+					}
+
+				}],
+				series: [{
+					type: 'bar',
+					barWidth: '20%',
+					data: dataVal2
+				}]
+			}
+			chartSmail02.setOption(optionmain01);
+			chartSmail02.resize()
+			//人才培训轮询
+			var index02 = 0; //播放所在下标
+			var timers02 = setInterval(function () {
+				chartSmail02.dispatchAction({
+					type: 'showTip',
+					seriesIndex: 0,
+					dataIndex: index02
+				});
+				index02++;
+				if (index02 > dataVal2.length) {
+					index02 = 0;
+				}
+			}, 2000);
+		}
+
+		var echaerts03
+		//查询操作系统占比
+		function optionChart(data) {
+			echaerts03 = echarts.init(document.getElementById('chaerts03'));
+			var dataName3 = [],
+				dataVal3 = []
+			for (let i in data) {
+				dataName3.unshift(i)
+				dataVal3.unshift({
+					value: data[i],
+					name: i
+				})
+			}
+			option03 = {
+				grid: {
+					left: '10%',
+					right: '4%',
+					bottom: '3%',
+					top: '25%',
+					containLabel: true
+				},
+				tooltip: {
+					trigger: 'item',
+					formatter: "{b}:<br />{d}%",
+				},
+				series: [{
+					center: ['50%', '45%'],
+					radius: ['30%', '60%'],
+					color: ['#00d4f8', '#fffc00', '#ff6d00'],
+					// name: '销量',
+					type: 'pie',
+					avoidLabelOverlap: false,
+					data: dataVal3,
+					// roseType : 'area',
+					label: {
+						normal: {
+							show: true,
+							formatter: "{b}:{d}%",
+							position: 'outside'
+						},
+					},
+					labelLine: {
+						normal: {
+							show: true,
+							length: 1,
+							length: 1
+						},
+						emphasis: {
+							show: true
+						}
+					},
+				}],
+			}
+			echaerts03.setOption(option03);
+			echaerts03.resize();
+			//行业分布轮询
+			var index03 = 0; //播放所在下标
+			var timers03 = setInterval(function () {
+				echaerts03.dispatchAction({
+					type: 'showTip',
+					seriesIndex: 0,
+					dataIndex: index03
+				});
+				index03++;
+				if (index03 > dataVal3.length) {
+					index03 = 0;
+				}
+			}, 2000);
+
+
+		}
+
+		var echaerts04 = echarts.init(document.getElementById('chaerts08'));
+		// 企业注册量统计
+		function compChart(data) {
+			const dataMonth04 = [],
+				dataVal04 = []
+			for (let i in data) {
+				dataMonth04.push(i + '月');
+				dataVal04.push(data[i])
+			}
+			optionmain04 = {
+				color: ['#00eaf9'],
+				tooltip: {
+					trigger: 'axis',
+					axisPointer: { // 坐标轴指示器，坐标轴触发有效
+						type: 'shadow' // 默认为直线，可选为：'line' | 'shadow'
+					}
+				},
+				grid: {
+					left: '3%',
+					right: '4%',
+					bottom: '3%',
+					top: '25%',
+					containLabel: true
+				},
+				xAxis: [{
+					type: 'category',
+					data: dataMonth04,
+					axisLine: {
+						lineStyle: {
+							color: '#ffffff',
+						}
+					},
+					axisTick: {
+						alignWithLabel: true,
+						lineStyle: {
+							color: '#ffffff',
+						}
+					},
+					nameTextStyle: {
+						color: '#ffffff',
+					},
+					splitLine: {
+						show: false
+					}
+				}],
+				yAxis: [{
+					type: 'value',
+					axisLine: {
+						lineStyle: {
+							color: '#ffffff',
+						}
+					},
+					axisTick: {
+						alignWithLabel: true,
+						lineStyle: {
+							color: '#ffffff',
+						}
+					},
+					nameTextStyle: {
+						color: '#ffffff',
+					},
+					splitLine: {
+						show: false
+					}
+
+				}],
+				series: [{
+					type: 'bar',
+					barWidth: '20%',
+					data: dataVal04,
+					itemStyle: {
+						normal: {
+							// barBorderRadius: [10, 10, 0, 0],
+							color: new echarts.graphic.LinearGradient(
+								0, 0, 0, 1,
+								[{
+										offset: 0,
+										color: '#00dbf7'
+									},
+									{
+										offset: 0.5,
+										color: '#0295dd'
+									},
+									{
+										offset: 1,
+										color: '#072d4d'
+									},
+								]
+							)
+						},
+					},
+				}]
+			}
+
+			echaerts04.setOption(optionmain04);
+			echaerts04.resize();
+			//行业分布轮询
+			var index04 = 0; //播放所在下标
+			var timers04 = setInterval(function () {
+				echaerts04.dispatchAction({
+					type: 'showTip',
+					seriesIndex: 0,
+					dataIndex: index04
+				});
+				index04++;
+				if (index04 > dataVal04.length) {
+					index04 = 0;
+				}
+			}, 2000);
+		}
+
+		// 三品一标
+		var echaerts05 = echarts.init(document.getElementById('chaerts07'))
+
+		function threeChart(data) {
+			var dataName05 = []
+			var dataVal05 = []
+			for (let i in data) {
+				dataName05.push(i);
+				dataVal05.push(data[i])
+			}
+			optionmain04 = {
+				tooltip: {
+					trigger: 'axis',
+					axisPointer: { // 坐标轴指示器，坐标轴触发有效
+						type: 'shadow' // 默认为直线，可选为：'line' | 'shadow'
+					}
+				},
+				grid: {
+					left: '3%',
+					right: '4%',
+					bottom: '3%',
+					top: '25%',
+					containLabel: true
+				},
+				xAxis: [{
+					type: 'category',
+					data: dataName05,
+					axisLine: {
+						lineStyle: {
+							color: '#ffffff',
+						}
+					},
+					axisTick: {
+						alignWithLabel: true,
+						lineStyle: {
+							color: '#ffffff',
+						}
+					},
+					nameTextStyle: {
+						color: '#ffffff',
+					},
+					splitLine: {
+						show: false
+					}
+				}],
+				yAxis: [{
+					type: 'value',
+					axisLine: {
+						lineStyle: {
+							color: '#ffffff',
+						}
+					},
+					axisTick: {
+						alignWithLabel: true,
+						lineStyle: {
+							color: '#ffffff',
+						}
+					},
+					nameTextStyle: {
+						color: '#ffffff',
+					},
+					splitLine: {
+						show: false
+					}
+
+				}],
+				series: [{
+					type: 'bar',
+					barWidth: '20%',
+					data: dataVal05,
+					itemStyle: {
+						normal: {
+							// barBorderRadius: [10, 10, 0, 0],
+							color: new echarts.graphic.LinearGradient(
+								0, 0, 0, 1,
+								[{
+										offset: 0,
+										color: '#07e2f4'
+									},
+									{
+										offset: 0.5,
+										color: '#d3f82c'
+									},
+									{
+										offset: 1,
+										color: '#fcf800'
+									},
+								]
+							)
+						},
+					},
+				}]
+			}
+			echaerts05.setOption(optionmain04);
+			echaerts05.resize();
+			//行业分布轮询
+			var index05 = 0; //播放所在下标
+			var timers05 = setInterval(function () {
+				echaerts05.dispatchAction({
+					type: 'showTip',
+					seriesIndex: 0,
+					dataIndex: index05
+				});
+				index05++;
+				if (index05 > dataVal05.length) {
+					index05 = 0;
+				}
+			}, 2000);
+
+		}
+
+		//三品一标 商品统计
+		var echaerts06 = echarts.init(document.getElementById('chaerts06'));
+
+		function threGodsChart(data) {
+			const dataName06 = [],
+				dataVal06 = []
+			for (let i in data) {
+				dataName06.push(i);
+				dataVal06.push(data[i])
+			}
+			optionmain06 = {
+				tooltip: {
+					trigger: 'axis',
+					axisPointer: { // 坐标轴指示器，坐标轴触发有效
+						type: 'shadow' // 默认为直线，可选为：'line' | 'shadow'
+					}
+				},
+				grid: {
+					left: '3%',
+					right: '4%',
+					bottom: '3%',
+					top: '25%',
+					containLabel: true
+				},
+				xAxis: [{
+					type: 'category',
+					data: dataName06,
+					axisLine: {
+						lineStyle: {
+							color: '#ffffff',
+						}
+					},
+					axisTick: {
+						alignWithLabel: true,
+						lineStyle: {
+							color: '#ffffff',
+						}
+					},
+					nameTextStyle: {
+						color: '#ffffff',
+					},
+					splitLine: {
+						show: false
+					}
+				}],
+				yAxis: [{
+					type: 'value',
+					axisLine: {
+						lineStyle: {
+							color: '#ffffff',
+						}
+					},
+					axisTick: {
+						alignWithLabel: true,
+						lineStyle: {
+							color: '#ffffff',
+						}
+					},
+					nameTextStyle: {
+						color: '#ffffff',
+					},
+					splitLine: {
+						show: false
+					}
+
+				}],
+				series: [{
+					type: 'bar',
+					barWidth: '20%',
+					data: dataVal06,
+					itemStyle: {
+						normal: {
+							// barBorderRadius: [10, 10, 0, 0],
+							color: new echarts.graphic.LinearGradient(
+								0, 0, 0, 1,
+								[{
+										offset: 0,
+										color: '#f8fca7'
+									},
+									{
+										offset: 0.5,
+										color: '#dddb01'
+									},
+									{
+										offset: 1,
+										color: '#6e6d07'
+									},
+								]
+							)
+						},
+					},
+				}]
+			}
+			echaerts06.setOption(optionmain06);
+			echaerts06.resize();
+			//行业分布轮询
+			var index06 = 0; //播放所在下标
+			var timers06 = setInterval(function () {
+				echaerts06.dispatchAction({
+					type: 'showTip',
+					seriesIndex: 0,
+					dataIndex: index06
+				});
+				index06++;
+				if (index06 > dataVal06.length) {
+					index06 = 0;
+				}
+			}, 2000);
+
+
+		}
+
+		// 轮询地图
+		
+
+		//地图数据插入
+		function mapsDataBox(dataCity) {
+			var mapChart = echarts.init(document.getElementById('map-wrap2'));
+			//34个省、市、自治区的名字拼音映射数组
+			var provinces = {
+				//23个省
+				"台湾": "taiwan",
+				"河北省": "hebei",
+				"山西": "shanxi",
+				"辽宁": "liaoning",
+				"吉林": "jilin",
+				"黑龙江": "heilongjiang",
+				"江苏": "jiangsu",
+				"浙江": "zhejiang",
+				"安徽": "anhui",
+				"福建": "fujian",
+				"江西": "jiangxi",
+				"山东": "shandong",
+				"河南": "henan",
+				"湖北": "hubei",
+				"湖南": "hunan",
+				"广东": "guangdong",
+				"海南": "hainan",
+				"四川": "sichuan",
+				"贵州": "guizhou",
+				"云南": "yunnan",
+				"陕西": "shanxi1",
+				"甘肃": "gansu",
+				"青海": "qinghai",
+				//5个自治区
+				"新疆": "xinjiang",
+				"广西": "guangxi",
+				"内蒙古": "neimenggu",
+				"宁夏": "ningxia",
+				"西藏": "xizang",
+				//4个直辖市
+				"北京": "beijing",
+				"天津": "tianjin",
+				"上海": "shanghai",
+				"重庆": "chongqing",
+				//2个特别行政区
+				"香港": "xianggang",
+				"澳门": "aomen"
+			};
+
+			//直辖市和特别行政区-只有二级地图，没有三级地图
+			var special = ["北京", "天津", "上海", "重庆", "香港", "澳门"];
+			var mapdata = [];
+			var data = dataCity
+			//绘制全国地图
+			$.getJSON('map/china.json', function (data) {
+				d = [];
+				for (var i = 0; i < data.features.length; i++) {
+					d.push({
+						name: data.features[i].properties.name
+					})
+				}
+				mapdata = d;
+				//注册地图
+				echarts.registerMap('china', data);
+				//绘制地图
+				renderMap('china', d);
+			});
+
+
+			//初始化绘制全国地图配置
+			var optionData = {
+				title: {
+					show: false,
+				},
+				tooltip: {
+					trigger: 'item',
+					show: true,
+					formatter: function (params) {
+						for (var i = 0; i < data.length; i++) {
+							if (data[i].name == params.data.name) {
+								return "<span style='color: #ffff33;border-bottom: 1px solid #ffff33;font-size:14px;display: block;'>" +
+									params.data.name + "</span>查询量 : " + data[i].value[0];
+							}
+						}
+					}
+
+				},
+				animationDuration: 1000,
+				animationEasing: 'cubicOut',
+				animationDurationUpdate: 1000
+
+			};
+
+			function renderMap(map, data) {
+				optionData.title.subtext = map;
+				optionData.series = [{
+					name: map,
+					type: 'map',
+					mapType: map,
+					roam: false,
+					label: {
+						normal: {
+							show: true,
+							align: 'center',
+							verticalAlign: 'middle',
+							textStyle: {
+								color: '#ffffff',
+								fontSize: 14
+							}
+						},
+						emphasis: {
+							show: true,
+							align: 'center',
+							verticalAlign: 'middle',
+							textStyle: {
+								color: '#ffffff',
+								fontSize: 14
+							},
+
+						}
+					},
+					itemStyle: {
+						normal: {
+							areaColor: '#1d92c9',
+							borderColor: '#d9e3e4'
+						},
+						emphasis: {
+							areaColor: '#50bcee',
+							borderColor: '#d9e3e4'
+						}
+					},
+					data: data
+				}];
+				//渲染地图
+				// chart.setOption(optionData);
+			}
+
+			// 例如海门9是发码量，10是扫码量
+			var databor = dataCity
+			//经纬度   前经度后纬
+
+			var convertData = function (databor) {
+
+				var res = [];
+				for (var i = 0; i < databor.length; i++) {
+					var geoCoord = geoCoordMap[databor[i].name];
+					if (geoCoord) {
+						res.push({
+							name: databor[i].name,
+							value: geoCoord.concat(databor[i].value)
+						});
+					}
+				}
+				return res;
+			};
+			mapChart.setOption(options = {
+				tooltip: {
+					show: true,
+					triggerOn: "none",
+					formatter: function (params) {
+						for (var i = 0; i < options.series[0].data.length; i++) {
+							if (options.series[0].data[i].name == params.data.name) {
+								return "<span style='color: #ffff33;border-bottom: 1px solid #ffff33;font-size:14px;display: block;'>" +
+									params.data.name + "</span>查询量: " + options.series[0].data[i].value[2];
+							}
+						}
+					}
+
+				},
+				geo: {
+					map: 'china',
+					show: true,
+					roam: false,
+					label: {
+						normal: {
+							show: true,
+							fontSize: 14,
+							align: 'center',
+							color: "#ffffff",
+						},
+						emphasis: {
+							show: true,
+							fontSize: 14,
+							align: 'center',
+							color: "#ffffff",
+						}
+					},
+					itemStyle: { // 定义样式
+						normal: {
+							areaColor: '#1d92c9',
+							borderColor: '#d9e3e4'
+						},
+						emphasis: {
+							areaColor: '#1d92c9',
+							borderColor: '#d9e3e4'
+						}
+
+					},
+				},
+				series: [{
+					type: 'effectScatter',
+					coordinateSystem: 'geo',
+					data: convertData(databor),
+					showEffectOn: 'render',
+					rippleEffect: {
+						brushType: 'stroke'
+					},
+					hoverAnimation: true,
+					label: {
+						normal: {
+							show: false
+						}
+					},
+					itemStyle: {
+						normal: {
+							color: '#ffff33',
+							shadowBlur: 10,
+							shadowColor: '#333'
+						}
+					},
+					zlevel: 1
+				}]
+			});
+			//当数据刷新的时候再次调取   mapChart.setOption(option,true)表示数据更新，mapChart.setOption(option,false)表示合并新数据原数据存在
+			mapChart.setOption(options);
+			mapChart.resize()
+			//地图自动轮询
+			var index0 = 0; //播放所在下标
+			var timers0 = setInterval(function () {
+				mapChart.dispatchAction({
+					type: 'showTip',
+					seriesIndex: 0,
+					dataIndex: index0
+				});
+				index0++;
+				if (index0 > databor.length) {
+					index0 = 0;
+				}
+			}, 2000);
+
+		}
+
+
+
+		//适配加载图表
+		$(".longNanContainerBox").resize(function () {
+			// 网络查询量占比\
+			netWorkChart(dataV1)
+			//查询软件统计
+			softwareChart(dataV2)
+			//查询操作系统占比
+			optionChart(dataV3)
+			// /企业注册量统计
+			//compChart(dataV4)
+			//三品一标
+			//threeChart(dataV5)
+			//三品一标 商品统计
+			//
+			threGodsChart(dataV6)
+			// 地图加载
+			mapsDataBox(dataCity)
+
+		});
+	</script>
+</body>
+
+</html>

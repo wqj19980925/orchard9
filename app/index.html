@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0,maximum-scale=1.0, user-scalable=no"/>
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta http-equiv="x-ua-compatible Content-Type" content="text/html;IE=edge,chrome=1"/>
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <link rel="stylesheet" href="./css/index.css">
+    <script src="./js/rem.js"></script>
+    <script src="./js/jquery-3.4.1.min.js"></script>
+    <script src="./js/jquery-3.4.1.js"></script>
+    <title></title>
+</head>
+<body>
+    <section>
+        <div class="tesdr"></div>
+
+        <div class="nonedata">
+            <img src="./images/nonedata.png">
+        </div>
+        <div class="information informaone">
+            <div class="informat_title">
+                <p class="title_text">
+                    产品信息
+                    <span></span>
+                </p>
+            </div>
+            <div class="informat_sect">
+                <div class="inforlist">
+                   <span class="infor_name">
+                       商品名称：
+                   </span>
+                   <p class="infor_sect goo_name">
+                        
+                   </p>
+                </div>
+                <div class="inforlist">
+                    <span class="infor_name">
+                        商品编号：
+                    </span>
+                    <p class="infor_sect goo_number">
+                        
+                    <p>
+                </div>
+                <div class="inforlist">
+                   <span class="infor_name">
+                        生产商：
+                   </span>
+                   <p class="infor_sect com_name">
+                        
+                   </p>
+                </div>
+                <div class="inforlist">
+                    <span class="infor_name">
+                        公司邮箱：
+                    </span>
+                    <p class="infor_sect info_email">
+
+                    <p>
+                </div>
+                <div class="inforlist">
+                    <span class="infor_name">
+                        联系方式：
+                    </span>
+                    <p class="infor_sect info_mobile">
+
+                    <p>
+                </div>
+                <div class="inforlist">
+                    <span class="infor_name">
+                        公司地址：
+                    </span>
+                    <p class="infor_sect info_address">
+
+                    <p>
+                </div>
+            </div>
+            <!-- <div class="informat_title">
+                <p class="title_text">
+                    溯源信息
+                    <span></span>
+                </p>
+            </div>
+            <div class="informat_sect informat_ss">
+                <p class="sect_titles">
+                    生产商
+                </p>
+                <div class="inforlist">
+                    <span class="infor_name">
+                        商品名称：
+                    </span>
+                    <p class="infor_sect">
+                        红富士苹果30斤/箱
+                    </p>
+                </div>
+                <div class="inforlist">
+                    <span class="infor_name">
+                        商品名称：
+                    </span>
+                    <p class="infor_sect">
+                        红富士苹果30斤/箱
+                    </p>
+                </div>
+                <div class="inforlist">
+                    <span class="infor_name">
+                        商品名称：
+                    </span>
+                    <p class="infor_sect">
+                        红富士苹果30斤/箱
+                    </p>
+                </div>
+            </div> -->
+        </div>
+        <div class="informat_twos information">
+            <div class="informat_title">
+                <p class="title_text">
+                    数量统计
+                    <span></span>
+                </p>
+            </div>
+            <div class="informa_nums">
+                <p class="num_text">
+                    产品码 <span class="count"></span> 个
+                </p>
+                <p class="num_text assicode">
+                    关联码 <span class="red ids"></span>
+                </p>
+            </div>
+            <div class="informat_title">
+                <p class="title_text">
+                    商品信息
+                    <span></span>
+                </p>
+            </div>
+            <div class="informa_mats">
+                <!-- <div class="infor_masect">
+                    <div class="masect_list"> 
+                        <span>商品名称：</span>
+                        <p>玉米种子3174</p>
+                    </div>
+                    <div class="masect_list"> 
+                        <span>商品编号：</span>
+                        <p>1234794123138</p>
+                    </div>
+                    <div class="masect_list"> 
+                        <span>产品码数量：</span>
+                        <p class="red">174</p>
+                    </div>
+                    <div class="masect_list"> 
+                        <span>关联码数量：</span>
+                        <p class="red">174</p>
+                    </div>
+                </div> -->
+            </div>
+        </div>
+    </section>
+</body>
+<script src="./js/index.js"></script>
+<script>
+    // var data = {
+    //     "gco_number": "50001190800000000134",//溯源码
+    //     "goo_name": "柴达木枸杞200g",//商品名称
+    //     "goo_number": "cdm-01-0001",//商品编号
+    //     "com_name": "蓝科溯源(北京)科技有限公司",//公司信息
+    //     "info_email": "",//公司邮箱
+    //     "info_mobile": "15245896584",//公司联系方式
+    //     "info_address": "天津市武清区国际企业社区"//公司地址
+    // }
+    // window.onload = function(){
+    //     // Querydata(data);
+    // }
+    function Querydata(datas){
+        if(datas == 'null'){
+            $(".informaone").hide();
+            $(".informat_twos").hide();
+            $(".nonedata").show();
+            return false;
+        }
+        // var data = datas;
+        // $('.tesdr').append(datas);
+        var dataones = datas.replace(/##/g,'"');
+        var data = dataones.split('#!')[0];
+
+        if(dataones.split('#!')[1] == '2'){
+            // window.android.showToast(data[0]);
+            data = JSON.parse(data)[0];
+            $(".goo_name").text(data.goo_name);
+            $(".goo_number").text(data.goo_number);
+            $(".com_name").text(data.com_name);
+            $(".info_email").text(data.info_email);
+            $(".info_mobile").text(data.info_mobile);
+            $(".info_address").text(data.info_address);
+            $(".informaone").show();
+            $(".informat_twos").hide();
+            $(".nonedata").hide();
+        }else{
+        // window.android.showToast(dataones.split('#!')[1]+'---12313');
+            data = JSON.parse(data);
+            $(".count").text(data.count);
+            if(data.ids != undefined){
+                $('.ids').text(data.ids);
+            }else{
+                $('.assicode').hide();
+            }
+            
+            var html='';
+            for(var i = 0; i<data.goods.length;i++){
+                if(data.goods[i].ids != undefined){
+                 html += '<div class="infor_masect"><div class="masect_list"><span>商品名称：</span><p class="ligd">'+data.goods[i].goo_name+'</p></div><div class="masect_list"><span>商品编号：</span><p>'+data.goods[i].goo_number+'</p></div><div class="masect_list"> <span>产品码数量：</span><p class="red">'+data.goods[i].num+'</p></div> <div class="masect_list"> <span>关联码数量：</span><p class="red">'+data.goods[i].ids+'</p> </div> </div>'
+                }else{
+                 html += '<div class="infor_masect"><div class="masect_list"><span>商品名称：</span><p class="ligd">'+data.goods[i].goo_name+'</p></div><div class="masect_list"><span>商品编号：</span><p>'+data.goods[i].goo_number+'</p></div><div class="masect_list"> <span>产品码数量：</span><p class="red">'+data.goods[i].num+'</p></div></div>'                    
+                }
+            }
+            $(".informa_mats").html(html)
+            $(".informaone").hide();
+            $(".informat_twos").show();
+            $(".nonedata").hide();
+        }
+    }
+</script>
+</html>
